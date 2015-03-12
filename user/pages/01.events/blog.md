@@ -1,6 +1,6 @@
 ---
-title: Home
-blog_url: blog
+title: Мероприятия
+blog_url: events
 body_classes: header-image fullwidth
 
 sitemap:
@@ -22,5 +22,4 @@ feed:
 pagination: true
 ---
 
-# My Gravtastic Blog
-## A tale of **awesomazing** adventures
+# Мероприятия ДК
