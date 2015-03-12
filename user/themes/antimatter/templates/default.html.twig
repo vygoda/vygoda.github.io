@@ -23,10 +23,6 @@
 		<h1>{{ page.title }}</h1>
 		</div>
 
-	    {% if config.plugins.breadcrumbs.enabled %}
-			{% include 'partials/breadcrumbs.html.twig' %}
-		{% endif %}
-
 		{{ page.content }}
 		<div class="content-wrapper blog-content-list grid pure-g-r">
 			<div id="listing" class="block pure-u-2-3">

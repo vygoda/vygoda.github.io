@@ -29,10 +29,10 @@
         {% endif %}
     {% elseif truncate and page.summary != page.content %}
         <p>{{ page.summary }}</p>
-        <p><a href="{{ page.url }}">Читать полность...</a></p>
+        <p><a href="{{ page.url }}">Читать полностью...</a></p>
     {% elseif truncate %}
         <p>{{ page.content|truncate(550) }}</p>
-        <p><a href="{{ page.url }}">Читать полность...</a></p>
+        <p><a href="{{ page.url }}">Читать полностью...</a></p>
     {% else %}
         <p>{{ page.content }}</p>
         {% set show_prev_next = true %}
