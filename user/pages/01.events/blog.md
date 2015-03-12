@@ -16,7 +16,7 @@ content:
     pagination: true
 
 feed:
-    description: Sample Blog Description
+    description: Мероприятия ДК c.Выгода
     limit: 10
 
 pagination: true
