@@ -1,0 +1,15 @@
+{
+   "project":"grav-plugin-videoembed",
+   "platforms":{
+      "grav":{
+         "nodes":{
+            "plugin":[
+               {
+                  "source":"/",
+                  "destination":"/user/plugins/videoembed"
+               }
+            ]
+         }
+      }
+   }
+}
