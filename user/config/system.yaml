@@ -1,5 +1,5 @@
 home:
-  alias: '/blog'
+  alias: '/events'
 
 pages:
   theme: antimatter
