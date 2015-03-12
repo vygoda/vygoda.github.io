@@ -3,7 +3,7 @@
     <div class="list-blog-header">
         <span class="list-blog-date">
             <span>{{ page.date|date("d") }}</span>
-            <em>{{ page.date|date("M") }}</em>
+            <em>{{ page.date|date("m") }}</em>
         </span>
         {% if page.header.link %}
             <h4>
@@ -40,10 +40,10 @@
         {% endif %}
     {% elseif truncate and page.summary != page.content %}
         <p>{{ page.summary }}</p>
-        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+        <p><a href="{{ page.url }}">Читать полность...</a></p>
     {% elseif truncate %}
         <p>{{ page.content|truncate(550) }}</p>
-        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+        <p><a href="{{ page.url }}">Читать полность...</a></p>
     {% else %}
         <p>{{ page.content }}</p>
         {% set show_prev_next = true %}
