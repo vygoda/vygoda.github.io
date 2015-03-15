@@ -1,5 +1,6 @@
 ---
 title: Молодые таланты
+menu: Таланты
 body_classes: header-image fullwidth
 
 content:

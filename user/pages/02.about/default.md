@@ -1,5 +1,6 @@
 ---
 title: О Доме Культуры
+menu: О ДК
 body_classes: header-image fullwidth
 ---
 
