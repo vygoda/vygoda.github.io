@@ -15,8 +15,17 @@
 </div>
 {% endif %}
 <div class="sidebar-content">
-	<h4>Some Text Widget</h4>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+	<h4>Афиша</h4>
+
+	{% set pages = page.parent %}
+
+	{% if pages.title != 'Pages' %}
+	    {% set pages = page.parent.parent %}
+	{% endif %}
+
+	{% for poster in pages.children.last.media.images | sort | reverse %}
+	    <div> {{ poster.lightbox().cropResize(300, 500).html() }} </div>
+	{% endfor %}
 </div>
 {% if false and config.plugins.taxonomylist.enabled %}
 <div class="sidebar-content">
