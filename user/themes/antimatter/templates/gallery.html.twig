@@ -1,0 +1,45 @@
+{% embed 'partials/base.html.twig' %}
+
+	{% set collection = page.collection() %}
+	{% set base_url = page.url %}
+    {% set feed_url = base_url %}
+
+    {% if base_url == '/' %}
+        {% set base_url = '' %}
+    {% endif %}
+
+    {% if base_url == base_url_relative %}
+        {% set feed_url = base_url~'/'~page.slug %}
+    {% endif  %}
+
+	{% block content %}
+		{% set blog_image = page.media.images|first.grayscale().contrast(20).brightness(-100).colorize(-35,81,122) %}
+
+		{% if blog_image %}
+		<div class="flush-top blog-header blog-header-image" style="background-image: url({{ blog_image.url }});">
+		{% else %}
+		<div class="blog-header">
+		{% endif %}
+		<h1>{{ page.title }}</h1>
+		</div>
+
+		{{ page.content }}
+	<div style="text-align: center">
+				{% for child in collection %}
+			        	    <h2>{{ child.title }}</h2>
+                            <div class="fotorama" style="margin-left: auto; margin-right: auto; width:700px"
+                                data-fit="contain"
+                                data-nav="thumbs"
+                                data-width="700"
+                                data-ratio="700/467"
+                                data-max-width="700" >
+                                {% for image in child.media.images %}
+                                    <a href="{{ image.url() }} "></a>
+                                {% endfor %}
+                            </div>
+                            <hr/>
+			    {% endfor %}
+
+    </div>
+    {% endblock %}
+{% endembed %}
