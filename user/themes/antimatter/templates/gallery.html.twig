@@ -24,9 +24,11 @@
 		</div>
 
 		{{ page.content }}
+        {% set width = "740" %}
+        {% set height = "480" %}
 	<div style="text-align: center">
 				{% for child in collection %}
-			        	    <h2>{{ child.title }} {{ child.date | date("d.m.Y") }}</h2>
+				            {#
                             <div class="fotorama" style="margin-left: auto; margin-right: auto; width:700px"
                                 data-fit="contain"
                                 data-nav="thumbs"
@@ -36,6 +38,12 @@
                                 {% for image in child.media.images %}
                                     <a href="{{ image.url() }} "></a>
                                 {% endfor %}
+                            </div>
+                            #}
+
+			        	    <h2>{{ child.title }} {{ child.date | date("d.m.Y") }}</h2>
+                            <div style="margin-left: auto; margin-right: auto; width:{{ width }}" >
+                                <iframe id='iframe' src='http://flickrit.com/slideshowholder.php?height={{ height }}&width={{ width }}&size=medium&setId={{ child.header.flickr }}&trans=1&theme=1&thumbnails=1&transition=0&layoutType=fixed&sort=0&speed=stop' scrolling='no' frameborder='0' width='{{ width }}' height='{{ height }}'></iframe>
                             </div>
                             <hr/>
 			    {% endfor %}
