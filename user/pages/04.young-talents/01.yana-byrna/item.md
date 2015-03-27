@@ -1,5 +1,7 @@
 ---
 title: Яна Бырна
+taxonomy:
+    category: blog
 ---
 
 **А я жила бы в поле...**

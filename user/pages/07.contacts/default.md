@@ -1,6 +1,8 @@
 ---
 title: Контакты
 body_classes: header-image fullwidth
+taxonomy:
+    category: blog
 ---
 ![](map2.png)
 

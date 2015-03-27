@@ -2,6 +2,8 @@
 title: О Доме Культуры
 menu: О ДК
 body_classes: header-image fullwidth
+taxonomy:
+    category: blog
 ---
 
 Дом Культуры с залом на 500 мест был построен 7 ноября 1967 года.
