@@ -20,6 +20,10 @@
 			<div id="item" class="block pure-u-2-3">
                 {% include 'partials/item.html.twig' with {'truncate':false,'big_header':true} %}
             </div>
+			{% elseif base_url == '/gallery' %}
+			<div id="item" class="block pure-u-2-3">
+				{% include 'partials/gallery_item.html.twig' with {'truncate':false,'big_header':true} %}
+			</div>
             {% else %}
 			<div id="item" class="block pure-u-2-3">
 			    {% include 'partials/blog_item.html.twig' with {'truncate':false,'big_header':true} %}
