@@ -5,21 +5,14 @@
 var dkControllers = angular.module('dkControllers', []);
 
 dkControllers.controller('EventListCtrl',
-    function ($scope, Phone) {
-        $scope.save = Phone.save;
-        $scope.phones = Phone.query();
-        $scope.orderProp = 'age';
+    function ($scope, Event) {
+        $scope.save = Event.save;
+        $scope.events = Event.query();
     });
 
 dkControllers.controller('EventDetailCtrl',
-    function ($scope, $routeParams, Phone) {
-        $scope.phone = Phone.get({eventId: $routeParams.eventId}, function (phone) {
-            $scope.mainImageUrl = phone.imageUrl;
-        });
-
-        $scope.setImage = function (imageUrl) {
-            $scope.mainImageUrl = imageUrl;
-        }
+    function ($scope, $routeParams, Event) {
+        $scope.phone = Event.get({eventId: $routeParams.eventId});
     });
 
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $window, ENV, AuthService) {
@@ -31,10 +24,10 @@ dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $windo
     }
 
     $rootScope.isAuthenticated = false;
-    $scope.message = '';
 
     if ($window.sessionStorage["user-token"]) {
         $rootScope.isAuthenticated = true;
+        $scope.wellcome = "Hi, " + $window.sessionStorage.userData.name;
     }
 
     $scope.submit = function () {
@@ -42,12 +35,10 @@ dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $windo
             function (successData) {
                 $rootScope.isAuthenticated = true;
                 $scope.wellcome = "Hi, " + successData.name;
-                $scope.message = '';
             },
             function (errorData) {
                 $scope.wellcome = '';
                 $rootScope.isAuthenticated = false;
-                $scope.message = errorData.message;
             });
     };
 

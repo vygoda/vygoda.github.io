@@ -2,7 +2,7 @@
 <html lang="en" ng-app="vygoda-dk-angular">
 <head>
     <meta charset="utf-8">
-    <title>Google Phone Gallery</title>
+    <title>ДК с.Выгода</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <script src="bower_components/angular/angular.js"></script>
@@ -34,35 +34,38 @@
                         <li><a class="navbar-brand" href="#/archive">Архив</a></li>
                         <li><a class="navbar-brand" href="#/contacts">Контакты</a></li>
                     </ul>
+
+                    <div id="navbar" class="navbar-collapse collapse" ng-controller="UserCtrl">
+                        <form class="navbar-form navbar-right" ng-show="!isAuthenticated" ng-submit="submit()">
+                            <div class="form-group">
+                                <input type="text" ng-model="user.login" placeholder="Login" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" ng-model="user.password" placeholder="Password" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Sign in</button>
+                        </form>
+                        <div class="navbar-form navbar-right" ng-show="isAuthenticated">
+                            <div class="form-group">{{wellcome}}</div>
+                             <button type="button" class="btn btn-primary" ng-click="logout()">Logout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-10">
-            <div ng-view></div>
-        </div>
+            <div class="col-md-10">
+                <div ng-view></div>
+            </div>
 
-        <div class="col-md-2">
-
-            <div ng-controller="UserCtrl">
-                    <form ng-show="!isAuthenticated" ng-submit="submit()">
-                        <input class="form-control" ng-model="user.login" type="text" name="user"
-                               placeholder="Username"/>
-                        <input class="form-control" ng-model="user.password" type="password" name="pass"
-                               placeholder="Password"/>
-                        <input class='btn btn-default' type="submit" value="Login"/>
-                    </form>
-                <div>{{message}}</div>
-                <div ng-show="isAuthenticated">
-                    <div>{{welcome}}</div>
-                    <a ng-click="logout()" href="">Logout</a>
-                </div>
+            <div class="col-md-2">
+                <h1>Sidebar</h1>
             </div>
         </div>
     </div>
-</div>
+
 </body>
 </html>

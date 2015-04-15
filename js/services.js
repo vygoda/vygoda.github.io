@@ -2,9 +2,9 @@
 
 var dkServices = angular.module('dkServices', ['ngResource']);
 
-dkServices.factory('Phone',
+dkServices.factory('Event',
     function ($resource, $http, $window, ENV) {
-        return $resource(ENV.host + '/data/test/:eventId', {}, {
+        return $resource(ENV.host + '/data/events/:eventId', {}, {
             query: {method: 'GET', params: {}, isArray: false}
         });
     });
