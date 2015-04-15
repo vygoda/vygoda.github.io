@@ -1,15 +1,15 @@
 'use strict';
 
-var phonecatServices = angular.module('phonecatServices', ['ngResource']);
+var dkServices = angular.module('dkServices', ['ngResource']);
 
-phonecatServices.factory('Phone',
+dkServices.factory('Phone',
     function ($resource, $http, $window, ENV) {
         return $resource(ENV.host + '/data/test/:eventId', {}, {
             query: {method: 'GET', params: {}, isArray: false}
         });
     });
 
-phonecatServices.service('AuthService', function($http, $window, ENV) {
+dkServices.service('AuthService', function($http, $window, ENV) {
     var logout = function (successHandler) {
         delete $window.sessionStorage["user-token"];
         delete $window.sessionStorage.userData;

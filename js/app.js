@@ -5,9 +5,9 @@
 var phonecatApp = angular.module('vygoda-dk-angular', [
     'config',
     'ngRoute',
-    'phonecatControllers',
-    'phonecatFilters',
-    'phonecatServices',
+    'dkControllers',
+    'dkFilters',
+    'dkServices',
     'btford.markdown',
     'ui.bootstrap'
 ]);
@@ -18,41 +18,45 @@ phonecatApp.config(
 
         $routeProvider.
             when('/events', {
-                templateUrl: 'partials/phone-list.html',
-                controller: 'PhoneListCtrl'
+                templateUrl: 'partials/event-list.html',
+                controller: 'EventListCtrl'
             }).
             when('/events/:eventId', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+                templateUrl: 'partials/event-detail.html',
+                controller: 'EventDetailCtrl'
             }).
-            when('/about', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+/*            when('/about', {
+                templateUrl: 'partials/about-list.html',
+                controller: 'AboutListCtrl'
             }).
             when('/about/:groupId', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
-            }).
-            when('/contacts', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
-            }).
-            when('/video', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+                templateUrl: 'partials/about-detail.html',
+                controller: 'AboutDetailCtrl'
             }).
             when('/photo', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+                templateUrl: 'partials/photo-list.html',
+                controller: 'PhotoListCtrl'
             }).
             when('/photo/:albumId', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+                templateUrl: 'partials/photo-detail.html',
+                controller: 'PhotoDetailCtrl'
+            }).
+            when('/video', {
+                templateUrl: 'partials/video.html',
+                controller: 'VideoCtrl'
             }).
             when('/documents', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+                templateUrl: 'partials/documents.html',
+                controller: 'DocumentsCtrl'
             }).
+            when('/archive', {
+                templateUrl: 'partials/archive.html',
+                controller: 'ArchiveCtrl'
+            }).
+            when('/contacts', {
+                templateUrl: 'partials/contacts.html',
+                controller: 'ContactsCtrl'
+            }).*/
             otherwise({
                 redirectTo: '/events'
             });

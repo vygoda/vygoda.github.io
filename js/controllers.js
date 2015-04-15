@@ -2,16 +2,16 @@
 
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var dkControllers = angular.module('dkControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl',
+dkControllers.controller('EventListCtrl',
     function ($scope, Phone) {
         $scope.save = Phone.save;
         $scope.phones = Phone.query();
         $scope.orderProp = 'age';
     });
 
-phonecatControllers.controller('PhoneDetailCtrl',
+dkControllers.controller('EventDetailCtrl',
     function ($scope, $routeParams, Phone) {
         $scope.phone = Phone.get({eventId: $routeParams.eventId}, function (phone) {
             $scope.mainImageUrl = phone.imageUrl;
@@ -22,7 +22,7 @@ phonecatControllers.controller('PhoneDetailCtrl',
         }
     });
 
-phonecatControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $window, ENV, AuthService) {
+dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $window, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 
     if (ENV.login && ENV.password) {
