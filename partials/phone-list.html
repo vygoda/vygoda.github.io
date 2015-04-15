@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+
+      <!--Body content-->
+
+      <div class="phones">
+        <div ng-repeat="phone in phones.data | filter:query | orderBy:orderProp" class="thumbnail">
+            <a href="#/events/{{phone.objectId}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+            <a href="#/events/{{phone.name}}">{{phone.name}}</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+

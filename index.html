@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" ng-app="vygoda-dk-angular">
+<head>
+    <meta charset="utf-8">
+    <title>Google Phone Gallery</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-markdown-directive/markdown.js"></script>
+    <script src="bower_components/showdown/src/showdown.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="navbar-brand" href="#/">ДК с.Выгода</a>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a class="navbar-brand" href="#/about">О Нас</a></li>
+                        <li><a class="navbar-brand" href="#/photo">Фото</a></li>
+                        <li><a class="navbar-brand" href="#/video">Видео</a></li>
+                        <li><a class="navbar-brand" href="#/documents">Документы</a></li>
+                        <li><a class="navbar-brand" href="#/archive">Архив</a></li>
+                        <li><a class="navbar-brand" href="#/contacts">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-10">
+            <div ng-view></div>
+        </div>
+
+        <div class="col-md-2">
+
+            <div ng-controller="UserCtrl">
+                    <form ng-show="!isAuthenticated" ng-submit="submit()">
+                        <input class="form-control" ng-model="user.login" type="text" name="user"
+                               placeholder="Username"/>
+                        <input class="form-control" ng-model="user.password" type="password" name="pass"
+                               placeholder="Password"/>
+                        <input class='btn btn-default' type="submit" value="Login"/>
+                    </form>
+                <div>{{message}}</div>
+                <div ng-show="isAuthenticated">
+                    <a ng-click="callRestricted()" href="">Shh, this is private!</a>
+                    <br>
+
+                    <div>{{welcome}}</div>
+                    <a ng-click="logout()" href="">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
