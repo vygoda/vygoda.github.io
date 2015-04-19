@@ -1,12 +1,6 @@
-<img ng-src="{{mainImageUrl}}" />
+<h1>{{event.title}}</h1>
+<h2>{{event.date | date: 'HH:mm:ss dd.MM.yyyy'}}</h2>
+<h3>Автор:{{event.author}}</h3>
+<img ng-src="{{event.thumb}}">
 
-<h1>{{phone.name}}</h1>
-
-<div btf-markdown="phone.content"></div>
-
-<ul class="phone-thumbs">
-  <li ng-repeat="img in phone.images">
-    <img ng-src="{{img}}" ng-click="setImage(img)">
-  </li>
-</ul>
-
+<div btf-markdown="event.content"></div>
