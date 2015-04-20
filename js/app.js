@@ -9,6 +9,7 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'dkFilters',
     'dkServices',
     'btford.markdown',
+    'ngStorage',
     'ui.bootstrap'
 ]);
 
@@ -70,7 +71,7 @@ phonecatApp.config(
             });
     });
 
-phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, ENV) {
+phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage, ENV) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -78,8 +79,8 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, ENV) {
             config.headers["application-id"] = ENV["application-id"];
             config.headers["secret-key"] = ENV["secret-key"];
 
-            if ($window.sessionStorage["user-token"]) {
-                config.headers["user-token"] = $window.sessionStorage["user-token"];
+            if ($localStorage["user-token"]) {
+                config.headers["user-token"] = $localStorage["user-token"];
             }
 
             return config;
@@ -87,7 +88,7 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, ENV) {
         responseError: function (rejection) {
             if (rejection.status === 401) {
                 // handle the case where the user is not authenticated
-                delete $window.sessionStorage["user-token"];
+                delete $localStorage["user-token"];
             }
             return $q.reject(rejection);
         }

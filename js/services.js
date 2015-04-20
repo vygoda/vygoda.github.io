@@ -3,7 +3,7 @@
 var dkServices = angular.module('dkServices', ['ngResource']);
 
 dkServices.factory('Event',
-    function ($resource, $http, $window, ENV) {
+    function ($resource, $http, ENV) {
         return $resource(ENV.host + '/data/events/:eventId', {}, {
             query: { method: 'GET', params: {}, isArray: false },
             update: { method:'PUT' }
@@ -11,12 +11,12 @@ dkServices.factory('Event',
         });
     });
 
-dkServices.service('AuthService', function($http, $window, ENV) {
+dkServices.service('AuthService', function($http, $localStorage, ENV) {
     var logout = function (successHandler) {
-        delete $window.sessionStorage["user-token"];
-        delete $window.sessionStorage.userData;
-        delete $window.sessionStorage.error;
-        delete $window.sessionStorage.errorCode;
+        delete $localStorage["user-token"];
+        delete $localStorage.userData;
+        delete $localStorage.error;
+        delete $localStorage.errorCode;
 
         if (successHandler) {
             successHandler();
@@ -31,8 +31,8 @@ dkServices.service('AuthService', function($http, $window, ENV) {
             .success(function (data, status, headers, config) {
                 logout();
 
-                $window.sessionStorage["user-token"] = data["user-token"];
-                $window.sessionStorage.userData = data;
+                $localStorage["user-token"] = data["user-token"];
+                $localStorage.userData = data;
 
                 if (successHandler) {
                     successHandler(data);
@@ -41,8 +41,8 @@ dkServices.service('AuthService', function($http, $window, ENV) {
             .error(function (data, status, headers, config) {
                 logout();
 
-                $window.sessionStorage.error = data.message;
-                $window.sessionStorage.errorCode = data.code;
+                $localStorage.error = data.message;
+                $localStorage.errorCode = data.code;
 
                 if (errorHandler) {
                     errorHandler(data);

@@ -60,7 +60,7 @@ dkControllers.controller('EventEditCtrl',
         };
     });
 
-dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $window, ENV, AuthService) {
+dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 
     if (ENV.login && ENV.password) {
@@ -70,9 +70,9 @@ dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $windo
 
     $rootScope.isAuthenticated = false;
 
-    if ($window.sessionStorage["user-token"]) {
+    if ($localStorage["user-token"]) {
         $rootScope.isAuthenticated = true;
-        $scope.wellcome = "Hi, " + $window.sessionStorage.userData.name;
+        $scope.wellcome = "Hi, " + $localStorage.userData.name;
     }
 
     $scope.submit = function () {
