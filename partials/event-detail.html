@@ -1,6 +1,14 @@
-<h1>{{event.title}}</h1>
-<h2>{{event.created | date: 'HH:mm:ss dd.MM.yyyy'}}</h2>
-<h3>Автор:{{event.author}}</h3>
-<img ng-src="{{event.thumb}}">
+<div class="row bg-success">
+    <div class="col-md-4">
+        <div>{{event.created | date: 'HH:mm:ss'}}</div>
+        <div>{{event.created | date: 'dd.MM.yyyy'}}</div>
+    </div>
+    <div class="col-md-8">{{event.title}}</div>
+</div>
+
+<div ng-show="event.thumb">
+    <img ng-src="{{event.thumb}}">
+</div>
 
 <div btf-markdown="event.content"></div>
+<div>Автор: {{event.author}}</div>
