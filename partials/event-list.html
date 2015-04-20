@@ -2,11 +2,14 @@
   <div class="row">
 
       <!--Body content-->
+      <div ng-show="isAuthenticated">
+        <a href="#/new/event">New</a>
+      </div>
 
       <div>
         <div ng-repeat="event in events.data">
             <a href="#/events/{{event.objectId}}" class="thumb"><img ng-src="{{event.thumb}}"></a>
-            {{event.title}}
+            {{event.title}}<a ng-show="isAuthenticated" ng-href="#/edit/event/{{event.objectId}}">Редактировать</a>
         </div>
       </div>
 

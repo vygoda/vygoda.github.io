@@ -1,0 +1,16 @@
+{{ notification }}<br/>
+
+Название:<br/>
+<input type="text" ng-model="event.title" /> <br/>
+
+Автор:<br/>
+<input type="text" ng-model="event.author" /><br/>
+Thumb:<br/>
+<input type="text" ng-model="event.thumb" /><br/>
+
+Текст:<br/>
+<textarea ng-model="event.content"> </textarea><br/>
+
+<br/>
+<button class="btn btn-success" ng-click="save()">Сохранить</button>
+<button class="btn btn-danger" ng-show="eventId" ng-click="delete()">Удалить</button>
