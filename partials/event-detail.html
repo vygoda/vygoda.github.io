@@ -11,10 +11,6 @@
 
     </div>
     <div class="panel-body">
-        <div ng-show="event.thumb">
-            <img ng-src="{{event.thumb}}">
-        </div>
-
         <div btf-markdown="event.summary"></div>
         <div ng-show="!detailed"><a href="#/events/{{event.objectId}}">Подробнее...</a></div>
         <div ng-show="detailed" btf-markdown="event.content"></div>
