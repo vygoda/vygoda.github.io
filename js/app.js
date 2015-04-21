@@ -80,7 +80,7 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $local
             config.headers["application-id"] = ENV["application-id"];
             config.headers["secret-key"] = ENV["secret-key"];
 
-            if ($localStorage["user-token"]) {
+            if (config.method !== "GET" && $localStorage["user-token"]) {
                 config.headers["user-token"] = $localStorage["user-token"];
             }
 
@@ -94,4 +94,26 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $local
             return $q.reject(rejection);
         }
     };
+});
+
+phonecatApp.config(['markdownConverterProvider', function (markdownConverterProvider) {
+    // options to be passed to Showdown
+    // see: https://github.com/coreyti/showdown#extensions
+    markdownConverterProvider.config({
+        extensions: ['youtube', 'table']
+    });
+}]);
+
+phonecatApp.config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log){
+        return function(text, target){
+
+            var result = $delegate(text, target);
+
+            var startTag = "<iframe width=\"480\" height=\"320\" src=\"//www.youtube.com/embed/";
+            var endTag = "?autoplay=0\"\nframeborder=\"0\" allowfullscreen></iframe>";
+
+            return result.replace("\^\$", startTag).replace("\$\^", endTag);
+        };
+    });
 });
