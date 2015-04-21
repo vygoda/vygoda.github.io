@@ -1,16 +1,36 @@
 {{ notification }}<br/>
 
-Название:<br/>
-<input type="text" ng-model="event.title" /> <br/>
+<tabset>
+    <tab heading="Редактирование">
+        <form>
+            <div class="form-group">
+                <label for="titleEdit">Название</label>
+                <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название">
+            </div>
+            <div class="form-group">
+                <label for="authorEdit">Автор</label>
+                <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор">
+            </div>
+            <div class="form-group">
+                <label for="thumbEdit">Ссылка на картинку</label>
+                <input type="text" ng-model="event.thumb" class="form-control" id="thumbEdit" placeholder="Ссылка на картинку">
+            </div>
+            <div class="form-group">
+                <label for="summaryEdit">Краткое содержание</label>
+                <textarea class="form-control" rows="3" ng-model="event.summary" id="summaryEdit"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="contentEdit">Текст</label>
+                <textarea class="form-control" rows="10" ng-model="event.content" id="contentEdit"></textarea>
+            </div>
+            <button class="btn btn-success" ng-click="save()">Сохранить</button>
+            <button class="btn btn-danger pull-right" ng-show="eventId" ng-click="delete()">Удалить</button>
+        </form>
+    </tab>
+    <tab heading="Предпросмотр">
+        <ng-include src="'partials/event-detail.html'"></ng-include>
+    </tab>
 
-Автор:<br/>
-<input type="text" ng-model="event.author" /><br/>
-Thumb:<br/>
-<input type="text" ng-model="event.thumb" /><br/>
+</tabset>
 
-Текст:<br/>
-<textarea ng-model="event.content"> </textarea><br/>
 
-<br/>
-<button class="btn btn-success" ng-click="save()">Сохранить</button>
-<button class="btn btn-danger" ng-show="eventId" ng-click="delete()">Удалить</button>

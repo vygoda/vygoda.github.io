@@ -12,11 +12,16 @@ dkControllers.controller('EventListCtrl',
 
 dkControllers.controller('EventDetailCtrl',
     function ($scope, $routeParams, Event) {
+        $scope.detailed = true;
+
         $scope.event = Event.get({eventId: $routeParams.eventId});
     });
 
 dkControllers.controller('EventEditCtrl',
-    function ($scope, $routeParams, $timeout, $location, Event) {
+    function ($scope, $routeParams, $timeout, $location, Event, Notification) {
+        $scope.preview = true;
+        $scope.detailed = true;
+
         $scope.eventId = $routeParams.eventId;
 
         if ($scope.eventId) {
@@ -25,17 +30,20 @@ dkControllers.controller('EventEditCtrl',
             $scope.event = {};
         }
 
+        var onError = function (error) {
+            Notification.error({message: error.data.message, delay: 3000});
+        };
+
         $scope.save = function () {
             var onSuccess = function (data) {
-                $scope.notification = "Сохранено";
+                Notification.success({message: 'Сохранено', delay: 2000});
+
                 $timeout(function() {
                     $location.path('/edit/event/' + data.objectId);
                 }, 1000);
             };
 
-            var onError = function (error) {
-                $scope.notification = error.data.message;
-            };
+
 
             if ($scope.eventId) {
                 Event.update({"eventId": $scope.eventId}, $scope.event, onSuccess, onError);
@@ -46,14 +54,11 @@ dkControllers.controller('EventEditCtrl',
 
         $scope.delete = function() {
             var onSuccess = function (data) {
-                $scope.notification = "Удалено";
+                Notification.success({message: 'Удалено', delay: 2000});
+
                 $timeout(function() {
                     $location.path('/events');
                 }, 1000);
-            };
-
-            var onError = function (error) {
-                $scope.notification = error.data.message;
             };
 
             Event.delete({"eventId": $scope.eventId}, onSuccess, onError);

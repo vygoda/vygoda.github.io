@@ -1,18 +1,13 @@
 <div class="container-fluid">
-  <div class="row">
 
       <!--Body content-->
-      <div ng-show="isAuthenticated">
-        <a href="#/new/event">New</a>
+      <div class="row" ng-show="isAuthenticated">
+          <a href="#/new/event" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span>
+              Добавить</a>
       </div>
 
-      <div>
-        <div ng-repeat="event in events.data">
-            <a href="#/events/{{event.objectId}}" class="thumb"><img ng-src="{{event.thumb}}"></a>
-            {{event.title}}<a ng-show="isAuthenticated" ng-href="#/edit/event/{{event.objectId}}">Редактировать</a>
-        </div>
+      <div class="row" ng-repeat="event in events.data">
+          <ng-include src="'partials/event-detail.html'"></ng-include>
       </div>
-
-    </div>
   </div>
 

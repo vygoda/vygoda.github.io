@@ -10,7 +10,8 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'dkServices',
     'btford.markdown',
     'ngStorage',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui-notification'
 ]);
 
 phonecatApp.config(
