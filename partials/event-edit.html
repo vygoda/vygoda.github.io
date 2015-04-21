@@ -2,24 +2,25 @@
 
 <tabset>
     <tab heading="Редактирование">
-        <form>
-            <div class="form-group">
-                <label for="titleEdit">Название</label>
-                <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название">
+        <form name="editForm">
+            <div class="form-group" ng-class="{ 'has-error': editForm.titleEdit.$invalid }">
+                <label for="titleEdit">Название*</label>
+                <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название" required>
             </div>
-            <div class="form-group">
-                <label for="authorEdit">Автор</label>
-                <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор">
+            <div class="form-group" ng-class="{ 'has-error': editForm.authorEdit.$invalid }">
+                <label for="authorEdit">Автор*</label>
+                <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор" required>
             </div>
-            <div class="form-group">
-                <label for="summaryEdit">Краткое содержание</label>
-                <textarea class="form-control" rows="7" ng-model="event.summary" id="summaryEdit"></textarea>
+            <div class="form-group" ng-class="{ 'has-error': editForm.summaryEdit.$invalid }">
+                <label for="summaryEdit">Краткое содержание*</label>
+                <textarea class="form-control" rows="7" ng-model="event.summary" id="summaryEdit" required></textarea>
             </div>
             <div class="form-group">
                 <label for="contentEdit">Текст</label>
                 <textarea class="form-control" rows="12" ng-model="event.content" id="contentEdit"></textarea>
             </div>
-            <button class="btn btn-success" ng-click="save()">Сохранить</button>
+            <p class="bg-info">* Обязательные поля</p>
+            <button class="btn btn-success" ng-disabled="editForm.$invalid" ng-click="save()">Сохранить</button>
             <button class="btn btn-danger pull-right" ng-show="eventId" ng-click="delete()">Удалить</button>
         </form>
     </tab>
