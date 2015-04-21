@@ -18,7 +18,7 @@ dkControllers.controller('EventDetailCtrl',
     });
 
 dkControllers.controller('EventEditCtrl',
-    function ($scope, $routeParams, $timeout, $location, Event, Notification) {
+    function ($scope, $routeParams, $timeout, $location, $localStorage, Event, Notification) {
         $scope.preview = true;
         $scope.detailed = true;
 
@@ -27,7 +27,7 @@ dkControllers.controller('EventEditCtrl',
         if ($scope.eventId) {
             $scope.event = Event.get({eventId: $scope.eventId});
         } else {
-            $scope.event = {};
+            $scope.event = {author: $localStorage.userData.name};
         }
 
         var onError = function (error) {
