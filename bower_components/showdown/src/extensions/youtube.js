@@ -16,7 +16,8 @@
                         m = url.match(youtube);
                         if (m && m[7].length === 11) {
                             video_id = m[7];
-                            return "^$" + video_id + "$^";
+                            //ToDo: add play icon overlay
+                            return "<a target=\"_blank\" href=\"http://www.youtube.com/watch?v=" + video_id + "\"><img src=\"http://img.youtube.com/vi/" + video_id + "/mqdefault.jpg\" /></a>";
                         } else {
                             return match;
                         }

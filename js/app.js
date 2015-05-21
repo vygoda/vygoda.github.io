@@ -103,17 +103,3 @@ phonecatApp.config(['markdownConverterProvider', function (markdownConverterProv
         extensions: ['youtube', 'table']
     });
 }]);
-
-phonecatApp.config(function($provide){
-    $provide.decorator("$sanitize", function($delegate, $log){
-        return function(text, target){
-
-            var result = $delegate(text, target);
-
-            var startTag = "<iframe width=\"480\" height=\"320\" src=\"//www.youtube.com/embed/";
-            var endTag = "?autoplay=0\"\nframeborder=\"0\" allowfullscreen></iframe>";
-
-            return result.replace("\^\$", startTag).replace("\$\^", endTag);
-        };
-    });
-});
