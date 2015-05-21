@@ -11,7 +11,9 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'btford.markdown',
     'ngStorage',
     'ui.bootstrap',
-    'ui-notification'
+    'ui-notification',
+    'cloudinary',
+    'angularFileUpload'
 ]);
 
 phonecatApp.config(
@@ -67,6 +69,14 @@ phonecatApp.config(
                 templateUrl: 'partials/contacts.html',
                 controller: 'ContactsCtrl'
             }).*/
+            when('/photos', {
+                templateUrl: 'partials/photo-list.html',
+                controller: 'PhotoListCtrl'
+            }).
+            when('/photos/new', {
+                templateUrl: 'partials/photo-upload.html',
+                controller: 'PhotoUploadCtrl'
+            }).
             otherwise({
                 redirectTo: '/events'
             });
@@ -75,6 +85,11 @@ phonecatApp.config(
 phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage, ENV) {
     return {
         request: function (config) {
+            //ToDo: remove workaround
+            if (config.url.indexOf("backendless.com") <= -1) {
+                return config;
+            }
+
             config.headers = config.headers || {};
 
             config.headers["application-id"] = ENV["application-id"];
@@ -87,6 +102,11 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $local
             return config;
         },
         responseError: function (rejection) {
+            //ToDo: remove workaround
+            if (rejection.config.url.indexOf("backendless.com") <= -1) {
+                return $q.reject(rejection);
+            }
+
             if (rejection.status === 401) {
                 // handle the case where the user is not authenticated
                 delete $localStorage["user-token"];
@@ -104,6 +124,7 @@ phonecatApp.config(['markdownConverterProvider', function (markdownConverterProv
     });
 }]);
 
+//ToDo: remove workaround
 phonecatApp.config(function($provide){
     $provide.decorator("$sanitize", function($delegate, $log){
         return function(text, target){

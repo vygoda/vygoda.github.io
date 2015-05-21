@@ -16,7 +16,9 @@
                         m = url.match(youtube);
                         if (m && m[7].length === 11) {
                             video_id = m[7];
+                            //ToDo: remove workaround
                             return "^$" + video_id + "$^";
+                            //return "<iframe  src=\"//www.youtube.com/embed/" + video_id + "?rel=0\"\nframeborder=\"0\" allowfullscreen></iframe>";
                         } else {
                             return match;
                         }

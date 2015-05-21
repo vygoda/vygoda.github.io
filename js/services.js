@@ -11,6 +11,16 @@ dkServices.factory('Event',
         });
     });
 
+dkServices.factory('Album',
+    function($rootScope, $resource){
+        var url = $.cloudinary.url('myphotoalbum', {format: 'json', type: 'list'});
+        //cache bust
+        url = url + "?" + Math.ceil(new Date().getTime()/1000);
+        return $resource(url, {}, {
+            query: {method:'GET', isArray:false}
+        });
+    });
+
 dkServices.service('AuthService', function($http, $localStorage, ENV) {
     var logout = function (successHandler) {
         delete $localStorage["user-token"];

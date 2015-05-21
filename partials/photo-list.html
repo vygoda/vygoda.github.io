@@ -1,0 +1,15 @@
+<div class="actions">
+  <a class="upload_link" href="#/photos/new">Add photo with Angular File Upload</a>
+</div>
+
+<div class="photos">
+  <p ng-if="photos.length === 0 || !photos">No photos were added yet.</p>
+  <div class="photo" ng-repeat="photo in photos | orderBy:'version':true">
+    <h2>{{photo.context.custom.photo}}</h2>
+    <a cl-href="{{photo.public_id}}" format="jpg" target="_blank">
+      <cl-image public-id="{{photo.public_id}}" class="thumbnail inline" width="150" height="150" crop="fit" quality="80" format="jpg"/>
+    </a>
+
+</div>
+</div>
+
