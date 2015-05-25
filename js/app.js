@@ -35,6 +35,10 @@ phonecatApp.config(
                 templateUrl: 'partials/event-edit.html',
                 controller: 'EventEditCtrl'
             }).
+            when('/videos', {
+                templateUrl: 'partials/video-list.html',
+                controller: 'VideoListCtrl'
+            }).
 /*            when('/about', {
                 templateUrl: 'partials/about-list.html',
                 controller: 'AboutListCtrl'

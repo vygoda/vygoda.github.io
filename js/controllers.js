@@ -65,6 +65,11 @@ dkControllers.controller('EventEditCtrl',
         };
     });
 
+dkControllers.controller('VideoListCtrl',
+    function ($scope, Video) {
+        $scope.videos = Video.query();
+    });
+
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 
