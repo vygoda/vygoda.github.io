@@ -11,6 +11,7 @@ dkServices.factory('Event',
         });
     });
 
+//ToDo: add pagination. Current limitation is 50 entries.
 dkServices.factory('Video',
     function ($resource, $http, ENV) {
         return $resource('https://www.googleapis.com/youtube/v3/playlistItems/', {}, {
