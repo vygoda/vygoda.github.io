@@ -70,6 +70,12 @@ dkControllers.controller('VideoListCtrl',
         $scope.videos = Video.query();
     });
 
+dkControllers.controller('AlbumListCtrl',
+    function ($scope, PhotoSet, ENV) {
+        $scope.user_id = ENV["flickr-user_id"];
+        $scope.albums = PhotoSet.query();
+    });
+
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 

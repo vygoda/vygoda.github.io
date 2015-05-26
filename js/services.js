@@ -19,6 +19,27 @@ dkServices.factory('Video',
         });
     });
 
+var transformFlickResponse = function(response) {
+    // ToDo: remove workaround jsonFlickrApi({...});
+    return angular.fromJson(response.substring(14, response.length - 1));
+};
+
+//ToDo: add pagination. Current limitation is 500 entries.
+dkServices.factory('PhotoSet',
+    function ($resource, $http, ENV) {
+        return $resource('https://api.flickr.com/services/rest/', {}, {
+            query: { method: 'GET', params: {method: "flickr.photosets.getList", api_key: ENV["flickr-api_key"], user_id: ENV["flickr-user_id"], format: "json", per_page: 500}, isArray: false, transformResponse: transformFlickResponse }
+        });
+    });
+
+////https://www.flickr.com/photos/130413297@N03/16377997373/in/album-72157651695647255/
+//dkServices.factory('PhotoDetail',
+//    function ($resource, $http, ENV) {
+//        return $resource('https://api.flickr.com/services/rest/', {}, {
+//            query: { method: 'GET', params: {method: "flickr.photos.getSizes", api_key: ENV["flickr-api_key"], format: "json"}, isArray: false, transformResponse: transformFlickResponse}
+//        });
+//    });
+
 dkServices.service('AuthService', function($http, $localStorage, ENV) {
     var logout = function (successHandler) {
         delete $localStorage["user-token"];

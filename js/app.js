@@ -39,6 +39,14 @@ phonecatApp.config(
                 templateUrl: 'partials/video-list.html',
                 controller: 'VideoListCtrl'
             }).
+            when('/albums', {
+                templateUrl: 'partials/album-list.html',
+                controller: 'AlbumListCtrl'
+            }).
+            //when('/album/:albumId', {
+            //    templateUrl: 'partials/album-detail.html',
+            //    controller: 'AlbumDetailCtrl'
+            //}).
 /*            when('/about', {
                 templateUrl: 'partials/about-list.html',
                 controller: 'AboutListCtrl'
@@ -47,14 +55,7 @@ phonecatApp.config(
                 templateUrl: 'partials/about-detail.html',
                 controller: 'AboutDetailCtrl'
             }).
-            when('/photo', {
-                templateUrl: 'partials/photo-list.html',
-                controller: 'PhotoListCtrl'
-            }).
-            when('/photo/:albumId', {
-                templateUrl: 'partials/photo-detail.html',
-                controller: 'PhotoDetailCtrl'
-            }).
+
             when('/video', {
                 templateUrl: 'partials/video.html',
                 controller: 'VideoCtrl'
@@ -79,6 +80,11 @@ phonecatApp.config(
 phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage, ENV) {
     return {
         request: function (config) {
+            //ToDo: remove workaround
+            if (config.url.indexOf("backendless.com") <= -1) {
+                return config;
+            }
+
             config.headers = config.headers || {};
 
             config.headers["application-id"] = ENV["application-id"];
@@ -91,6 +97,11 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $local
             return config;
         },
         responseError: function (rejection) {
+            //ToDo: remove workaround
+            if (rejection.config.url.indexOf("backendless.com") <= -1) {
+                return $q.reject(rejection);
+            }
+
             if (rejection.status === 401) {
                 // handle the case where the user is not authenticated
                 delete $localStorage["user-token"];
