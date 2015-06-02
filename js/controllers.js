@@ -85,6 +85,11 @@ dkControllers.controller('AlbumListCtrl',
         $scope.photoSets = PhotoSet.query();
     });
 
+dkControllers.controller('DocumentListCtrl',
+    function ($scope, $sce, ENV) {
+        $scope.folder_url = $sce.trustAsResourceUrl("https://drive.google.com/embeddedfolderview?id=" + ENV["googleDrive-folder_id"] + "#grid");
+    });
+
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 

@@ -52,6 +52,10 @@ phonecatApp.config(
                     }
                 }
             }).
+            when('/documents', {
+                templateUrl: 'partials/document-list.html',
+                controller: 'DocumentListCtrl'
+            }).
             //when('/photo/:collectionId/album/:albumId', {
             //    templateUrl: 'partials/album-list.html',
             //    controller: 'AlbumListCtrl',
@@ -72,10 +76,7 @@ phonecatApp.config(
                 templateUrl: 'partials/video.html',
                 controller: 'VideoCtrl'
             }).
-            when('/documents', {
-                templateUrl: 'partials/documents.html',
-                controller: 'DocumentsCtrl'
-            }).
+
             when('/archive', {
                 templateUrl: 'partials/archive.html',
                 controller: 'ArchiveCtrl'
