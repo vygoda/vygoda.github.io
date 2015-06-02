@@ -1,0 +1,5 @@
+<div class="container-fluid">
+    <div class="row" ng-repeat="collection in collections.collections.collection | orderBy:'title'">
+        <ng-include src="'partials/collection-detail.html'"></ng-include>
+    </div>
+</div>

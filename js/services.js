@@ -32,6 +32,31 @@ dkServices.factory('PhotoSet',
         });
     });
 
+dkServices.factory('PhotoSetInfo',
+    function ($resource, $http, ENV) {
+        return $resource('https://api.flickr.com/services/rest/', {}, {
+            query: { method: 'GET', params: {method: "flickr.photosets.getInfo", api_key: ENV["flickr-api_key"], user_id: ENV["flickr-user_id"], format: "json"}, isArray: false, transformResponse: transformFlickResponse }
+        });
+    });
+
+dkServices.factory('PhotoCollection',
+    function ($resource, $http, ENV) {
+        return $resource('https://api.flickr.com/services/rest/', {}, {
+            query: { method: 'GET', params: {method: "flickr.collections.getTree", api_key: ENV["flickr-api_key"], user_id: ENV["flickr-user_id"], format: "json"}, isArray: false, transformResponse: transformFlickResponse },
+            queryPhotoSets: { method: 'GET', params: {method: "flickr.collections.getTree", api_key: ENV["flickr-api_key"], user_id: ENV["flickr-user_id"], format: "json"}, isArray: true, transformResponse: function(response) {
+                var responseObject = angular.fromJson(transformFlickResponse(response));
+                var setList = responseObject.collections.collection[0].set;
+
+                var entries = [];
+                for (var index in setList) {
+                    entries.push(setList[index].id);
+                }
+
+                return entries;
+            } }
+        });
+    });
+
 ////https://www.flickr.com/photos/130413297@N03/16377997373/in/album-72157651695647255/
 //dkServices.factory('PhotoDetail',
 //    function ($resource, $http, ENV) {

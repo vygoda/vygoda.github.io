@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row" ng-repeat="album in albums.photosets.photoset">
+    <div class="row" ng-repeat="album in photoSets.photosets.photoset | orderBy:'title._content'" ng-if="photoSetIds.indexOf(album.id) > -1">
         <ng-include src="'partials/album-detail.html'"></ng-include>
     </div>
-  </div>
+</div>
 

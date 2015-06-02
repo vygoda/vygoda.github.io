@@ -70,10 +70,19 @@ dkControllers.controller('VideoListCtrl',
         $scope.videos = Video.query();
     });
 
-dkControllers.controller('AlbumListCtrl',
-    function ($scope, PhotoSet, ENV) {
+dkControllers.controller('CollectionListCtrl',
+    function ($scope, $routeParams, PhotoCollection, ENV) {
         $scope.user_id = ENV["flickr-user_id"];
-        $scope.albums = PhotoSet.query();
+
+        $scope.collections = PhotoCollection.query();
+    });
+
+dkControllers.controller('AlbumListCtrl',
+    function ($scope, PhotoSet, photoSetIds, ENV) {
+        $scope.user_id = ENV["flickr-user_id"];
+
+        $scope.photoSetIds = photoSetIds;
+        $scope.photoSets = PhotoSet.query();
     });
 
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {

@@ -39,13 +39,25 @@ phonecatApp.config(
                 templateUrl: 'partials/video-list.html',
                 controller: 'VideoListCtrl'
             }).
-            when('/albums', {
-                templateUrl: 'partials/album-list.html',
-                controller: 'AlbumListCtrl'
+            when('/photo', {
+                templateUrl: 'partials/collection-list.html',
+                controller: 'CollectionListCtrl'
             }).
-            //when('/album/:albumId', {
-            //    templateUrl: 'partials/album-detail.html',
-            //    controller: 'AlbumDetailCtrl'
+            when('/photo/:collectionId', {
+                templateUrl: 'partials/album-list.html',
+                controller: 'AlbumListCtrl',
+                resolve: {
+                    photoSetIds : function(PhotoCollection, $route) {
+                        return PhotoCollection.queryPhotoSets({collection_id: $route.current.params.collectionId});
+                    }
+                }
+            }).
+            //when('/photo/:collectionId/album/:albumId', {
+            //    templateUrl: 'partials/album-list.html',
+            //    controller: 'AlbumListCtrl',
+            //    resolve: {
+            //        photoSetIds : null
+            //    }
             //}).
 /*            when('/about', {
                 templateUrl: 'partials/about-list.html',
