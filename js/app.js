@@ -11,7 +11,10 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'btford.markdown',
     'ngStorage',
     'ui.bootstrap',
-    'ui-notification'
+    'ui-notification',
+    'chieffancypants.loadingBar',
+    'ngAnimate',
+    'ngOnload'
 ]);
 
 phonecatApp.config(
@@ -97,6 +100,10 @@ phonecatApp.config(
                 redirectTo: '/events'
             });
     });
+
+phonecatApp.config(function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+  });
 
 phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage, ENV) {
     return {

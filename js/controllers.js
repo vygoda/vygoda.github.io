@@ -86,7 +86,13 @@ dkControllers.controller('AlbumListCtrl',
     });
 
 dkControllers.controller('DocumentListCtrl',
-    function ($scope, $sce, ENV) {
+    function ($scope, $sce, cfpLoadingBar, ENV) {
+                $scope.onLoaded = function() {
+                    cfpLoadingBar.complete();
+                };
+
+        cfpLoadingBar.start();
+
         $scope.folder_url = $sce.trustAsResourceUrl("https://drive.google.com/embeddedfolderview?id=" + ENV["googleDrive-folder_id"] + "#grid");
     });
 
