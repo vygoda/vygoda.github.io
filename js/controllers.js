@@ -90,6 +90,19 @@ dkControllers.controller('DocumentListCtrl',
         $scope.folder_url = $sce.trustAsResourceUrl("https://drive.google.com/embeddedfolderview?id=" + ENV["googleDrive-folder_id"] + "#grid");
     });
 
+dkControllers.controller('AboutCtrl',
+    function ($scope, $routeParams, $location, About, ENV) {
+        $scope.page = $routeParams.page;
+
+        $scope.abouts = About.query();
+
+        $scope.goto = function(page) {
+            $location.path('/about/' + page, false);
+            $scope.page = page;
+        };
+    });
+
+
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 

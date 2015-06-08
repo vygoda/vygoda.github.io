@@ -56,6 +56,14 @@ phonecatApp.config(
                 templateUrl: 'partials/document-list.html',
                 controller: 'DocumentListCtrl'
             }).
+            when('/about', {
+                templateUrl: 'partials/about.html',
+                controller: 'AboutCtrl'
+            }).
+            when('/about/:page', {
+                templateUrl: 'partials/about.html',
+                controller: 'AboutCtrl'
+            }).
             //when('/photo/:collectionId/album/:albumId', {
             //    templateUrl: 'partials/album-list.html',
             //    controller: 'AlbumListCtrl',
@@ -130,4 +138,18 @@ phonecatApp.config(['markdownConverterProvider', function (markdownConverterProv
     markdownConverterProvider.config({
         extensions: ['youtube', 'table']
     });
+}]);
+
+phonecatApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
+    };
 }]);

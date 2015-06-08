@@ -11,6 +11,15 @@ dkServices.factory('Event',
         });
     });
 
+dkServices.factory('About',
+    function ($resource, $http, ENV) {
+        return $resource(ENV.host + '/data/abouts/:about', {}, {
+            query: { method: 'GET', params: {}, isArray: false },
+            update: { method:'PUT' }
+
+        });
+    });
+
 //ToDo: add pagination. Current limitation is 50 entries.
 dkServices.factory('Video',
     function ($resource, $http, ENV) {

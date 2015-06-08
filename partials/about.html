@@ -1,0 +1,17 @@
+<!--ToDO: ng-repeat-->
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default" ng-repeat="about in abouts.data | orderBy:'order'">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a ng-class="{collapsed: !(page == about.titleTrans) && !(!page && $first)}" href="javascript:;" ng-click="goto(about.titleTrans)">
+                    {{about.title}}
+                </a>
+            </h4>
+        </div>
+        <div collapse="!(page == about.titleTrans) && !(!page && $first)">
+            <div class="panel-body" btf-markdown="about.content">
+            </div>
+        </div>
+    </div>
+</div>
