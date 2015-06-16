@@ -106,8 +106,94 @@ dkControllers.controller('AboutCtrl',
             $location.path('/about/' + page, false);
             $scope.page = page;
         };
+
+        var changeOrder = function(about, abouts, up) {
+            abouts.sort(function(a, b) {
+                          if (a.order < b.order) {
+                            return -1;
+                          }
+                          if (a.order > b.order) {
+                            return 1;
+                          }
+                          // a должно быть равным b
+                          return 0;
+                        });
+
+            var index = 0;
+             abouts.forEach(function(entry) {
+                 entry.order = index++;
+             });
+
+            index = abouts.indexOf(about);
+
+            if (up && index > 0) {
+                    var tmp = abouts[index - 1].order;
+                    abouts[index - 1].order = about.order;
+                    about.order = tmp;
+            } else if (!up && index < abouts.length - 1) {
+                    var tmp = abouts[index + 1].order;
+                    abouts[index + 1].order = about.order;
+                    about.order = tmp;
+            }
+
+            abouts.forEach(function(entry) {
+                About.update({aboutId: entry.objectId}, {order: entry.order});
+            });
+        };
+
+        $scope.orderUp = function(about, abouts) {
+            changeOrder(about, abouts, true);
+        };
+
+        $scope.orderDown = function(about, abouts) {
+            changeOrder(about, abouts, false);
+        };
     });
 
+dkControllers.controller('AboutEditCtrl',
+    function ($scope, $routeParams, $timeout, $location, About, Notification) {
+        $scope.preview = true;
+
+        $scope.aboutId = $routeParams.aboutId;
+
+        if ($scope.aboutId) {
+            $scope.about = About.get({aboutId: $scope.aboutId});
+        } else {
+            $scope.about = {order: 9007199254740992};
+        }
+
+        var onError = function (error) {
+            Notification.error({message: error.data.message, delay: 3000});
+        };
+
+        $scope.save = function () {
+            var onSuccess = function (data) {
+                Notification.success({message: 'Сохранено', delay: 2000});
+
+                $timeout(function() {
+                    $location.path('/edit/about/' + data.objectId);
+                }, 1000);
+            };
+
+            if ($scope.aboutId) {
+                About.update({"aboutId": $scope.aboutId}, $scope.about, onSuccess, onError);
+            } else {
+                About.save($scope.about, onSuccess, onError);
+            }
+        };
+
+        $scope.delete = function() {
+            var onSuccess = function (data) {
+                Notification.success({message: 'Удалено', delay: 2000});
+
+                $timeout(function() {
+                    $location.path('/about');
+                }, 1000);
+            };
+
+            About.delete({"aboutId": $scope.aboutId}, onSuccess, onError);
+        };
+    });
 
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};

@@ -1,0 +1,31 @@
+<!--ToDO: ng-repeat-->
+
+<div class="row" ng-show="isAuthenticated">
+    <a href="#/new/about" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span>
+        Добавить</a>
+</div>
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default" ng-repeat="about in abouts.data | orderBy:'order'">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h4>
+                    <a href="#/edit/about/{{about.objectId}}" ng-show="isAuthenticated" style="display: inline-block;" s
+                       class="btn glyphicon glyphicon-edit"> </a>
+
+                    <a style="display: inline-block;" class="btn glyphicon glyphicon-arrow-up" ng-click="orderUp(about, abouts.data)"></a>
+                    <a style="display: inline-block;" class="btn glyphicon glyphicon-arrow-down" ng-click="orderDown(about, abouts.data)"></a>
+
+                    <a ng-class="{collapsed: !(page == about.titleTrans) && !(!page && $first), expander:true}"
+                       href="javascript:;" ng-click="goto(about.titleTrans)">
+                        {{about.title}}
+                    </a>
+                </h4>
+            </div>
+        </div>
+        <div collapse="!(page == about.titleTrans) && !(!page && $first)">
+            <div class="panel-body" btf-markdown="about.content">
+            </div>
+        </div>
+    </div>
+</div>

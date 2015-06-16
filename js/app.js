@@ -60,12 +60,20 @@ phonecatApp.config(
                 controller: 'DocumentListCtrl'
             }).
             when('/about', {
-                templateUrl: 'partials/about.html',
+                templateUrl: 'partials/about-list.html',
                 controller: 'AboutCtrl'
             }).
             when('/about/:page', {
-                templateUrl: 'partials/about.html',
+                templateUrl: 'partials/about-list.html',
                 controller: 'AboutCtrl'
+            }).
+            when('/edit/about/:aboutId', {
+                templateUrl: 'partials/about-edit.html',
+                controller: 'AboutEditCtrl'
+            }).
+            when('/new/about', {
+                templateUrl: 'partials/about-edit.html',
+                controller: 'AboutEditCtrl'
             }).
             //when('/photo/:collectionId/album/:albumId', {
             //    templateUrl: 'partials/album-list.html',

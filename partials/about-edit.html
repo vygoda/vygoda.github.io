@@ -1,0 +1,27 @@
+<tabset>
+    <tab heading="Редактирование">
+        <form name="editForm">
+            <div class="form-group" ng-class="{ 'has-error': editForm.titleEdit.$invalid }">
+                <label for="titleEdit">Название*</label>
+                <input type="text" ng-model="about.title" class="form-control" id="titleEdit" placeholder="Название" required>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': editForm.titleTransEdit.$invalid }">
+                <label for="titleEdit">Название (eng)*</label>
+                <input type="text" ng-model="about.titleTrans" class="form-control" id="titleTransEdit" placeholder="Название (eng)" required>
+            </div>
+            <div class="form-group">
+                <label for="contentEdit">Текст</label>
+                <textarea class="form-control" rows="12" ng-model="about.content" id="contentEdit"></textarea>
+            </div>
+            <p class="bg-info">* Обязательные поля</p>
+            <button class="btn btn-success" ng-disabled="editForm.$invalid" ng-click="save()">Сохранить</button>
+            <button class="btn btn-danger pull-right" ng-show="aboutId" ng-click="delete()">Удалить</button>
+        </form>
+    </tab>
+    <tab heading="Предпросмотр">
+        <div btf-markdown="about.content"> </div>
+    </tab>
+
+</tabset>
+
+
