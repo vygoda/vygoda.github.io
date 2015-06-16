@@ -13,8 +13,8 @@
                     <a href="#/edit/about/{{about.objectId}}" ng-show="isAuthenticated" style="display: inline-block;" s
                        class="btn glyphicon glyphicon-edit"> </a>
 
-                    <a style="display: inline-block;" class="btn glyphicon glyphicon-arrow-up" ng-click="orderUp(about, abouts.data)"></a>
-                    <a style="display: inline-block;" class="btn glyphicon glyphicon-arrow-down" ng-click="orderDown(about, abouts.data)"></a>
+                    <a ng-show="isAuthenticated" style="display: inline-block;" class="btn glyphicon glyphicon-arrow-up" ng-click="orderUp(about, abouts.data)"></a>
+                    <a ng-show="isAuthenticated" style="display: inline-block;" class="btn glyphicon glyphicon-arrow-down" ng-click="orderDown(about, abouts.data)"></a>
 
                     <a ng-class="{collapsed: !(page == about.titleTrans) && !(!page && $first), expander:true}"
                        href="javascript:;" ng-click="goto(about.titleTrans)">
