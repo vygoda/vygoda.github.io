@@ -14,7 +14,8 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'ui-notification',
     'chieffancypants.loadingBar',
     'ngAnimate',
-    'ngOnload'
+    'ngOnload',
+    'uiGmapgoogle-maps'
 ]);
 
 phonecatApp.config(
@@ -75,6 +76,10 @@ phonecatApp.config(
                 templateUrl: 'partials/about-edit.html',
                 controller: 'AboutEditCtrl'
             }).
+            when('/contacts', {
+                templateUrl: 'partials/contacts.html',
+                controller: 'ContactsCtrl'
+            }).
             //when('/photo/:collectionId/album/:albumId', {
             //    templateUrl: 'partials/album-list.html',
             //    controller: 'AlbumListCtrl',
@@ -100,10 +105,7 @@ phonecatApp.config(
                 templateUrl: 'partials/archive.html',
                 controller: 'ArchiveCtrl'
             }).
-            when('/contacts', {
-                templateUrl: 'partials/contacts.html',
-                controller: 'ContactsCtrl'
-            }).*/
+            */
             otherwise({
                 redirectTo: '/events'
             });
@@ -167,4 +169,12 @@ phonecatApp.run(['$route', '$rootScope', '$location', function ($route, $rootSco
         }
         return original.apply($location, [path]);
     };
+}]);
+
+phonecatApp.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
+  GoogleMapApi.configure({
+    //key: 'api key',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization'
+  });
 }]);
