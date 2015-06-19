@@ -220,6 +220,12 @@ $scope.map = {
         };
 });
 
+dkControllers.controller('PostersCtrl', function ($scope, Photos, ENV) {
+    $scope.myInterval = 5000;
+
+    $scope.slides = Photos.query({photoset_id: ENV["flickr-posters_album_id"]});
+});
+
 dkControllers.controller('UserCtrl', function ($rootScope, $scope, $http, $localStorage, ENV, AuthService) {
     $scope.user = {login: '', password: ''};
 
