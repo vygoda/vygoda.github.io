@@ -93,7 +93,7 @@ dkControllers.controller('DocumentListCtrl',
 
         cfpLoadingBar.start();
 
-        $scope.folder_url = $sce.trustAsResourceUrl("https://drive.google.com/embeddedfolderview?id=" + ENV["googleDrive-folder_id"] + "#grid");
+        $scope.folder_url = $sce.trustAsResourceUrl("https://drive.google.com/embeddedfolderview?id=" + ENV["googleDrive-folder_id"] + "#list");
     });
 
 dkControllers.controller('AboutCtrl',
