@@ -15,7 +15,8 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'chieffancypants.loadingBar',
     'ngAnimate',
     'ngOnload',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'duScroll'
 ]);
 
 phonecatApp.config(

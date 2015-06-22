@@ -97,7 +97,7 @@ dkControllers.controller('DocumentListCtrl',
     });
 
 dkControllers.controller('AboutCtrl',
-    function ($scope, $routeParams, $location, About, ENV) {
+    function ($scope, $routeParams, $location, $document, $timeout, About, ENV) {
         $scope.page = $routeParams.page;
 
         $scope.abouts = About.query();
@@ -105,7 +105,24 @@ dkControllers.controller('AboutCtrl',
         $scope.goto = function(page) {
             $location.path('/about/' + page, false);
             $scope.page = page;
+
+            var duration = 500;
+
+            var offset = 30; //pixels; adjust for floating menu, context etc
+                //Scroll to #some-id with 30 px "padding"
+                //Note: Use this in a directive, not with document.getElementById
+
+            //ToDo: add handler instead of delay
+            $timeout(function() {
+                var someElement = angular.element(document.getElementById(page));
+                $document.scrollToElement(someElement, offset, duration);
+            }, 500);
+
         };
+
+        if ($scope.page) {
+            $scope.goto($scope.page);
+        }
 
         var changeOrder = function(about, abouts, up) {
             abouts.sort(function(a, b) {

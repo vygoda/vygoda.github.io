@@ -17,7 +17,7 @@
                     <a ng-show="isAuthenticated" style="display: inline-block;" class="btn glyphicon glyphicon-arrow-down" ng-click="orderDown(about, abouts.data)"></a>
 
                     <a ng-class="{collapsed: !(page == about.titleTrans) && !(!page && $first), expander:true}"
-                       href="javascript:;" ng-click="goto(about.titleTrans)">
+                       href="javascript:;" ng-click="goto(about.titleTrans)" id="{{about.titleTrans}}">
                         {{about.title}}
                     </a>
                 </h4>
