@@ -179,3 +179,34 @@ phonecatApp.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
     libraries: 'weather,geometry,visualization'
   });
 }]);
+
+
+phonecatApp.config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log){
+        return function(text, target){
+
+            var result = $delegate(text, target);
+
+            var startStr = "[flash=";
+            var endStr = "]";
+
+            var start = result.indexOf(startStr);
+            console.log(start);
+
+            if (start == -1) {
+                return result;
+            }
+
+            var end = result.indexOf(endStr, start);
+            var str = result.substring(start + startStr.length, end);
+
+            var params = str.split(',');
+            var resultValue = result.substring(0, start) +
+            "<iframe width=\"" + params[0] + "\" height=\"" + params[1]
+             + "\" src=\"" + params[2] + "\"\nframeborder=\"0\" scrolling=\"no\" allowfullscreen></iframe>" +
+             result.substring(end + endStr.length, result.length);
+
+            return resultValue;
+        };
+    });
+});
