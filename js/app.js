@@ -180,6 +180,9 @@ phonecatApp.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
   });
 }]);
 
+phonecatApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }]);
 
 phonecatApp.config(function($provide){
     $provide.decorator("$sanitize", function($delegate, $log){
