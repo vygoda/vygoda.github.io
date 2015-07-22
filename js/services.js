@@ -2,12 +2,34 @@
 
 var dkServices = angular.module('dkServices', ['ngResource']);
 
+var eventRequestTransform = function(data){
+        if (data === undefined) {
+            return data;
+        }
+
+        if (data.eventDate !== undefined) {
+            data.eventDate = data.eventDate.getTime();
+        }
+
+        return angular.toJson(data);
+    };
+
+var transformEventResponse = function(response) {
+    var event = angular.fromJson(response);
+
+    console.log(response);
+    event.eventDate = new Date(event.eventDate);
+
+
+    return event;
+};
+
 dkServices.factory('Event',
     function ($resource, $http, ENV) {
         return $resource(ENV.host + '/data/events/:eventId', {}, {
-            query: { method: 'GET', params: {}, isArray: false },
-            update: { method:'PUT' }
-
+            query: { method: 'GET', params: {}, isArray: false , transformResponse: transformEventResponse},
+            update: { method:'PUT' , transformRequest: eventRequestTransform},
+            save: { method:'POST' , transformRequest: eventRequestTransform}
         });
     });
 

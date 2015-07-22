@@ -23,6 +23,7 @@
     "angular-loading-bar": "0.7.1",
     "angular-google-maps": "~2.1.4",
     "angular-scroll": "~0.7.1",
-    "lodash": "3.9.3"
+    "lodash": "3.9.3",
+    "angular-ui-bootstrap-datetimepicker": "~0.11.2"
   }
 }

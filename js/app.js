@@ -16,7 +16,8 @@ var phonecatApp = angular.module('vygoda-dk-angular', [
     'ngAnimate',
     'ngOnload',
     'uiGmapgoogle-maps',
-    'duScroll'
+    'duScroll',
+    'ui.bootstrap.datetimepicker'
 ]);
 
 phonecatApp.config(

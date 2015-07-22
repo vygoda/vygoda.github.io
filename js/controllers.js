@@ -18,8 +18,7 @@ dkControllers.controller('EventDetailCtrl',
     });
 
 dkControllers.controller('EventEditCtrl',
-    function ($scope, $routeParams, $timeout, $location, $localStorage, Event, Notification) {
-        $scope.preview = true;
+    function ($scope, $routeParams, $timeout, $location, $localStorage, $log, Event, Notification) {
         $scope.detailed = true;
 
         $scope.eventId = $routeParams.eventId;
