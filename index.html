@@ -53,9 +53,12 @@
                     <li><a href="#/documents">Документы</a></li>
                     <li><a href="#/contacts">Контакты</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="UserCtrl">
-                    <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-                    <!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+
+                <!--<ul class="nav navbar-nav navbar-right" ng-controller="UserCtrl">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>-->
+                <div ng-controller="UserCtrl">
                     <form class="navbar-form navbar-right" ng-show="!isAuthenticated" ng-submit="submit()">
                         <div class="form-group">
                             <input type="text" ng-model="user.login" placeholder="Login" class="form-control">
@@ -69,7 +72,7 @@
                         <div class="form-group">{{wellcome}}</div>
                         <button type="button" class="btn btn-primary" ng-click="logout()">Logout</button>
                     </div>
-                </ul>
+                </div>
             </div>
         </div>
     </nav>

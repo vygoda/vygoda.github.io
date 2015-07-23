@@ -16,8 +16,12 @@
                         m = url.match(youtube);
                         if (m && m[7].length === 11) {
                             video_id = m[7];
-                            //ToDo: add play icon overlay
-                            return "<a target=\"_blank\" href=\"http://www.youtube.com/watch?v=" + video_id + "\"><img src=\"http://img.youtube.com/vi/" + video_id + "/mqdefault.jpg\" /></a>";
+                            return '<div class="play-button-container">' +
+                                '<a target="_blank" href="http://www.youtube.com/watch?v=' + video_id + '" class="play-button-link">' +
+                                    '<img class="youtube-thumbnail" src="http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg" />' +
+                                    '<img class="play-button" alt="" src="img/youtube_play_64x64.png" />' +
+                                '</a>' +
+                            '</div>';
                         } else {
                             return match;
                         }
