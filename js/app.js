@@ -194,7 +194,6 @@ phonecatApp.config(function($provide){
             var endStr = "]";
 
             var start = result.indexOf(startStr);
-            console.log(start);
 
             if (start == -1) {
                 return result;
