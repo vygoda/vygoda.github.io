@@ -39,13 +39,24 @@
     <script src="config.js"></script>
 </head>
 <body>
+<div style="background: repeating-linear-gradient(
+  45deg,
+  #ffffff,
+  #ffffff 10px,
+  #f0f0f0 10px,
+  #f0f0f0 20px
+);">
+    <a href="#/events">
+        <img src="img/vdk1.jpg" class="img-circle"  style="display: inline-block;" />
+        <h1 style="display: inline-block; vertical-align: bottom">Сообщество с.Выгода</h1>
+    </a>
+</div>
     <!-- TODO: navbar-fixed-top-->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/events">с.Выгода</a>
-            </div>
-            <div>
+            <!--<div class="navbar-header">-->
+                <!--<a class="navbar-brand" href="#/events">с.Выгода</a>-->
+            <!--</div>-->
                 <ul class="nav navbar-nav">
                     <li><a href="#/events">Новости</a></li>
                     <li><a href="#/about">О Нас</a></li>
@@ -74,7 +85,6 @@
                         <button type="button" class="btn btn-primary" ng-click="logout()">Logout</button>
                     </div>
                 </div>
-            </div>
         </div>
     </nav>
 

@@ -182,7 +182,7 @@ phonecatApp.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
 }]);
 
 phonecatApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeSpinner = true;
   }]);
 
 phonecatApp.config(function($provide){
