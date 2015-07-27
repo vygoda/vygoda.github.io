@@ -3,15 +3,19 @@
         <form name="editForm">
             <div class="form-group" ng-class="{ 'has-error': editForm.titleEdit.$invalid }">
                 <label for="titleEdit">Название*</label>
-                <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название" required>
+                <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название">
+            </div>
+            <div class="form-group">
+                <label for="vkPostEdit">VK Пост (если заполнено это поле, то игнорируются все остальные)</label>
+                <input type="text"  ng-model="event.vkPost" id="vkPostEdit" class="form-control" placeholder="Код VK поста">
             </div>
             <div class="form-group" ng-class="{ 'has-error': editForm.authorEdit.$invalid }">
                 <label for="authorEdit">Автор*</label>
-                <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор" required>
+                <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор">
             </div>
             <div class="form-group" ng-class="{ 'has-error': editForm.summaryEdit.$invalid }">
                 <label for="summaryEdit">Краткое содержание*</label>
-                <textarea class="form-control" rows="7" ng-model="event.summary" id="summaryEdit" required></textarea>
+                <textarea class="form-control" rows="7" ng-model="event.summary" id="summaryEdit"></textarea>
             </div>
             <div class="form-group">
                 <label for="contentEdit">Текст</label>

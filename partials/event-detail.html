@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-show="!event.vkPost">
     <div class="panel-heading">
         <div class="pull-left">
             <div>{{event.created | date: 'HH:mm:ss'}}</div>
@@ -16,6 +16,14 @@
         <div ng-show="detailed" btf-markdown="event.content"></div>
         <div>Автор: {{event.author}}</div>
     </div>
+</div>
+
+<div ng-show="event.vkPost">
+    <div class="pull-right" ng-show="isAuthenticated && !preview">
+        <a href="#/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+
+    <div btf-markdown="event.vkPost"></div>
 </div>
 
 <div class="comments" ng-show="detailed">

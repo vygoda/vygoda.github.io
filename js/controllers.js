@@ -7,7 +7,7 @@ var dkControllers = angular.module('dkControllers', []);
 dkControllers.controller('EventListCtrl',
     function ($scope, Event) {
         $scope.save = Event.save;
-        $scope.events = Event.query();
+        $scope.events = Event.query({sortBy: "eventDate desc"});
     });
 
 dkControllers.controller('EventDetailCtrl',

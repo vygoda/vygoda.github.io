@@ -146,6 +146,7 @@ phonecatApp.factory('authInterceptor', function ($rootScope, $q, $window, $local
                 // handle the case where the user is not authenticated
                 delete $localStorage["user-token"];
             }
+
             return $q.reject(rejection);
         }
     };
@@ -214,8 +215,48 @@ phonecatApp.config(function($provide){
     });
 });
 
-phonecatApp.run(function($rootScope, $location) {
+phonecatApp.config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log, $rootScope){
+        return function(text, target){
+
+            var result = $delegate(text, target);
+
+            var startStr = "[vk=";
+            var endStr = "]";
+
+            var start = result.indexOf(startStr);
+
+            if (start == -1) {
+                return result;
+            }
+
+            var end = result.indexOf(endStr, start);
+            var str = result.substring(start + startStr.length, end);
+
+            var params = str.split(',');
+
+            var ownerId = params[0];
+            var postId = params[1];
+            var postHash = params[2];
+
+            var element = '<div id="vk_post_' + ownerId + '_' + postId + '"></div>';
+
+            $rootScope.drawPost({"ownerId": ownerId, "postId": postId, "postHash": postHash});
+
+            var resultValue = result.substring(0, start) + element + result.substring(end + endStr.length, result.length);
+            return resultValue;
+        };
+    });
+});
+
+phonecatApp.run(function($rootScope, $location, $timeout) {
     $rootScope.location = $location;
+
+    $rootScope.drawPost = function(item) {
+        $timeout(function(){
+            VK.Widgets.Post("vk_post_" + item.ownerId + "_" + item.postId, item.ownerId, item.postId, item.postHash, {});
+        }, 100);
+    };
 });
 
 phonecatApp.config(function (ezfbProvider) {
@@ -232,5 +273,9 @@ phonecatApp.config(function (ezfbProvider, ENV) {
     // https://developers.facebook.com/docs/javascript/reference/FB.init
     version: 'v2.3'
   });
+});
+
+phonecatApp.config(function (ENV) {
+  VK.init({apiId: ENV["vk-app_id"], onlyWidgets: true});
 });
 
