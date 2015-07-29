@@ -9,5 +9,26 @@
       <div class="row" ng-repeat="event in events.data">
           <ng-include src="'partials/event-detail.html'"></ng-include>
       </div>
+
+      <div style="text-align: center;">
+          <pagination
+                  ng-show="totalCount"
+                  total-items="totalCount"
+                  ng-model="page"
+                  items-per-page="pageSize"
+                  max-size="10"
+                  class="pagination-sm"
+                  boundary-links="true"
+                  rotate="false"
+                  num-pages="numPages"
+                  ng-change="pageChanged()"
+
+                  next-text="Старее"
+                  previous-text="Новее"
+                  last-text="Первые"
+                  first-text="Последние"
+                  >
+          </pagination>
+      </div>
   </div>
 

@@ -29,7 +29,11 @@ phonecatApp.config(
                 templateUrl: 'partials/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/events/:eventId', {
+            when('/events/:page', {
+                templateUrl: 'partials/event-list.html',
+                controller: 'EventListCtrl'
+            }).
+            when('/event/:eventId', {
                 templateUrl: 'partials/event-detail.html',
                 controller: 'EventDetailCtrl'
             }).

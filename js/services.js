@@ -5,7 +5,7 @@ var dkServices = angular.module('dkServices', ['ngResource']);
 dkServices.factory('Event',
     function ($resource, $http, ENV) {
         return $resource(ENV.host + '/data/events/:eventId', {}, {
-            query: { method: 'GET', params: {}, isArray: false },
+            query: { method: 'GET', params: {pageSize: ENV.pageSize, sortBy: "eventDate desc"}, isArray: false },
             update: { method:'PUT' }
 
         });
