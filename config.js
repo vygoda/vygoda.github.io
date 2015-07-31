@@ -12,5 +12,6 @@ angular.module("config", [])
         "flickr-posters_album_id": "72157651695647255",
         "googleDrive-folder_id" : "0B-7EtES7S1ZKfmticGh3a3FNSUd3X0NiWktKZUFuRzRGZzQ4bUNlWE8xOWh4VjZUbVh0UDQ",
         "facebook-app_id" : "773644762748334",
-        "vk-app_id" : "5007540"
+        "vk-app_id" : "5007540",
+        "pageSize" : 5
     });
