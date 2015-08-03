@@ -1,5 +1,20 @@
+<h2>Коллекции фотографий</h2>
 <div class="container-fluid">
-    <div class="row" ng-repeat="collection in collections.collections.collection | orderBy:'title'">
-        <ng-include src="'partials/collection-detail.html'"></ng-include>
+    <div class="col-md-4" ng-repeat="collection in collections.collections.collection | orderBy:'title'">
+        <div class="panel panel-success">
+
+            <div class="panel-heading">
+                <a ng-href="#/photo/{{collection.id}}/">
+                    <b>{{collection.title}}</b>
+                </a>
+            </div>
+            <div class="panel-body">
+                <a ng-href="#/photo/{{collection.id}}/">
+                    <img ng-src="{{collection.iconlarge}}"/>
+                </a>
+
+                <p>{{collection.description}}</p>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,6 +1,31 @@
+<h2>Альбомы</h2>
 <div class="container-fluid">
-    <div class="row" ng-repeat="album in photoSets.photosets.photoset | orderBy:'title._content'" ng-if="photoSetIds.indexOf(album.id) > -1">
-        <ng-include src="'partials/album-detail.html'"></ng-include>
+    <div class="col-md-5" ng-repeat="album in photoSets.photosets.photoset | orderBy:'title._content'" ng-if="photoSetIds.indexOf(album.id) > -1">
+        <div class="panel panel-success">
+
+            <div class="panel-heading">
+                <a target="_blank" ng-href="https://www.flickr.com/photos/{{user_id}}/{{album.primary}}/in/album-{{album.id}}/">
+                    <b>{{album.title._content}}</b>
+                </a>
+            </div>
+            <div class="panel-body">
+                <a target="_blank" ng-href="https://www.flickr.com/photos/{{user_id}}/{{album.primary}}/in/album-{{album.id}}/">
+                    <img ng-src="https://farm{{album.farm}}.staticflickr.com/{{album.server}}/{{album.primary}}_{{album.secret}}_m.jpg"/>
+                </a>
+
+                <p>{{album.description._content}}</p>
+            </div>
+        </div>
     </div>
+    <!--<div class="row" ng-repeat="album in photoSets.photosets.photoset | orderBy:'title._content'" ng-if="photoSetIds.indexOf(album.id) > -1">-->
+        <!--<a target="_blank" ng-href="https://www.flickr.com/photos/{{user_id}}/{{album.primary}}/in/album-{{album.id}}/">-->
+            <!--<h3>{{album.title._content}}</h3>-->
+            <!--<img ng-src="https://farm{{album.farm}}.staticflickr.com/{{album.server}}/{{album.primary}}_{{album.secret}}_m.jpg"/>-->
+        <!--</a>-->
+        <!--<p>{{album.description._content}}</p>-->
+        <!--&lt;!&ndash;<p>Создан: {{album.date_create * 1000 | date: 'HH:mm:ss dd.MM.yyyy'}}</p>&ndash;&gt;-->
+        <!--&lt;!&ndash;<p>Обновлен: {{album.date_update * 1000 | date: 'HH:mm:ss dd.MM.yyyy'}}</p>&ndash;&gt;-->
+
+    <!--</div>-->
 </div>
 

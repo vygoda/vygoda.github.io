@@ -1,7 +1,0 @@
-<a target="_blank" ng-href="https://www.flickr.com/photos/{{user_id}}/{{album.primary}}/in/album-{{album.id}}/">
-    <h3>{{album.title._content}}</h3>
-    <img ng-src="https://farm{{album.farm}}.staticflickr.com/{{album.server}}/{{album.primary}}_{{album.secret}}_n.jpg"/>
-</a>
-<p>{{album.description._content}}</p>
-<p>Создан: {{album.date_create * 1000 | date: 'HH:mm:ss dd.MM.yyyy'}}</p>
-<p>Обновлен: {{album.date_update * 1000 | date: 'HH:mm:ss dd.MM.yyyy'}}</p>
