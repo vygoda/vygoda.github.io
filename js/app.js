@@ -66,26 +66,26 @@ phonecatApp.config(
                 templateUrl: 'partials/document-list.html',
                 controller: 'DocumentListCtrl'
             }).
-            when('/about', {
-                templateUrl: 'partials/about-list.html',
-                controller: 'AboutCtrl'
-            }).
-            when('/about/:page', {
-                templateUrl: 'partials/about-list.html',
-                controller: 'AboutCtrl'
-            }).
-            when('/edit/about/:aboutId', {
-                templateUrl: 'partials/about-edit.html',
-                controller: 'AboutEditCtrl'
-            }).
-            when('/new/about', {
-                templateUrl: 'partials/about-edit.html',
-                controller: 'AboutEditCtrl'
-            }).
-            when('/contacts', {
-                templateUrl: 'partials/contacts.html',
-                controller: 'ContactsCtrl'
-            }).
+//            when('/about', {
+//                templateUrl: 'partials/about-list.html',
+//                controller: 'AboutCtrl'
+//            }).
+//            when('/about/:page', {
+//                templateUrl: 'partials/about-list.html',
+//                controller: 'AboutCtrl'
+//            }).
+//            when('/edit/about/:aboutId', {
+//                templateUrl: 'partials/about-edit.html',
+//                controller: 'AboutEditCtrl'
+//            }).
+//            when('/new/about', {
+//                templateUrl: 'partials/about-edit.html',
+//                controller: 'AboutEditCtrl'
+//            }).
+//            when('/contacts', {
+//                templateUrl: 'partials/contacts.html',
+//                controller: 'ContactsCtrl'
+//            }).
             //when('/photo/:collectionId/album/:albumId', {
             //    templateUrl: 'partials/album-list.html',
             //    controller: 'AlbumListCtrl',

@@ -86,3 +86,20 @@ a.play-button-link:hover img.play-button {
 .play-button-container {
     /* text-align: center; */
 }
+
+#footer {
+  width: 100%;
+  color: #ecf0f1;
+  background-color: #2ecc71;
+  /*margin-top:50px;*/
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+#footer a {
+    color: #ecf0f1
+}
+
+#footer a:hover {
+    color: #d1ffed
+}
