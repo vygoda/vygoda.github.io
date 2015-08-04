@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="vygoda-dk-angular">
+<html lang="en" ng-app="vygoda-web">
 <head>
     <meta charset="utf-8">
     <title>Сообщество с.Выгода</title>
@@ -36,11 +36,36 @@
     <link type="text/css" rel="stylesheet" href="css/navbar.css">
 
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/services.js"></script>
-    <script src="config.js"></script>
+    <script src="js/config.js"></script>
+
+    <script src="modules/auth/js/auth-controller.js"></script>
+    <script src="modules/auth/js/auth-service.js"></script>
+    <script src="modules/auth/js/auth-config.js"></script>
+
+    <script src="modules/event/js/event-detail-controller.js"></script>
+    <script src="modules/event/js/event-list-controller.js"></script>
+    <script src="modules/event/js/event-service.js"></script>
+    <script src="modules/event/js/event-edit-controller.js"></script>
+
+    <script src="modules/photo/js/photo-utils.js"></script>
+    <script src="modules/photo/js/photo-collection-controller.js"></script>
+    <script src="modules/photo/js/photo-collection-service.js"></script>
+    <script src="modules/photo/js/photo-service.js"></script>
+    <script src="modules/photo/js/photo-set-controller.js"></script>
+    <script src="modules/photo/js/photo-set-service.js"></script>
+    <script src="modules/photo/js/posters-controller.js"></script>
+
+    <!--<script src="modules/about/js/about-edit-controller.js"></script>-->
+    <!--<script src="modules/about/js/about-list-controller.js"></script>-->
+    <!--<script src="modules/about/js/about-service.js"></script>-->
+
+    <!--<script src="modules/contacts/js/contacts-controller.js"></script>-->
+
+    <script src="modules/document/js/documents-controller.js"></script>
+
+    <script src="modules/video/js/video-list-controller.js"></script>
+    <script src="modules/video/js/video-service.js"></script>
+    <script src="modules/video/js/youtube-directive.js"></script>
 </head>
 <body>
 
@@ -73,7 +98,7 @@
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>-->
-                <div ng-controller="UserCtrl">
+                <div ng-controller="AuthCtrl">
                     <form class="navbar-form navbar-right" ng-show="!isAuthenticated" ng-submit="submit()">
                         <div class="form-group">
                             <input type="text" ng-model="user.login" placeholder="Login" class="form-control">
@@ -99,12 +124,7 @@
 
             <div class="col-md-3">
                 <h2>Афиша</h2>
-                <div ng-controller="PostersCtrl">
-                        <carousel interval="myInterval">
-                            <slide ng-repeat="slide in slides" active="slide.active">
-                                <img ng-src="{{slide.image}}" style="margin:auto;">
-                            </slide>
-                        </carousel>
+                <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 angular.module("config", [])
     .constant("ENV", {
         "host": "https://api.backendless.com/v1",
+        "flickr-api_url": "https://api.flickr.com/services/rest/",
         "application-id": "B216603E-9B55-A43F-FFB5-996A1A0BE900",
         "secret-key": "7264DFA7-9715-713A-FFF0-DEAEFA16AA00",
         "youtube-key": "AIzaSyDCznZmYhdRjYBMcmD8c_V6YdTcaot_1p4",

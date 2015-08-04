@@ -1,8 +1,8 @@
 {
-  "name": "vygoda-dk-angular",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-phonecat",
+  "name": "vygoda-angular",
+  "description": "Vygoda Community Site",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vygoda/vygoda.github.io",
   "license": "MIT",
   "private": true,
   "dependencies": {
