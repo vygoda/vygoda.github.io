@@ -1,4 +1,4 @@
-<h2>Альбомы</h2>
+<h3><a href="#/photo">Коллекции фотографий</a> / {{collectionTitle}}</h3>
 <div class="container-fluid">
     <div class="col-md-5" ng-repeat="album in photoSets.photosets.photoset | orderBy:'title._content'" ng-if="photoSetIds.indexOf(album.id) > -1">
         <div class="panel panel-success">
