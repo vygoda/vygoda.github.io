@@ -67,3 +67,17 @@
     background-color: #27ae60;
   }
 }
+
+/* Footer colors */
+#footer {
+  color: #ecf0f1;
+  background-color: #2ecc71;
+}
+
+#footer a {
+    color: #ecf0f1
+}
+
+#footer a:hover {
+    color: #d1ffed
+}

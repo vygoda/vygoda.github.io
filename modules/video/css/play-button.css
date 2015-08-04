@@ -1,0 +1,28 @@
+a.play-button-link {
+	position:relative;
+	display:inline-block;
+	line-height:0px;
+}
+
+/*#home-content-stories img.play-button, */
+a.play-button-link img.play-button {
+	border: 0px solid blue;/*Temporary border to show play button location*/
+    position: absolute;
+	bottom: 25%;
+	left: 50%;
+	z-index: 10;
+	margin: 0 0 0 -32px;
+	opacity:0.6;
+	/*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";*/ /*IE fix for alpha transparency, however it doesn't work with transparent .pngs*/
+	display:inline-block;
+	/*max-width: 20%;	*/
+}
+
+/*#home-content-stories img.play-button:hover, */
+a.play-button-link:hover img.play-button {
+	opacity:1.0;
+	/*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";*/ /*IE fix for alpha transparency, however it doesn't work with transparent .pngs*/
+}
+.play-button-container {
+    /* text-align: center; */
+}
