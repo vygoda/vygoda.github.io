@@ -30,6 +30,8 @@
     <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.js"></script>
     <script src="bower_components/angular-easyfb/angular-easyfb.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
     <script src="//vk.com/js/api/openapi.js?116"></script>
 
     <link type="text/css" rel="stylesheet" href="css/styles.css">
@@ -110,6 +112,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
+		<div ncy-breadcrumb></div>
                 <div ng-view></div>
             </div>
 

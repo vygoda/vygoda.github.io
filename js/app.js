@@ -32,111 +32,199 @@ angular.module('vygoda-web', [
     'ngOnload',
     'uiGmapgoogle-maps',
     'duScroll',
-    'ezfb'
+    'ezfb',
+    'ui.router',
+    'ncy-angular-breadcrumb'
 ])
 
-.config(
-    function ($routeProvider, $httpProvider) {
-        $httpProvider.interceptors.push('authInterceptor');
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
 
-        $routeProvider.
-            when('/events', {
-                templateUrl: 'modules/event/view/event-list.html',
-                controller: 'EventListCtrl'
-            }).
-            when('/events/:page', {
-                templateUrl: 'modules/event/view/event-list.html',
-                controller: 'EventListCtrl'
-            }).
-            when('/event/:eventId', {
-                templateUrl: 'modules/event/view/event-detail.html',
-                controller: 'EventDetailCtrl'
-            }).
-            when('/edit/event/:eventId', {
-                templateUrl: 'modules/event/view/event-edit.html',
-                controller: 'EventEditCtrl'
-            }).
-            when('/new/event', {
-                templateUrl: 'modules/event/view/event-edit.html',
-                controller: 'EventEditCtrl'
-            }).
+  $urlRouterProvider.otherwise('/events');
 
-
-            when('/videos', {
-                templateUrl: 'modules/video/view/video-list.html',
-                controller: 'VideoListCtrl'
-            }).
-
-            when('/photo', {
-                templateUrl: 'modules/photo/view/collection-list.html',
-                controller: 'PhotoCollectionCtrl'
-            }).
-            when('/photo/:collectionId', {
-                templateUrl: 'modules/photo/view/album-list.html',
-                controller: 'PhotoSetCtrl',
-                resolve: {
-                    photoSetIds : function(PhotoCollection, $route) {
-                        return PhotoCollection.queryPhotoSets({collection_id: $route.current.params.collectionId});
-                    }
-                }
-            }).
-
-            when('/documents', {
-                templateUrl: 'modules/document/view/documents.html',
-                controller: 'DocumentsCtrl'
-            }).
-
-//            when('/about', {
-//                templateUrl: 'modules/about/view/about-list.html',
-//                controller: 'AboutListCtrl'
-//            }).
-//            when('/about/:page', {
-//                templateUrl: 'modules/about/view/about-list.html',
-//                controller: 'AboutListCtrl'
-//            }).
-//            when('/edit/about/:aboutId', {
-//                templateUrl: 'modules/about/view/about-edit.html',
-//                controller: 'AboutEditCtrl'
-//            }).
-//            when('/new/about', {
-//                templateUrl: 'modules/about/view/about-edit.html',
-//                controller: 'AboutEditCtrl'
-//            }).
-
-//            when('/contacts', {
-//                templateUrl: 'modules/contact/view/contacts.html',
-//                controller: 'ContactsCtrl'
-//            }).
-            //when('/photo/:collectionId/album/:albumId', {
-            //    templateUrl: 'partials/album-list.html',
-            //    controller: 'AlbumListCtrl',
-            //    resolve: {
-            //        photoSetIds : null
-            //    }
-            //}).
-/*            when('/about', {
-                templateUrl: 'partials/about-list.html',
-                controller: 'AboutListCtrl'
-            }).
-            when('/about/:groupId', {
-                templateUrl: 'partials/about-detail.html',
-                controller: 'AboutDetailCtrl'
-            }).
-
-            when('/video', {
-                templateUrl: 'partials/video.html',
-                controller: 'VideoCtrl'
-            }).
-
-            when('/archive', {
-                templateUrl: 'partials/archive.html',
-                controller: 'ArchiveCtrl'
-            }).
-            */
-            otherwise({
-                redirectTo: '/events'
-            });
+  $stateProvider
+    .state('events', {
+	    url: '/events',
+        templateUrl: 'modules/event/view/event-list.html',
+        controller: 'EventListCtrl',
+	    ncyBreadcrumb: {
+    	    label: 'Новости'
+        }
     })
+//    .state('events.:page', {
+//                url: '/events/:page',
+//                templateUrl: 'modules/event/view/event-list.html',
+//                controller: 'EventListCtrl',
+//		ncyBreadcrumb: {
+//    		    label: 'Новости'
+//                }
+//            })
+//    .state('even.:eventId', {
+//		url: '/event/:eventId',
+//                templateUrl: 'modules/event/view/event-detail.html',
+//                controller: 'EventDetailCtrl',
+//		ncyBreadcrumb: {
+//    		    label: '{{event.title}}'
+//                }
+//            })
+//    .state('edit.event.:eventId', {
+//                url: 'edit/event/:eventId',
+//                templateUrl: 'modules/event/view/event-edit.html',
+//                controller: 'EventEditCtrl',
+//		ncyBreadcrumb: {
+//    		    label: 'Редактирование {{event.title}}'
+//                }
+//            })
+//    .state('/new/event', {
+//		url: '/new/event',
+//                templateUrl: 'modules/event/view/event-edit.html',
+//                controller: 'EventEditCtrl',
+//		ncyBreadcrumb: {
+//    		    skip: true
+//                }
+//            })
+//     .state('/videos', {
+//		url: '/videos',
+//                templateUrl: 'modules/video/view/video-list.html',
+//                controller: 'VideoListCtrl',
+//		ncyBreadcrumb: {
+//    		    label: 'Видео'
+//                }
+//            })
+//     .state('/photo', {
+//                url: '/photo',
+//                templateUrl: 'modules/photo/view/collection-list.html',
+//                controller: 'CollectionListCtrl',
+//		ncyBreadcrumb: {
+//    		    label: 'Фото'
+//                }
+//            })
+//     .state('/photo/:collectionId', {
+//		url: '/photo/:collectionId',
+//                templateUrl: 'modules/photo/view/album-list.html',
+//                controller: 'AlbumListCtrl',
+//                resolve: {
+//                    photoSetIds : function(PhotoCollection, $route) {
+//                        return PhotoCollection.queryPhotoSets({collection_id: $route.current.params.collectionId});
+//                    }
+//                },
+//		ncyBreadcrumb: {
+//    		    label: 'Коллекция фото ...'
+//                }
+//            })
+//      .state('/documents', {
+//		url: '/documents',
+//                templateUrl: 'modules/document/view/document-list.html',
+//                controller: 'DocumentListCtrl',
+//		ncyBreadcrumb: {
+//    		    label: 'Документы'
+//                }
+//            })
+
+})
+
+//.config(
+//    function ($routeProvider, $httpProvider) {
+//        $httpProvider.interceptors.push('authInterceptor');
+//
+//        $routeProvider.
+//            when('/events', {
+//                templateUrl: 'modules/event/view/event-list.html',
+//                controller: 'EventListCtrl'
+//            }).
+//            when('/events/:page', {
+//                templateUrl: 'modules/event/view/event-list.html',
+//                controller: 'EventListCtrl'
+//            }).
+//            when('/event/:eventId', {
+//                templateUrl: 'modules/event/view/event-detail.html',
+//                controller: 'EventDetailCtrl'
+//            }).
+//            when('/edit/event/:eventId', {
+//                templateUrl: 'modules/event/view/event-edit.html',
+//                controller: 'EventEditCtrl'
+//            }).
+//            when('/new/event', {
+//                templateUrl: 'modules/event/view/event-edit.html',
+//                controller: 'EventEditCtrl'
+//            }).
+//
+//
+//            when('/videos', {
+//                templateUrl: 'modules/video/view/video-list.html',
+//                controller: 'VideoListCtrl'
+//            }).
+//
+//            when('/photo', {
+//                templateUrl: 'modules/photo/view/collection-list.html',
+//                controller: 'PhotoCollectionCtrl'
+//            }).
+//            when('/photo/:collectionId', {
+//                templateUrl: 'modules/photo/view/album-list.html',
+//                controller: 'PhotoSetCtrl',
+//                resolve: {
+//                    photoSetIds : function(PhotoCollection, $route) {
+//                        return PhotoCollection.queryPhotoSets({collection_id: $route.current.params.collectionId});
+//                    }
+//                }
+//            }).
+//
+//            when('/documents', {
+//                templateUrl: 'modules/document/view/documents.html',
+//                controller: 'DocumentsCtrl'
+//            }).
+//
+////            when('/about', {
+////                templateUrl: 'modules/about/view/about-list.html',
+////                controller: 'AboutListCtrl'
+////            }).
+////            when('/about/:page', {
+////                templateUrl: 'modules/about/view/about-list.html',
+////                controller: 'AboutListCtrl'
+////            }).
+////            when('/edit/about/:aboutId', {
+////                templateUrl: 'modules/about/view/about-edit.html',
+////                controller: 'AboutEditCtrl'
+////            }).
+////            when('/new/about', {
+////                templateUrl: 'modules/about/view/about-edit.html',
+////                controller: 'AboutEditCtrl'
+////            }).
+//
+////            when('/contacts', {
+////                templateUrl: 'modules/contact/view/contacts.html',
+////                controller: 'ContactsCtrl'
+////            }).
+//            //when('/photo/:collectionId/album/:albumId', {
+//            //    templateUrl: 'partials/album-list.html',
+//            //    controller: 'AlbumListCtrl',
+//            //    resolve: {
+//            //        photoSetIds : null
+//            //    }
+//            //}).
+///*            when('/about', {
+//                templateUrl: 'partials/about-list.html',
+//                controller: 'AboutListCtrl'
+//            }).
+//            when('/about/:groupId', {
+//                templateUrl: 'partials/about-detail.html',
+//                controller: 'AboutDetailCtrl'
+//            }).
+//
+//            when('/video', {
+//                templateUrl: 'partials/video.html',
+//                controller: 'VideoCtrl'
+//            }).
+//
+//            when('/archive', {
+//                templateUrl: 'partials/archive.html',
+//                controller: 'ArchiveCtrl'
+//            }).
+//            */
+//            otherwise({
+//                redirectTo: '/events'
+//            });
+//    })
 
 .config(function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
@@ -261,5 +349,10 @@ angular.module('vygoda-web', [
 
 .config(function (ENV) {
   VK.init({apiId: ENV["vk-app_id"], onlyWidgets: true});
-});
+})
 
+.config(function($breadcrumbProvider) {
+    $breadcrumbProvider.setOptions({
+      template: 'bootstrap3'
+    });
+  });
