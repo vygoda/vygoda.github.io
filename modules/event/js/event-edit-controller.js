@@ -12,7 +12,7 @@ angular.module('vygoda-event')
         if ($scope.eventId) {
             $scope.event = Event.get({eventId: $scope.eventId});
         } else {
-            $scope.event = {author: $localStorage.userData.name};
+            $scope.event = {author: $localStorage.userData.name, eventDate: new Date().getTime()};
         }
 
         var onError = function (error) {

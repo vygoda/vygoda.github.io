@@ -7,12 +7,12 @@
         <div class="pull-right" ng-show="isAuthenticated && !preview">
             <a href="#/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
         </div>
-        <div class="text-center"><a href="#/events/{{event.objectId}}"><h4>{{event.title}}</h4></a></div>
+        <div class="text-center"><a href="#/event/{{event.objectId}}"><h4>{{event.title}}</h4></a></div>
 
     </div>
     <div class="panel-body">
         <div btf-markdown="event.summary"></div>
-        <div ng-show="!detailed"><a href="#/events/{{event.objectId}}">Подробнее...</a></div>
+        <div ng-show="!detailed"><a href="#/event/{{event.objectId}}">Подробнее...</a></div>
         <div ng-show="detailed" btf-markdown="event.content"></div>
         <div>Автор: {{event.author}}</div>
     </div>
