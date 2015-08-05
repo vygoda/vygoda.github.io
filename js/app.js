@@ -336,12 +336,22 @@ angular.module('vygoda-web', [
 })
 
 .filter('escape', function() {
-  return window.encodeURIComponent;
+  return function(text) {
+    if (!text) {
+        return text;
+    }
+
+    return window.encodeURIComponent(text);
+  }
 })
 
 .filter('md', function($sanitize) {
   var converter = new Showdown.converter();
   return function(text) {
+      if (!text) {
+          return text;
+      }
+
     return $sanitize(converter.makeHtml(text));
   };
 })
