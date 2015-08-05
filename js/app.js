@@ -261,5 +261,13 @@ angular.module('vygoda-web', [
 
 .config(function (ENV) {
   VK.init({apiId: ENV["vk-app_id"], onlyWidgets: true});
-});
+})
 
+.filter('escape', function() {
+  return window.encodeURIComponent;
+})
+
+.filter('md', function() {
+  var converter = new Showdown.converter();
+  return converter.makeHtml;
+});

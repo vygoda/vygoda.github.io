@@ -14,6 +14,9 @@
         <div btf-markdown="event.summary"></div>
         <div ng-show="!detailed"><a href="#/event/{{event.objectId}}">Подробнее...</a></div>
         <div ng-show="detailed" btf-markdown="event.content"></div>
+
+        <ng-include src="'modules/event/view/share-panel.html'"></ng-include>
+
         <div>Автор: {{event.author}}</div>
     </div>
 </div>

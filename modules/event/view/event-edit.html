@@ -9,6 +9,10 @@
                 <label for="vkPostEdit">VK Пост (если заполнено это поле, то игнорируются все остальные)</label>
                 <input type="text"  ng-model="event.vkPost" id="vkPostEdit" class="form-control" placeholder="Код VK поста">
             </div>
+            <div class="form-group">
+                <label for="socialImageEdit">Картинка для соц. сетей</label>
+                <input type="text"  ng-model="event.socialImage" id="socialImageEdit" class="form-control" placeholder="Картинка для соц. сетей">
+            </div>
             <div class="form-group" ng-class="{ 'has-error': editForm.authorEdit.$invalid }">
                 <label for="authorEdit">Автор*</label>
                 <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор">
