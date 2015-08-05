@@ -33,6 +33,17 @@
     <tab heading="Предпросмотр">
         <ng-include src="'modules/event/view/event-detail.html'"></ng-include>
     </tab>
+    <tab heading="HTML для вставки">
+        <input type="text" ng-model="event.title" class="form-control" placeholder="Название"  select-on-click>
+
+        <textarea class="form-control" rows="15" readonly="readonly" select-on-click>
+<!-- Краткое содержание -->
+{{event.summary | md}}
+
+<!-- Текст -->
+{{event.content | md}}
+        </textarea>
+    </tab>
 
 </tabset>
 
