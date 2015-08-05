@@ -4,11 +4,11 @@
             <div>{{video.snippet.publishedAt | date: 'HH:mm:ss'}}</div>
             <div>{{video.snippet.publishedAt | date: 'dd.MM.yyyy'}}</div>
         </div>
-        <div class="text-center"><a target="_blank" href="http://www.youtube.com/watch?v={{ video.snippet.resourceId.videoId }}" ><h4>{{video.snippet.title}}</h4></a></div>
+        <div class="text-center"><a target="_blank" ng-href="http://www.youtube.com/watch?v={{ video.snippet.resourceId.videoId }}" ><h4>{{video.snippet.title}}</h4></a></div>
 
     </div>
-    <div class="panel-body">
-        <div youtube="{{ video.snippet.resourceId.videoId }}"> </div>
+    <div class="panel-body" ng-init="fullUrl = getTrusted(video.snippet.resourceId.videoId)">
+        <iframe type="text/html" width='480' height='270' ng-src="{{fullUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>
 
         <p style="white-space: pre; word-wrap: break-word;">{{ video.snippet.description }}</p>
     </div>

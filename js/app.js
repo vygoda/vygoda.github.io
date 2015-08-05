@@ -200,6 +200,78 @@ angular.module('vygoda-web', [
 })
 
 .config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log){
+        return function(text, target){
+            var result = $delegate(text, target);
+
+            var startStr = "[youtube=";
+            var endStr = "]";
+
+            var start = result.indexOf(startStr);
+
+            if (start == -1) {
+                return result;
+            }
+
+            var end = result.indexOf(endStr, start);
+            var str = result.substring(start + startStr.length, end);
+
+            var params = str.split(',');
+            var url = params[2];
+
+            var youtube = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+
+            if (youtube.test(url)) {
+                var m = url.match(youtube);
+
+                if (m && m[7].length === 11) {
+                    var video_id = m[7];
+                    url = 'http://www.youtube.com/embed/' + video_id + '?autoplay=0';
+
+                    var resultValue = result.substring(0, start) +
+                    "<iframe width=\"" + params[0] + "\" height=\"" + params[1]
+                     + "\" src=\"" + url + "\"\nframeborder=\"0\" scrolling=\"no\" allowfullscreen></iframe>" +
+                     result.substring(end + endStr.length, result.length);
+
+                     return resultValue;
+                }
+            }
+
+            return result;
+        };
+    });
+})
+
+.config(function($provide){
+    $provide.decorator("$sanitize", function($delegate, $log){
+        return function(text, target){
+
+            var result = $delegate(text, target);
+
+            var startStr = "[flickr=";
+            var endStr = "]";
+
+            var start = result.indexOf(startStr);
+
+            if (start == -1) {
+                return result;
+            }
+
+            var end = result.indexOf(endStr, start);
+            var str = result.substring(start + startStr.length, end);
+
+            var params = str.split(',');
+
+            var resultValue = result.substring(0, start) +
+            "<iframe id='iframe' src='//flickrit.com/slideshowholder.php?height=" + params[1] + "&width=" + params[0] + "&size=medium&speed=8&setId=" + params[2] + "&credit=1&trans=1&theme=1&thumbnails=2&transition=1&layoutType=fixed&sort=0' scrolling='no' frameborder='0' width='" + params[0] + "' height='" + params[1] + "'></iframe>" +
+            result.substring(end + endStr.length, result.length);
+
+            return resultValue;
+        };
+    });
+})
+
+.config(function($provide){
     $provide.decorator("$sanitize", function($delegate, $log, $rootScope){
         return function(text, target){
 
@@ -267,9 +339,11 @@ angular.module('vygoda-web', [
   return window.encodeURIComponent;
 })
 
-.filter('md', function() {
+.filter('md', function($sanitize) {
   var converter = new Showdown.converter();
-  return converter.makeHtml;
+  return function(text) {
+    return $sanitize(converter.makeHtml(text));
+  };
 })
 
 .directive('selectOnClick', ['$window', function ($window) {
@@ -284,4 +358,12 @@ angular.module('vygoda-web', [
             });
         }
     };
+}])
+
+.config(['markdownConverterProvider', function (markdownConverterProvider) {
+    // options to be passed to Showdown
+    // see: https://github.com/coreyti/showdown#extensions
+    markdownConverterProvider.config({
+        extensions: ['table']
+    });
 }]);
