@@ -36,6 +36,7 @@
 
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/widgets.js"></script>
 
     <script src="modules/auth/js/auth-controller.js"></script>
     <script src="modules/auth/js/auth-service.js"></script>
@@ -126,9 +127,7 @@
             </div>
 
             <div class="col-md-3">
-                <h2>Афиша</h2>
-                <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
-                </div>
+                <ng-include src="'partials/sidebar.html'"></ng-include>
             </div>
         </div>
     </div>
