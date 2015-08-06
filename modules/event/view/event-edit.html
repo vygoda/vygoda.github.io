@@ -17,6 +17,12 @@
                 <label for="authorEdit">Автор*</label>
                 <input type="text" ng-model="event.author" class="form-control" id="authorEdit" placeholder="Автор">
             </div>
+            <div class="form-group">
+                <label for="isHtmlEdit" class="checkbox">
+                    <input id="isHtmlEdit" type="checkbox" ng-model="event.isHtml">
+                    использовать HTML для хранения
+                </label>
+            </div>
             <div class="form-group" ng-class="{ 'has-error': editForm.summaryEdit.$invalid }">
                 <label for="summaryEdit">Краткое содержание*</label>
                 <textarea class="form-control" rows="7" ng-model="event.summary" id="summaryEdit"></textarea>
@@ -33,7 +39,7 @@
     <tab heading="Предпросмотр">
         <ng-include src="'modules/event/view/event-detail.html'"></ng-include>
     </tab>
-    <tab heading="HTML для вставки">
+    <tab ng-show="!event.isHtml" heading="HTML для вставки">
         <input type="text" ng-model="event.title" class="form-control" placeholder="Название"  select-on-click>
 
         <textarea class="form-control" rows="15" readonly="readonly" select-on-click>

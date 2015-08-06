@@ -305,13 +305,21 @@ angular.module('vygoda-web', [
     });
 })
 
-.run(function($rootScope, $location, $timeout) {
+.run(function($rootScope, $location, $timeout, $sce) {
     $rootScope.location = $location;
 
     $rootScope.drawPost = function(item) {
         $timeout(function(){
             VK.Widgets.Post("vk_post_" + item.ownerId + "_" + item.postId, item.ownerId, item.postId, item.postHash, {});
         }, 100);
+    };
+
+    $rootScope.trustAsHtml = function(text) {
+        if (!text) {
+            return text;
+        }
+
+        return $sce.trustAsHtml(text);
     };
 })
 
@@ -347,8 +355,8 @@ angular.module('vygoda-web', [
 
 .filter('md', function($sanitize) {
   var converter = new Showdown.converter();
-  return function(text) {
-      if (!text) {
+  return function(text, isHtml) {
+      if (!text || isHtml) {
           return text;
       }
 
