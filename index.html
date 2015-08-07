@@ -127,7 +127,33 @@
             </div>
 
             <div class="col-md-3">
-                <ng-include src="'partials/sidebar.html'"></ng-include>
+                <div id="vk_groups"></div>
+                <script>
+                    VK.Widgets.Group("vk_groups", {mode: 0, height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 5366610);
+                </script>
+                <br/>
+
+                <div id="ok_group_widget"></div>
+                <script>
+                    !function (d, id, did, st) {
+                      var js = d.createElement("script");
+                      js.src = "https://connect.ok.ru/connect.js";
+                      js.onload = js.onreadystatechange = function () {
+                      if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                        if (!this.executed) {
+                          this.executed = true;
+                          setTimeout(function () {
+                            OK.CONNECT.insertGroupWidget(id,did,st);
+                          }, 0);
+                        }
+                      }}
+                      d.documentElement.appendChild(js);
+                    }(document,"ok_group_widget","43737308201104","{height:335}");
+                </script>
+
+                <h2>Афиша</h2>
+                <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
+                </div>
             </div>
         </div>
     </div>
