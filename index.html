@@ -128,10 +128,20 @@
 
             <div class="col-md-3">
                 <div id="vk_groups"></div>
-                <script>
-                    VK.Widgets.Group("vk_groups", {mode: 0, height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 5366610);
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", {mode: 0, height: "300", width: "auto", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 5366610);
                 </script>
-                <br/>
+                <hr/>
+
+                <div class="fb-page" data-href="https://www.facebook.com/Vygoda/timeline" data-height="300"
+                     data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+                     data-show-facepile="true" data-show-posts="false">
+                    <div class="fb-xfbml-parse-ignore">
+                        <blockquote cite="https://www.facebook.com/Vygoda/timeline"><a
+                                href="https://www.facebook.com/Vygoda/timeline">Жители села Выгода</a></blockquote>
+                    </div>
+                </div>
+                <hr/>
 
                 <div id="ok_group_widget"></div>
                 <script>
@@ -148,8 +158,9 @@
                         }
                       }}
                       d.documentElement.appendChild(js);
-                    }(document,"ok_group_widget","43737308201104","{height:335}");
+                    }(document,"ok_group_widget","43737308201104","{height:300}");
                 </script>
+                <hr/>
 
                 <h2>Афиша</h2>
                 <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
