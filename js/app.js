@@ -35,6 +35,10 @@ angular.module('vygoda-web', [
     'ezfb'
 ])
 
+.config(function($locationProvider) {
+  $locationProvider.html5Mode(true).hashPrefix('!');
+})
+
 .config(
     function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');

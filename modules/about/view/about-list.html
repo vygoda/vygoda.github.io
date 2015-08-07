@@ -1,7 +1,7 @@
 <!--ToDO: ng-repeat-->
 
 <div class="row" ng-show="isAuthenticated">
-    <a href="#/new/about" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span>
+    <a href="/new/about" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-plus"></span>
         Добавить</a>
 </div>
 
@@ -10,7 +10,7 @@
         <div class="panel-heading">
             <div class="panel-title">
                 <h4>
-                    <a href="#/edit/about/{{about.objectId}}" ng-show="isAuthenticated" style="display: inline-block;" s
+                    <a href="/edit/about/{{about.objectId}}" ng-show="isAuthenticated" style="display: inline-block;" s
                        class="btn glyphicon glyphicon-edit"> </a>
 
                     <a ng-show="isAuthenticated" style="display: inline-block;" class="btn glyphicon glyphicon-arrow-up" ng-click="orderUp(about, abouts.data)"></a>

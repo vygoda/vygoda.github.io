@@ -30,6 +30,7 @@ angular.module('vygoda-auth')
             if (rejection.status === 401) {
                 // handle the case where the user is not authenticated
                 delete $localStorage["user-token"];
+                $rootScope.isAuthenticated = false;
             }
 
             return $q.reject(rejection);
