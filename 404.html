@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" ng-app="vygoda-web">
+<head>
+    <meta charset="utf-8">
+    <title>Сообщество с.Выгода</title>
+
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
+    <link href='/bower_components/angular-loading-bar/src/loading-bar.css' rel='stylesheet' />
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-markdown-directive/markdown.js"></script>
+    <script src="/bower_components/showdown/src/showdown.js"></script>
+    <script src="/bower_components/showdown/src/extensions/table.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/ngstorage/ngStorage.js"></script>
+    <script src="/bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+    <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/ng-onload/release/ng-onload.min.js"></script>
+    <script src="/bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.js"></script>
+    <script src="/bower_components/angular-easyfb/angular-easyfb.js"></script>
+    <script src="//vk.com/js/api/openapi.js?116"></script>
+
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link type="text/css" rel="stylesheet" href="/css/green-skin.css">
+
+    <script src="/js/app.js"></script>
+    <script src="/js/config.js"></script>
+
+    <script src="/modules/auth/js/auth-controller.js"></script>
+    <script src="/modules/auth/js/auth-service.js"></script>
+    <script src="/modules/auth/js/auth-config.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="/modules/event/share.css">
+    <script src="/modules/event/js/event-detail-controller.js"></script>
+    <script src="/modules/event/js/event-list-controller.js"></script>
+    <script src="/modules/event/js/event-service.js"></script>
+    <script src="/modules/event/js/event-edit-controller.js"></script>
+
+    <script src="/modules/photo/js/photo-utils.js"></script>
+    <script src="/modules/photo/js/photo-collection-controller.js"></script>
+    <script src="/modules/photo/js/photo-collection-service.js"></script>
+    <script src="/modules/photo/js/photo-service.js"></script>
+    <script src="/modules/photo/js/photo-set-controller.js"></script>
+    <script src="/modules/photo/js/photo-set-service.js"></script>
+    <script src="/modules/photo/js/posters-controller.js"></script>
+
+    <!--<script src="modules/about/js/about-edit-controller.js"></script>-->
+    <!--<script src="modules/about/js/about-list-controller.js"></script>-->
+    <!--<script src="modules/about/js/about-service.js"></script>-->
+
+    <!--<script src="modules/contacts/js/contacts-controller.js"></script>-->
+
+    <script src="/modules/document/js/documents-controller.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="/modules/video/css/play-button.css">
+    <script src="/modules/video/js/video-list-controller.js"></script>
+    <script src="/modules/video/js/video-service.js"></script>
+    <script src="/modules/video/js/youtube-directive.js"></script>
+
+    <meta name="fragment" content="!" />
+    <base href="/" />
+
+    <!--ToDo: generate automatically-->
+    <meta property="og:title" content="Сообщество с. Выгода"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://vygoda.net"/>
+    <meta property="og:image" content="http://vygoda.net/img/vdk1.jpg"/>
+    <meta property="og:site_name" content="Сообщество с. Выгода"/>
+    <meta property="fb:admins" content="USER_ID"/>
+    <meta property="og:description"
+          content="Гражданская инициатива.
+                   Информационный и краеведческий проект села Выгода"/>
+</head>
+<body>
+
+<div style="background: repeating-linear-gradient(
+  45deg,
+  #ffffff,
+  #ffffff 10px,
+  #f0f0f0 10px,
+  #f0f0f0 20px
+);">
+    <a href="/events">
+        <img src="img/vdk1.jpg" class="img-circle"  style="display: inline-block;" />
+        <h1 style="display: inline-block; vertical-align: bottom">Сообщество с.Выгода</h1>
+    </a>
+</div>
+    <!-- TODO: navbar-fixed-top-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!--<div class="navbar-header">-->
+                <!--<a class="navbar-brand" href="/events">с.Выгода</a>-->
+            <!--</div>-->
+                <ul class="nav navbar-nav">
+                    <li><a href="/events">Новости</a></li>
+                    <li><a href="/photo">Фото</a></li>
+                    <li><a href="/videos">Видео</a></li>
+                    <li><a href="/documents">Документы</a></li>
+                </ul>
+
+            <form class="navbar-form navbar-right" ng-controller="AuthCtrl">
+                <span ng-show="isAuthenticated">{{wellcome}}</span>
+                <button ng-show="isAuthenticated" type="button" class="btn btn-primary" ng-click="logout()">
+                    <span class="glyphicon glyphicon-log-out"></span> Выйти
+                </button>
+                <button ng-show="!isAuthenticated" type="button" class="btn btn-success" ng-click="open()"><span
+                        class="glyphicon glyphicon-log-in"></span> Вход
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div ng-view></div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="vk_groups"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", {mode: 0, height: "300", width: "auto", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 5366610);
+                </script>
+                <hr/>
+
+                <div class="fb-page" data-href="https://www.facebook.com/Vygoda/timeline" data-height="300"
+                     data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+                     data-show-facepile="true" data-show-posts="false">
+                    <div class="fb-xfbml-parse-ignore">
+                        <blockquote cite="https://www.facebook.com/Vygoda/timeline"><a
+                                href="https://www.facebook.com/Vygoda/timeline">Жители села Выгода</a></blockquote>
+                    </div>
+                </div>
+                <hr/>
+
+                <div id="ok_group_widget"></div>
+                <script>
+                    !function (d, id, did, st) {
+                      var js = d.createElement("script");
+                      js.src = "https://connect.ok.ru/connect.js";
+                      js.onload = js.onreadystatechange = function () {
+                      if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                        if (!this.executed) {
+                          this.executed = true;
+                          setTimeout(function () {
+                            OK.CONNECT.insertGroupWidget(id,did,st);
+                          }, 0);
+                        }
+                      }}
+                      d.documentElement.appendChild(js);
+                    }(document,"ok_group_widget","43737308201104","{height:300}");
+                </script>
+                <hr/>
+
+                <h2>Афиша</h2>
+                <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="footer" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p><b>Жители села Выгода ©</b> 2008 – 2015</p>
+
+            <p><a href="mailto:vygoda.net@gmail.com">vygoda.net@gmail.com</a></p>
+        </div>
+        <div class="col-md-6">
+            <p>Гражданская инициатива.</p>
+
+            <p>Информационный и краеведческий проект села Выгода</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
