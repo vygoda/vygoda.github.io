@@ -3,5 +3,12 @@
       <div class="row" ng-repeat="video in videos.items">
           <ng-include src="'modules/video/view/video-detail.html'"></ng-include>
       </div>
+
+    <nav>
+        <ul class="pager">
+            <li><a ng-show="videos.prevPageToken" ng-href="/videos/{{videos.prevPageToken}}">Новее</a></li>
+            <li><a ng-show="videos.nextPageToken" ng-href="/videos/{{videos.nextPageToken}}">Старее</a></li>
+        </ul>
+    </nav>
   </div>
 

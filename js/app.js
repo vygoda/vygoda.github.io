@@ -70,6 +70,10 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/video/view/video-list.html',
                 controller: 'VideoListCtrl'
             }).
+            when('/videos/:pageToken', {
+                templateUrl: 'modules/video/view/video-list.html',
+                controller: 'VideoListCtrl'
+            }).
 
             when('/photo', {
                 templateUrl: 'modules/photo/view/collection-list.html',
