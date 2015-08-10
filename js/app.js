@@ -67,10 +67,14 @@ angular.module('vygoda-web', [
 
 
             when('/videos', {
+                templateUrl: 'modules/video/view/playlist-list.html',
+                controller: 'PlaylistCtrl'
+            }).
+            when('/videos/:playlistId', {
                 templateUrl: 'modules/video/view/video-list.html',
                 controller: 'VideoListCtrl'
             }).
-            when('/videos/:pageToken', {
+            when('/videos/:playlistId/page/:pageToken', {
                 templateUrl: 'modules/video/view/video-list.html',
                 controller: 'VideoListCtrl'
             }).

@@ -8,6 +8,7 @@ angular.module("config", [])
         "secret-key": "7264DFA7-9715-713A-FFF0-DEAEFA16AA00",
         "youtube-key": "AIzaSyDCznZmYhdRjYBMcmD8c_V6YdTcaot_1p4",
         "youtube-playlistId": "PLA2CFC4E6D8D01EB4",
+        "youtube-channelId": "UCMICPOoMGiQy1BHTeVVxr5A",
         "flickr-api_key": "a9ed5e5be75dc8d02c768948ab924689",
         "flickr-user_id": "130413297@N03",
         "flickr-posters_album_id": "72157651695647255",

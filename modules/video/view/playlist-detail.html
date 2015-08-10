@@ -1,0 +1,11 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="text-center"><a ng-href="/videos/{{ playlist.id }}" ><h4>{{playlist.snippet.title}}</h4></a></div>
+
+    </div>
+    <div class="panel-body" ng-init="fullUrl = getTrusted(playlist.id)">
+        <iframe type="text/html" width='560' height='315' ng-src="{{fullUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>
+
+        <p style="white-space: pre; word-wrap: break-word;">{{ playlist.snippet.description }}</p>
+    </div>
+</div>

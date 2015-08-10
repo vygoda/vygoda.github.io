@@ -1,3 +1,4 @@
+<h3><a href="/videos">Коллекции видео</a> / {{playlistTitle}}</h3>
 <div class="container-fluid">
 
       <div class="row" ng-repeat="video in videos.items">
@@ -6,8 +7,8 @@
 
     <nav>
         <ul class="pager">
-            <li><a ng-show="videos.prevPageToken" ng-href="/videos/{{videos.prevPageToken}}">Новее</a></li>
-            <li><a ng-show="videos.nextPageToken" ng-href="/videos/{{videos.nextPageToken}}">Старее</a></li>
+            <li><a ng-show="videos.prevPageToken" ng-href="/videos/{{playlistId}}/page/{{videos.prevPageToken}}">Новее</a></li>
+            <li><a ng-show="videos.nextPageToken" ng-href="/videos/{{playlistId}}/page/{{videos.nextPageToken}}">Старее</a></li>
         </ul>
     </nav>
   </div>
