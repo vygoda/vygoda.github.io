@@ -8,6 +8,6 @@ angular.module('vygoda-video')
             return $sce.trustAsResourceUrl('https://www.youtube.com/embed/videoseries?list=' + playlistId);
         };
 
-        $scope.playlists = Playlist.query({channelId: ENV["youtube-channelId"]});
+        $scope.playlists = Playlist.query();
     }
 );
