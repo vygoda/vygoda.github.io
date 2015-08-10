@@ -8,6 +8,10 @@ angular.module('vygoda-event')
 
         $scope.togglePin = function(event, pinedEvents) {
             pinedEvents.forEach(function(item, i, arr) {
+                if (item === event) {
+                    return;
+                }
+
                 item.pined = false;
             });
 
