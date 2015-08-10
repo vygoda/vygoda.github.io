@@ -6,6 +6,10 @@
               Добавить</a>
       </div>
 
+        <div class="row" ng-repeat="event in pinedEvents.data">
+            <ng-include src="'modules/event/view/event-detail.html'"></ng-include>
+        </div>
+
       <div class="row" ng-repeat="event in events.data">
           <ng-include src="'modules/event/view/event-detail.html'"></ng-include>
       </div>

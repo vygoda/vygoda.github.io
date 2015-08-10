@@ -4,9 +4,9 @@
             <div>{{event.created | date: 'HH:mm:ss'}}</div>
             <div>{{event.created | date: 'dd.MM.yyyy'}}</div>
         </div>
-        <div class="pull-right" ng-show="isAuthenticated && !preview">
-            <a href="/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-        </div>
+
+        <ng-include src="'modules/event/view/event-header-controls.html'"></ng-include>
+
         <div class="text-center"><a href="/event/{{event.objectId}}"><h4>{{event.title}}</h4></a></div>
 
     </div>
@@ -25,9 +25,7 @@
 </div>
 
 <div ng-show="event.vkPost">
-    <div class="pull-right" ng-show="isAuthenticated && !preview">
-        <a href="/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-    </div>
+    <ng-include src="'modules/event/view/event-header-controls.html'"></ng-include>
 
     <div btf-markdown="event.vkPost"></div>
     <div style="height: 15px">&nbsp;</div>
