@@ -52,7 +52,7 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/event/:eventId', {
+            when('/event/:eventTitle', {
                 templateUrl: 'modules/event/view/event-detail.html',
                 controller: 'EventDetailCtrl'
             }).

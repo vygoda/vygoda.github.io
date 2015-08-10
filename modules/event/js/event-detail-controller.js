@@ -6,7 +6,9 @@ angular.module('vygoda-event')
     function ($scope, $routeParams, $location, Event) {
         $scope.detailed = true;
 
-        $scope.event = Event.get({eventId: $routeParams.eventId});
+        Event.get({where: "title='" + $routeParams.eventTitle + "'"}, function(successData) {
+            $scope.event = successData.data[0];
+        });
 
         VK.Widgets.Comments('vk_comments', {}, $location.path().hashCode());
     }
