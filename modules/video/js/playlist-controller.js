@@ -8,6 +8,16 @@ angular.module('vygoda-video')
             return $sce.trustAsResourceUrl('https://www.youtube.com/embed/videoseries?list=' + playlistId);
         };
 
-        $scope.playlists = Playlist.query();
+        Playlist.query({}, function(successData) {
+            //Workaround to remove useless playlist
+            for (var i = 0; i < successData.items.length; i++) {
+                if (successData.items[i].snippet.title == 'ОНАПТ') {
+                    successData.items.splice(i, 1);
+                    break;
+                }
+            }
+
+            $scope.playlists = successData;
+        });
     }
 );
