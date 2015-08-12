@@ -1,0 +1,35 @@
+<div ng-show="!sent">
+    <h1>Обратная связь</h1>
+
+    <form name="editForm">
+        <div class="form-group" ng-class="{ 'has-error': editForm.themeEdit.$invalid }">
+            <label for="themeEdit">Тема</label>
+            <input type="text" ng-model="feedback.theme" class="form-control" id="themeEdit" placeholder="Тема">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': editForm.nameEdit.$invalid }">
+            <label for="nameEdit">Имя</label>
+            <input type="text" ng-model="feedback.name" class="form-control" id="nameEdit" placeholder="Имя">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': editForm.phoneEdit.$invalid }">
+            <label for="phoneEdit">Телефон</label>
+            <input type="text" ng-model="feedback.phone" class="form-control" id="phoneEdit" placeholder="Телефон">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': editForm.emailEdit.$invalid }">
+            <label for="emailEdit">E-Mail</label>
+            <input type="email" ng-model="feedback.email" class="form-control" id="emailEdit" placeholder="E-Mail">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': editForm.textEdit.$invalid }">
+            <label for="textEdit">Сообщение *</label>
+            <textarea class="form-control" rows="7" ng-model="feedback.text" id="textEdit"></textarea>
+        </div>
+        <p class="bg-info">* Обязательные поля</p>
+        <button class="btn btn-primary" ng-disabled="editForm.$invalid" ng-click="save()">Отправить</button>
+    </form>
+</div>
+
+<div ng-show="sent">
+    <h2>Спасибо!</h2>
+
+    <h3>Ваша новость успешно отправлена на рассмотрение.<br/>
+    Мы свяжемся с Вами в ближайшее время.</h3>
+</div>

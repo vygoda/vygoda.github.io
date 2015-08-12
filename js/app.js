@@ -8,6 +8,7 @@ angular.module('vygoda-event', []);
 angular.module('vygoda-photo', []);
 angular.module('vygoda-document', []);
 angular.module('vygoda-video', []);
+angular.module('vygoda-feedback', []);
 //angular.module('vygoda-about', []);
 //angular.module('vygoda-contact', []);
 
@@ -18,6 +19,7 @@ angular.module('vygoda-web', [
     'vygoda-photo',
     'vygoda-document',
     'vygoda-video',
+    'vygoda-feedback',
 //    'vygoda-about',
 //    'vygoda-contact',
     'config',
@@ -105,6 +107,11 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/document/view/documents.html',
                 controller: 'DocumentsCtrl'
             }).
+            when('/feedback', {
+                templateUrl: 'modules/feedback/view/feedback.html',
+                controller: 'FeedbackCtrl'
+            }).
+
 
 //            when('/about', {
 //                templateUrl: 'modules/about/view/about-list.html',
