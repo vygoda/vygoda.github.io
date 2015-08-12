@@ -1,4 +1,8 @@
 <div class="container-fluid">
+    <div ng-show="isArchive" style="text-align: center;"><h3>{{monthName}} {{year}}г.</h3></div>
+
+    <div style="text-align: center;" ng-controller="ArchiveCtrl" ng-include="'modules/event/view/archive.html'">
+    </div>
 
       <!--Body content-->
       <div class="row" ng-show="isAuthenticated">
@@ -14,7 +18,7 @@
           <ng-include src="'modules/event/view/event-detail.html'"></ng-include>
       </div>
 
-      <div style="text-align: center;">
+      <div ng-show="totalCount > pageSize" style="text-align: center;">
           <pagination
                   ng-show="totalCount"
                   total-items="totalCount"

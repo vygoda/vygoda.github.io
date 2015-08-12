@@ -6,6 +6,12 @@ angular.module('vygoda-event')
     function ($scope, $routeParams, Event, $location, $timeout, ENV) {
         $scope.pageSize = ENV.pageSize;
 
+        $scope.year = $routeParams.year;
+        $scope.month = $routeParams.month;
+        $scope.monthName = $routeParams.month ? months[$routeParams.month - 1] : "";
+
+        $scope.isArchive = $scope.year && $scope.month;
+
         $scope.togglePin = function(event, pinedEvents) {
             pinedEvents.forEach(function(item, i, arr) {
                 if (item === event) {
@@ -36,8 +42,52 @@ angular.module('vygoda-event')
             return (page - 1) * $scope.pageSize;
         };
 
+        var generateDates = function(year, month) {
+            year = parseInt(year);
+            month = parseInt(month);
+
+            var nextYear = year;
+            var nextMonth = month + 1;
+
+            //parametrize
+            var threeMonth = month - 1;
+            var threeYear = year;
+
+            if (month == 12) {
+                nextMonth = 1;
+                nextYear++;
+            }
+
+            if (threeMonth <= 0) {
+                threeYear--;
+                threeMonth += 12;
+            }
+
+            var dateFormat = function(year, month) {
+                var monthStr = month < 10 ? '0' + month : month;
+
+                return year + "" + monthStr + "01000000";
+            };
+
+            return {startDate: dateFormat(year, month), endDate: dateFormat(nextYear, nextMonth), threeMonths: dateFormat(threeYear, threeMonth)};
+        };
+
         var queryItems = function() {
-            $scope.events = Event.query({offset: calculateOffset($routeParams.page), where: "pined=false OR pined IS NULL"}, function(response) {
+            var whereStr = "((pined=false)OR(pined IS NULL))";
+            if ($scope.isArchive) {
+                var dates = generateDates($scope.year, $scope.month);
+
+                whereStr = whereStr + "AND(eventDate>=" + dates.startDate + ")AND(eventDate<" + dates.endDate + ")";
+            } else {
+                var currentDate = extractYearMonth(new Date());
+                var dates = generateDates(currentDate.year, currentDate.month);
+
+                whereStr += "AND(eventDate>=" + dates.threeMonths + ")";
+            }
+
+            console.log(whereStr);
+
+            $scope.events = Event.query({offset: calculateOffset($routeParams.page), where: whereStr}, function(response) {
                 $scope.totalCount = response.totalObjects;
                 $scope.page = $routeParams.page;
             });
@@ -47,11 +97,14 @@ angular.module('vygoda-event')
 
         $scope.pageChanged = function() {
             $routeParams.page = $scope.page;
-                    console.log($scope.page);
-                    console.log($routeParams.page);
 
              $timeout(function() {
-                        $location.path('/events/' + $scope.page, false);
+                        if ($scope.isArchive) {
+                            $location.path('/events/' + $scope.year + '/' + $scope.month + '/page/' + $scope.page, false);
+                        } else {
+                            $location.path('/events/' + $scope.page, false);
+                        }
+
                         queryItems();
              }, 50);
 

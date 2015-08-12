@@ -52,6 +52,14 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
+            when('/events/:year/:month', {
+                templateUrl: 'modules/event/view/event-list.html',
+                controller: 'EventListCtrl'
+            }).
+            when('/events/:year/:month/page/:page', {
+                templateUrl: 'modules/event/view/event-list.html',
+                controller: 'EventListCtrl'
+            }).
             when('/event/:eventTitle', {
                 templateUrl: 'modules/event/view/event-detail.html',
                 controller: 'EventDetailCtrl'
