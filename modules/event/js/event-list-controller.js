@@ -85,8 +85,6 @@ angular.module('vygoda-event')
                 whereStr += "AND(eventDate>=" + dates.threeMonths + ")";
             }
 
-            console.log(whereStr);
-
             $scope.events = Event.query({offset: calculateOffset($routeParams.page), where: whereStr}, function(response) {
                 $scope.totalCount = response.totalObjects;
                 $scope.page = $routeParams.page;

@@ -37,6 +37,12 @@ angular.module('vygoda-web', [
     'ezfb'
 ])
 
+.controller('NavigationCtrl',
+    function ($scope) {
+        $scope.date = new Date();
+    }
+)
+
 .config(function($locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
 })

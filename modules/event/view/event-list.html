@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div ng-show="isArchive" style="text-align: center;"><h3>{{monthName}} {{year}}г.</h3></div>
 
-    <div style="text-align: center;" ng-controller="ArchiveCtrl" ng-include="'modules/event/view/archive.html'">
+    <div ng-show="isArchive" style="text-align: center;" ng-controller="ArchiveCtrl" ng-include="'modules/event/view/archive.html'">
     </div>
 
       <!--Body content-->
