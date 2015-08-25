@@ -32,7 +32,7 @@
     <script src="//vk.com/js/api/openapi.js?116"></script>
 
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link type="text/css" rel="stylesheet" href="/css/green-skin.css">
+    <!--<link type="text/css" rel="stylesheet" href="/css/green-skin.css">-->
 
     <script src="/js/app.js"></script>
     <script src="/js/config.js"></script>
@@ -120,11 +120,11 @@
 
             <form class="navbar-form navbar-right" ng-controller="AuthCtrl">
                 <span ng-show="isAuthenticated">{{wellcome}}</span>
-                <button ng-show="isAuthenticated" type="button" class="btn btn-primary" ng-click="logout()">
-                    <span class="glyphicon glyphicon-log-out"></span> Выйти
+                <button ng-show="isAuthenticated" type="button" class="btn btn-default" title="Выйти" ng-click="logout()">
+                    <span class="glyphicon glyphicon-log-out"></span>
                 </button>
-                <button ng-show="!isAuthenticated" type="button" class="btn btn-success" ng-click="open()"><span
-                        class="glyphicon glyphicon-log-in"></span> Вход
+                <button ng-show="!isAuthenticated" type="button" class="btn btn-default" title="Вход" ng-click="open()"><span
+                        class="glyphicon glyphicon-log-in"></span>
                 </button>
             </form>
         </div>

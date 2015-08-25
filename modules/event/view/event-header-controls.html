@@ -1,7 +1,7 @@
 <div class="pull-right" ng-show="isAuthenticated && !preview">
-    <a href="/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a title="Редактировать" ng-href="/edit/event/{{event.objectId}}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
 </div>
 <div class="pull-right" ng-show="isAuthenticated && !preview && !detailed" style="margin-right: 10px">
-    <button ng-show="!event.pined" class="btn btn-primary btn-primary" ng-click="togglePin(event, pinedEvents.data)"><span class="glyphicon glyphicon-pushpin"></span></button>
-    <button ng-show="event.pined" class="btn btn-primary btn-primary" ng-click="togglePin(event, pinedEvents.data)"><span class="glyphicon glyphicon-ban-circle"></span></button>
+    <button title="Закрепить" ng-show="!event.pined" class="btn btn-primary btn-primary" ng-click="togglePin(event, pinedEvents.data)"><span class="glyphicon glyphicon-pushpin"></span></button>
+    <button title="Открепить" ng-show="event.pined" class="btn btn-primary btn-primary" ng-click="togglePin(event, pinedEvents.data)"><span class="glyphicon glyphicon-ban-circle"></span></button>
 </div>
