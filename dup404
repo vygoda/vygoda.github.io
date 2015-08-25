@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cp -f index.html 404.html

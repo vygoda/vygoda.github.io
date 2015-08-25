@@ -103,58 +103,58 @@
         <h1 style="display: inline-block; vertical-align: bottom">Сообщество с.Выгода</h1>
     </a>
 </div>
-<!-- TODO: navbar-fixed-top-->
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">
-    <div class="container-fluid">
-        <!--<div class="navbar-header">-->
-        <!--<a class="navbar-brand" href="/events">с.Выгода</a>-->
-        <!--</div>-->
-        <ul class="nav navbar-nav">
-            <li><a href="/events">Новости</a></li>
-            <li><a href="/photo">Фото</a></li>
-            <li><a href="/videos">Видео</a></li>
-            <li><a href="/documents">Документы</a></li>
-            <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
-            <li><a href="/feedback">Расказать</a></li>
-        </ul>
+    <!-- TODO: navbar-fixed-top-->
+    <nav class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">
+        <div class="container-fluid">
+            <!--<div class="navbar-header">-->
+                <!--<a class="navbar-brand" href="/events">с.Выгода</a>-->
+            <!--</div>-->
+                <ul class="nav navbar-nav">
+                    <li><a href="/events">Новости</a></li>
+                    <li><a href="/photo">Фото</a></li>
+                    <li><a href="/videos">Видео</a></li>
+                    <li><a href="/documents">Документы</a></li>
+                    <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
+                    <li><a href="/feedback">Расказать</a></li>
+                </ul>
 
-        <form class="navbar-form navbar-right" ng-controller="AuthCtrl">
-            <span ng-show="isAuthenticated">{{wellcome}}</span>
-            <button ng-show="isAuthenticated" type="button" class="btn btn-default" title="Выйти" ng-click="logout()">
-                <span class="glyphicon glyphicon-log-out"></span>
-            </button>
-            <button ng-show="!isAuthenticated" type="button" class="btn btn-default" title="Вход" ng-click="open()"><span
-                    class="glyphicon glyphicon-log-in"></span>
-            </button>
-        </form>
-    </div>
-</nav>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <div ng-view></div>
+            <form class="navbar-form navbar-right" ng-controller="AuthCtrl">
+                <span ng-show="isAuthenticated">{{wellcome}}</span>
+                <button ng-show="isAuthenticated" type="button" class="btn btn-default" title="Выйти" ng-click="logout()">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </button>
+                <button ng-show="!isAuthenticated" type="button" class="btn btn-default" title="Вход" ng-click="open()"><span
+                        class="glyphicon glyphicon-log-in"></span>
+                </button>
+            </form>
         </div>
+    </nav>
 
-        <div class="col-md-3">
-            <div id="vk_groups"></div>
-            <script type="text/javascript">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div ng-view></div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="vk_groups"></div>
+                <script type="text/javascript">
                     VK.Widgets.Group("vk_groups", {mode: 0, height: "300", width: "auto", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 5366610);
                 </script>
-            <hr/>
+                <hr/>
 
-            <div class="fb-page" data-href="https://www.facebook.com/Vygoda/timeline" data-height="300"
-                 data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-                 data-show-facepile="true" data-show-posts="false">
-                <div class="fb-xfbml-parse-ignore">
-                    <blockquote cite="https://www.facebook.com/Vygoda/timeline"><a
-                            href="https://www.facebook.com/Vygoda/timeline">Жители села Выгода</a></blockquote>
+                <div class="fb-page" data-href="https://www.facebook.com/Vygoda/timeline" data-height="300"
+                     data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+                     data-show-facepile="true" data-show-posts="false">
+                    <div class="fb-xfbml-parse-ignore">
+                        <blockquote cite="https://www.facebook.com/Vygoda/timeline"><a
+                                href="https://www.facebook.com/Vygoda/timeline">Жители села Выгода</a></blockquote>
+                    </div>
                 </div>
-            </div>
-            <hr/>
+                <hr/>
 
-            <div id="ok_group_widget"></div>
-            <script>
+                <div id="ok_group_widget"></div>
+                <script>
                     !function (d, id, did, st) {
                       var js = d.createElement("script");
                       js.src = "https://connect.ok.ru/connect.js";
@@ -170,14 +170,14 @@
                       d.documentElement.appendChild(js);
                     }(document,"ok_group_widget","43737308201104","{width:250, height:300}");
                 </script>
-            <hr/>
+                <hr/>
 
-            <h2>Афиша</h2>
-            <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
+                <h2>Афиша</h2>
+                <div ng-controller="PostersCtrl" ng-include="'modules/photo/view/posters.html'">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div id="footer" class="container">
     <div class="row">
