@@ -55,6 +55,7 @@
     <script src="/modules/event/js/event-edit-controller.js"></script>
     <script src="/modules/event/js/event-config.js"></script>
     <script src="/modules/event/js/archive-controller.js"></script>
+    <script src="/modules/event/js/search-controller.js"></script>
 
     <script src="/modules/photo/js/photo-utils.js"></script>
     <script src="/modules/photo/js/photo-collection-controller.js"></script>
@@ -133,6 +134,9 @@
                         class="glyphicon glyphicon-log-in"></span>
                 </button>
             </form>
+
+            <div class="col-sm-3 col-md-3 pull-right" ng-include="'/modules/event/view/search-form.html'">
+            </div>
         </div>
     </nav>
 
