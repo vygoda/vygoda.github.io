@@ -69,7 +69,7 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/event/:eventTitle', {
+            when('/event/:eventId', {
                 templateUrl: 'modules/event/view/event-detail.html',
                 controller: 'EventDetailCtrl'
             }).
@@ -117,6 +117,10 @@ angular.module('vygoda-web', [
             when('/feedback', {
                 templateUrl: 'modules/feedback/view/feedback.html',
                 controller: 'FeedbackCtrl'
+            }).
+            when('/search/:query', {
+                templateUrl: 'modules/event/view/search-result.html',
+                controller: 'SearchCtrl'
             }).
 
 
@@ -411,6 +415,23 @@ angular.module('vygoda-web', [
         }
     };
 }])
+
+.directive('focusMe', function($timeout) {
+   return {
+     scope: { trigger: '=focusMe' },
+     link: function(scope, element) {
+       scope.$watch('trigger', function(value) {
+         if(value === true) {
+           //console.log('trigger',value);
+           //$timeout(function() {
+             element[0].focus();
+             scope.trigger = false;
+           //});
+         }
+       });
+     }
+   };
+ })
 
 .config(['markdownConverterProvider', function (markdownConverterProvider) {
     // options to be passed to Showdown

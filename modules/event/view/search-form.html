@@ -1,0 +1,8 @@
+<form ng-submit="submit()" class="navbar-form" role="search" ng-controller="SearchFormCtrl">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Поиск" ng-model="query" name="query" id="query" focus-me="focusSearch">
+        <div class="input-group-btn">
+            <button class="btn btn-default" ng-disabled="!query.length" type="submit" title="Поиск"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</form>

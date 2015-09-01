@@ -1,0 +1,20 @@
+<div ng-include="'/modules/event/view/search-form.html'">
+</div>
+
+<div>
+    <div ng-show="events.totalObjects == 0">
+        <h4>Ничего не найдено по запросу <b>"{{query}}"</b></h4>
+    </div>
+
+    <div ng-show="events.totalObjects">
+        <table class="table table-striped">
+            <tbody>
+            <tr ng-repeat="event in events.data">
+                <td>{{event.eventDate | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td><a target="_blank" ng-href="/event/{{ event.objectId }}">{{ event.title }}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
