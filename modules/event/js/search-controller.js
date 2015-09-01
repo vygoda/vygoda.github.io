@@ -12,7 +12,9 @@ angular.module('vygoda-event')
             }
 
             var query = $scope.query;
-            $scope.query = "";
+            if (!$scope.holdValue) {
+                $scope.query = "";
+            }
 
             $location.path('/search/' + query)
         };
@@ -21,7 +23,7 @@ angular.module('vygoda-event')
 
 .controller('SearchCtrl',
     function ($scope, $routeParams, $location, Event) {
-        $scope.focusSearch = true;
+        $scope.holdValue = true;
         $scope.query = $routeParams.query;
 
         var queryString = "%" + $scope.query.replace(/'/g, "_").replace(/"/g, "_").replace(/%/g, "_") + "%";
