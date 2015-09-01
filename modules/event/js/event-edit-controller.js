@@ -3,14 +3,27 @@
 angular.module('vygoda-event')
 
 .controller('EventEditCtrl',
-    function ($scope, $routeParams, $timeout, $location, $localStorage, Event, Notification) {
+    function ($scope, $routeParams, $timeout, $filter, $location, $localStorage, Event, Notification) {
         $scope.preview = true;
         $scope.detailed = true;
 
         $scope.eventId = $routeParams.eventId;
 
+         $scope.$watch('eventDate', function() {
+               $scope.eventDateStr = $filter('date')($scope.eventDate, "dd.MM.yyyy hh:mm:ss");
+         });
+
+        $scope.eventDate = new Date();
+
+        $scope.onTimeSet = function (newDate, oldDate) {
+            $scope.event.eventDate = newDate.getTime();
+            $scope.eventDate = newDate;
+        }
+
         if ($scope.eventId) {
-            $scope.event = Event.get({eventId: $scope.eventId});
+            $scope.event = Event.get({eventId: $scope.eventId}, function(successData) {
+                $scope.eventDate = new Date(successData.eventDate);
+            });
         } else {
             $scope.event = {author: $localStorage.userData.name, eventDate: new Date().getTime()};
         }
@@ -27,8 +40,6 @@ angular.module('vygoda-event')
                     $location.path('/edit/event/' + data.objectId);
                 }, 1000);
             };
-
-
 
             if ($scope.eventId) {
                 Event.update({"eventId": $scope.eventId}, $scope.event, onSuccess, onError);

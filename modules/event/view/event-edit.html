@@ -5,6 +5,26 @@
                 <label for="titleEdit">Название*</label>
                 <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название">
             </div>
+
+            <div class="form-group">
+                <label for="eventDateEdit">Дата публикации</label>
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                       href="">
+                        <div class="input-group">
+                            <input id="eventDateEdit" type="text" class="form-control" data-ng-model="eventDateStr">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="eventDate" data-on-set-time="onTimeSet(newDate, oldDate)"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }">
+                        </datetimepicker>
+                    </ul>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="vkPostEdit">VK Пост (если заполнено это поле, то игнорируются все остальные)</label>
                 <input type="text"  ng-model="event.vkPost" id="vkPostEdit" class="form-control" placeholder="Код VK поста">

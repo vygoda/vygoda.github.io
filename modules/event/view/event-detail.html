@@ -1,8 +1,8 @@
 <div class="panel panel-default" ng-show="!event.vkPost">
     <div class="panel-heading">
         <div class="pull-left">
-            <div>{{event.created | date: 'HH:mm:ss'}}</div>
-            <div>{{event.created | date: 'dd.MM.yyyy'}}</div>
+            <div>{{event.eventDate | date: 'HH:mm:ss'}}</div>
+            <div>{{event.eventDate | date: 'dd.MM.yyyy'}}</div>
         </div>
 
         <ng-include src="'modules/event/view/event-header-controls.html'"></ng-include>
