@@ -22,12 +22,13 @@ angular.module('vygoda-event')
 )
 
 .controller('SearchCtrl',
-    function ($scope, $routeParams, $location, Event) {
+    function ($scope, $routeParams, $location, Event, SearchVideo) {
         $scope.holdValue = true;
         $scope.query = $routeParams.query;
 
         var queryString = "%" + $scope.query.replace(/'/g, "_").replace(/"/g, "_").replace(/%/g, "_") + "%";
 
         $scope.events = Event.query({where: "(title LIKE '" + queryString + "')" + "OR" + "(summary LIKE '" + queryString + "')" + "OR" + "(content LIKE '" + queryString + "')", pageSize: 100});
+        $scope.videos = SearchVideo.query({q: $scope.query});
     }
 );
