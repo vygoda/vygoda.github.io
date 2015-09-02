@@ -1,4 +1,4 @@
-<div class="share-container" ng-init="absUrl = $location.protocol() + '://' + $location.host() + '/event/' + id">
+<div class="share-container" ng-init="absUrl = location.protocol() + '://' + location.host() + (!location.port() || location.port() == 80 ? '' : ':' + location.port()) + '/event/' + id">
     <div class="btn-group">
         <button class="btn btn-default btn-sm disabled">Поделиться:</button>
         <a class="btn btn-default btn-sm" target="_blank" title="On VK.com" ng-href="http://vk.com/share.php?url={{absUrl | escape}}&title={{event.title | escape}}&description={{event.summary | md: event.isHtml | escape}}&image={{event.socialImage}}">
