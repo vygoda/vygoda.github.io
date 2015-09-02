@@ -3,14 +3,37 @@
 angular.module('vygoda-event')
 
 .controller('EventEditCtrl',
-    function ($scope, $routeParams, $timeout, $filter, $location, $localStorage, Event, Notification) {
+    function ($scope, $routeParams, $timeout, $filter, $location, $localStorage, Event, Blogger, Notification) {
         $scope.preview = true;
         $scope.detailed = true;
+
+        $scope.postUrl = "";
+
+        $scope.requestBlogger = function(postUrl) {
+            var a = document.createElement('a');
+            a.href = postUrl;
+
+            $scope.text = Blogger.query({path: a.pathname}, function(post) {
+                $scope.eventDate = Date.parseRFC3339(post.published);
+                $scope.onTimeSet($scope.eventDate);
+
+                $scope.event.title = post.title;
+                $scope.event.summary = post.content;
+                $scope.event.author = post.author.displayName;
+                $scope.event.isHtml = true;
+
+                Notification.success({message: 'Успешно импортировано', delay: 2000});
+            },
+            function(error) {
+                console.log(error);
+                Notification.error({message: 'Ошибка импорта: ' + error.status + ': ' + error.statusText, delay: 4000});
+            });
+        };
 
         $scope.eventId = $routeParams.eventId;
 
          $scope.$watch('eventDate', function() {
-               $scope.eventDateStr = $filter('date')($scope.eventDate, "dd.MM.yyyy hh:mm:ss");
+               $scope.eventDateStr = $filter('date')($scope.eventDate, "dd.MM.yyyy HH:mm:ss");
          });
 
         $scope.eventDate = new Date();

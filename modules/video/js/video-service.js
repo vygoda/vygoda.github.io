@@ -5,7 +5,7 @@ angular.module('vygoda-video')
 .factory('Video',
     function ($resource, $http, ENV) {
         return $resource('https://www.googleapis.com/youtube/v3/playlistItems/', {}, {
-            query: { method: 'GET', params: {key: ENV["youtube-key"], part: "snippet", maxResults: ENV["pageSize"]}, isArray: false }
+            query: { method: 'GET', params: {key: ENV["google-key"], part: "snippet", maxResults: ENV["pageSize"]}, isArray: false }
         });
     }
 )
@@ -13,7 +13,7 @@ angular.module('vygoda-video')
 .factory('Playlist',
     function ($resource, $http, ENV) {
         return $resource('https://www.googleapis.com/youtube/v3/playlists/', {}, {
-            query: { method: 'GET', params: {key: ENV["youtube-key"], channelId: ENV["youtube-channelId"], part: "snippet", maxResults: 50}, isArray: false }
+            query: { method: 'GET', params: {key: ENV["google-key"], channelId: ENV["youtube-channelId"], part: "snippet", maxResults: 50}, isArray: false }
         });
     }
 );

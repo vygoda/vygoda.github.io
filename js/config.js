@@ -6,7 +6,7 @@ angular.module("config", [])
         "flickr-api_url": "https://api.flickr.com/services/rest/",
         "application-id": "B216603E-9B55-A43F-FFB5-996A1A0BE900",
         "secret-key": "7264DFA7-9715-713A-FFF0-DEAEFA16AA00",
-        "youtube-key": "AIzaSyDCznZmYhdRjYBMcmD8c_V6YdTcaot_1p4",
+        "google-key": "AIzaSyDCznZmYhdRjYBMcmD8c_V6YdTcaot_1p4",
         "youtube-playlistId": "PLA2CFC4E6D8D01EB4",
         "youtube-channelId": "UCMICPOoMGiQy1BHTeVVxr5A",
         "flickr-api_key": "a9ed5e5be75dc8d02c768948ab924689",
@@ -15,5 +15,6 @@ angular.module("config", [])
         "googleDrive-folder_id" : "0B-7EtES7S1ZKfmticGh3a3FNSUd3X0NiWktKZUFuRzRGZzQ4bUNlWE8xOWh4VjZUbVh0UDQ",
         "facebook-app_id" : "773644762748334",
         "vk-app_id" : "5007540",
-        "pageSize" : 5
+        "pageSize" : 5,
+        "blogger-id" : "3532773844502088245"
     });

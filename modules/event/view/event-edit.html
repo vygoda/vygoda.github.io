@@ -1,5 +1,13 @@
 <tabset>
     <tab heading="Редактирование">
+        <form ng-submit="requestBlogger(postUrl)">
+            <div class="form-group">
+                <label for="postUrlEdit">Импортировать из blogspot (URL)</label>
+                <input class="form-control" type="text" ng-model="postUrl" id="postUrlEdit" />
+                <input class="btn btn-default" type="submit" value="Импорт" />
+            </div>
+        </form>
+
         <form name="editForm">
             <div class="form-group" ng-class="{ 'has-error': editForm.titleEdit.$invalid }">
                 <label for="titleEdit">Название*</label>
