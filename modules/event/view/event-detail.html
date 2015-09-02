@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-show="!event.vkPost">
+<div class="panel panel-default" ng-show="!event.vkPost" ng-init="id = (event.prettyTitle) ? event.prettyTitle : event.objectId ">
     <div class="panel-heading">
         <div class="pull-left">
             <div>{{event.eventDate | date: 'HH:mm:ss'}}</div>
@@ -7,13 +7,13 @@
 
         <ng-include src="'modules/event/view/event-header-controls.html'"></ng-include>
 
-        <div class="text-center"><a href="/event/{{event.objectId}}"><h4>{{event.title}}</h4></a></div>
+        <div class="text-center"><a href="/event/{{id}}"><h4>{{event.title}}</h4></a></div>
 
     </div>
     <div class="panel-body">
         <div ng-show="!event.isHtml" btf-markdown="event.summary"></div>
         <div ng-show="event.isHtml" ng-bind-html="trustAsHtml(event.summary)"></div>
-        <div ng-show="!detailed"><a href="/event/{{event.objectId}}">Подробнее...</a></div>
+        <div ng-show="!detailed"><a href="/event/{{id}}">Подробнее...</a></div>
 
         <div ng-show="detailed && !event.isHtml" btf-markdown="event.content"></div>
         <div ng-show="detailed && event.isHtml" ng-bind-html="trustAsHtml(event.content)"></div>

@@ -13,6 +13,10 @@
                 <label for="titleEdit">Название*</label>
                 <input type="text" ng-model="event.title" class="form-control" id="titleEdit" placeholder="Название">
             </div>
+            <div class="form-group" ng-class="{ 'has-error': editForm.prettyTitleEdit.$invalid }">
+                <label for="prettyTitleEdit">Транскрипция названия (для ссылки)</label>
+                <input type="text" ng-model="event.prettyTitle" class="form-control" id="prettyTitleEdit" placeholder="Транскрипция названия (для ссылки)">
+            </div>
 
             <div class="form-group">
                 <label for="eventDateEdit">Дата публикации</label>
