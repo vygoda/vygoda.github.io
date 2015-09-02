@@ -6,7 +6,7 @@
         <h4>Ничего не найдено по запросу <b>"{{query}}"</b></h4>
     </div>
 
-    <div ng-show="events.totalObjects">
+    <div ng-show="events.totalObjects > 0">
         <h4>Новости</h4>
         <table class="table table-striped">
             <tbody>
@@ -18,7 +18,7 @@
         </table>
     </div>
 
-    <div ng-show="videos.pageInfo.totalResults">
+    <div ng-show="videos.pageInfo.totalResults > 0">
         <h4>Видео</h4>
         <table class="table table-striped">
             <tbody>
@@ -31,7 +31,7 @@
         </table>
     </div>
 
-    <div ng-show="photos.photos.total">
+    <div ng-show="photos.photos.total > 0">
         <h4>Фото</h4>
         <table class="table table-striped">
             <tbody>
