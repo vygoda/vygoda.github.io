@@ -17,7 +17,16 @@ angular.module('vygoda-photo')
             } }
         });
     }
-);
+)
+
+.factory('SearchPhotos',
+    function ($resource, $http, ENV) {
+        return $resource(ENV['flickr-api_url'], {}, {
+            query: { method: 'GET', params: {method: "flickr.photos.search", api_key: ENV["flickr-api_key"], user_id: ENV["flickr-user_id"], content_type: 7, extras: "url_sq,description,date_upload", format: "json", per_page: 500}, isArray: false, transformResponse: transformFlickResponse}
+        });
+    });
+
+
 
 ////https://www.flickr.com/photos/130413297@N03/16377997373/in/album-72157651695647255/
 //dkServices.factory('PhotoDetail',

@@ -22,7 +22,7 @@ angular.module('vygoda-event')
 )
 
 .controller('SearchCtrl',
-    function ($scope, $routeParams, $location, Event, SearchVideo) {
+    function ($scope, $routeParams, $location, Event, SearchVideo, SearchPhotos) {
         $scope.holdValue = true;
         $scope.query = $routeParams.query;
 
@@ -30,5 +30,7 @@ angular.module('vygoda-event')
 
         $scope.events = Event.query({where: "(title LIKE '" + queryString + "')" + "OR" + "(summary LIKE '" + queryString + "')" + "OR" + "(content LIKE '" + queryString + "')", pageSize: 100});
         $scope.videos = SearchVideo.query({q: $scope.query});
+
+        $scope.photos = SearchPhotos.query({text: $scope.query});
     }
 );
