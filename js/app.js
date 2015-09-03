@@ -347,7 +347,7 @@ angular.module('vygoda-web', [
             $rootScope.drawPost({"divId": divId, "ownerId": ownerId, "postId": postId, "postHash": postHash});
 
             var resultValue = result.substring(0, start) + element + result.substring(end + endStr.length, result.length);
-            console.log(resultValue);
+
             return resultValue;
         };
     });
@@ -365,9 +365,7 @@ angular.module('vygoda-web', [
 
             VK.Widgets.Post(item.divId, item.ownerId, item.postId, item.postHash, {});
              $timeout(function(){
-                console.log("drawPost - " + item.divId);
-
-                var vkDiv = document.getElementById(item.divId);
+                    var vkDiv = document.getElementById(item.divId);
                 if (!vkDiv) {
                     return;
                 }
@@ -376,7 +374,7 @@ angular.module('vygoda-web', [
                 for(i=0; i < vkDiv.childNodes.length; i++)
                  {
                      var childElement = vkDiv.childNodes[i];
-                     console.log(childElement);
+
                      var tagName = childElement.tagName.toLowerCase();
                      if (tagName == "iframe") {
                         if (hasIframe) {

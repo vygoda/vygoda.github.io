@@ -11,8 +11,8 @@
 
     </div>
     <div class="panel-body">
-        <div ng-show="!event.isHtml" btf-markdown="event.summary"></div>
-        <div ng-show="event.isHtml" ng-bind-html="trustAsHtml(event.summary)"></div>
+        <div class="summary" ng-show="!event.isHtml" btf-markdown="event.summary"></div>
+        <div class="summary" ng-show="event.isHtml" ng-bind-html="trustAsHtml(event.summary)"></div>
         <div ng-show="!detailed"><a href="/event/{{id}}">Подробнее...</a></div>
 
         <div ng-show="detailed && !event.isHtml" btf-markdown="event.content"></div>

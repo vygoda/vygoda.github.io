@@ -22,6 +22,16 @@ angular.module('vygoda-event')
                 $scope.event.author = post.author.displayName;
                 $scope.event.isHtml = true;
 
+                var filename = postUrl.substring(postUrl.lastIndexOf('/') + 1);
+                $scope.event.prettyTitle = filename.substring(0, filename.lastIndexOf('.'));
+
+                $timeout(function() {
+                    var elementResult = $(".summary:first").find("img:first");
+                    if (elementResult.length == 1) {
+                        $scope.event.socialImage = elementResult[0].currentSrc;
+                    }
+                }, 500);
+
                 Notification.success({message: 'Успешно импортировано', delay: 2000});
             },
             function(error) {
