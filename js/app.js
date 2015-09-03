@@ -333,11 +333,21 @@ angular.module('vygoda-web', [
             var postId = params[1];
             var postHash = params[2];
 
-            var element = '<div id="vk_post_' + ownerId + '_' + postId + '"></div>';
+            var divIdTemplate = 'vk_post_' + ownerId + '_' + postId;
+            var divId = divIdTemplate;
+            var i = 0;
+            while(vkPostDivIds.indexOf(divId) != -1) {
+                divId = divIdTemplate + "_" + i;
+                i++;
+            }
+            vkPostDivIds.push(divId);
 
-            $rootScope.drawPost({"ownerId": ownerId, "postId": postId, "postHash": postHash});
+            var element = '<div id="' + divId + '"></div>';
+
+            $rootScope.drawPost({"divId": divId, "ownerId": ownerId, "postId": postId, "postHash": postHash});
 
             var resultValue = result.substring(0, start) + element + result.substring(end + endStr.length, result.length);
+            console.log(resultValue);
             return resultValue;
         };
     });
@@ -348,7 +358,35 @@ angular.module('vygoda-web', [
 
     $rootScope.drawPost = function(item) {
         $timeout(function(){
-            VK.Widgets.Post("vk_post_" + item.ownerId + "_" + item.postId, item.ownerId, item.postId, item.postHash, {});
+            var vkDiv = document.getElementById(item.divId);
+            if (!vkDiv) {
+                return;
+            }
+
+            VK.Widgets.Post(item.divId, item.ownerId, item.postId, item.postHash, {});
+             $timeout(function(){
+                console.log("drawPost - " + item.divId);
+
+                var vkDiv = document.getElementById(item.divId);
+                if (!vkDiv) {
+                    return;
+                }
+
+                var hasIframe = false;
+                for(i=0; i < vkDiv.childNodes.length; i++)
+                 {
+                     var childElement = vkDiv.childNodes[i];
+                     console.log(childElement);
+                     var tagName = childElement.tagName.toLowerCase();
+                     if (tagName == "iframe") {
+                        if (hasIframe) {
+                            vkDiv.removeChild(childElement);
+                        }
+
+                        hasIframe = true;
+                     }
+                 }
+            }, 100);
         }, 100);
     };
 
@@ -440,6 +478,8 @@ angular.module('vygoda-web', [
         extensions: ['table']
     });
 }]);
+
+var vkPostDivIds = [];
 
 String.prototype.hashCode = function() {
   var hash = 0, i, chr, len;
