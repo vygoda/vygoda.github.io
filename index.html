@@ -102,13 +102,7 @@
 </head>
 <body>
 
-<div style="background: repeating-linear-gradient(
-  45deg,
-  #ffffff,
-  #ffffff 10px,
-  #f0f0f0 10px,
-  #f0f0f0 20px
-);">
+<div id="header">
     <a href="/events">
         <img src="img/vdk1.jpg" class="img-circle"  style="display: inline-block;" />
         <h1 style="display: inline-block; vertical-align: bottom">Жители села Выгода</h1>
@@ -122,11 +116,6 @@
             <!--</div>-->
                 <ul class="nav navbar-nav">
                     <li><a href="/events">Новости</a></li>
-                    <!--<li><a href="/photo">Фото</a></li>-->
-                    <li><a target="_blank" href="https://fotki.yandex.ru/users/is-vygoda/albums/">Фото</a></li> <!--Временное решение-->
-                    <li><a href="/videos">Видео</a></li>
-                    <li><a href="/documents">Документы</a></li>
-                    <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Инфо <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -137,6 +126,12 @@
                             <li><a href="/bus-schedule">Расписание автобусов</a></li>
                         </ul>
                     </li>
+                    <!--<li><a href="/photo">Фото</a></li>-->
+                    <li><a target="_blank" href="https://fotki.yandex.ru/users/is-vygoda/albums/">Фото</a></li> <!--Временное решение-->
+                    <li><a href="/videos">Видео</a></li>
+                    <!--<li><a href="/documents">Документы</a></li>--> <!--Временное решение-->
+                    <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
+
                     <li><a href="/feedback">Рассказать</a></li>
                 </ul>
 
