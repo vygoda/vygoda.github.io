@@ -79,6 +79,10 @@ ul.nav li a, ul.nav li {
     background-size: 100%; /* Современные браузеры */
    }
 
+#header a, #header a:visited, #header a:active {
+    color: white !important
+}
+
 #footer {
   width: 100%;
   /*margin-top:50px;*/
