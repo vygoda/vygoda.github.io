@@ -9,6 +9,7 @@ angular.module('vygoda-photo', []);
 angular.module('vygoda-document', []);
 angular.module('vygoda-video', []);
 angular.module('vygoda-feedback', []);
+angular.module('vygoda-map', []);
 //angular.module('vygoda-about', []);
 //angular.module('vygoda-contact', []);
 
@@ -20,6 +21,7 @@ angular.module('vygoda-web', [
     'vygoda-document',
     'vygoda-video',
     'vygoda-feedback',
+    'vygoda-map',
 //    'vygoda-about',
 //    'vygoda-contact',
     'config',
@@ -121,6 +123,19 @@ angular.module('vygoda-web', [
             when('/search/:query', {
                 templateUrl: 'modules/event/view/search-result.html',
                 controller: 'SearchCtrl'
+            }).
+            when('/map', {
+                templateUrl: 'modules/map/view/map.html',
+                controller: 'MapCtrl'
+            }).
+            when('/phone-book', {
+                templateUrl: 'modules/other/view/phone-book.html'
+            }).
+            when('/train-schedule', {
+                templateUrl: 'modules/other/view/train-schedule.html'
+            }).
+            when('/bus-schedule', {
+                templateUrl: 'modules/other/view/bus-schedule.html'
             }).
 
 

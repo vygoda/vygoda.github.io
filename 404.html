@@ -84,6 +84,8 @@
     <script src="/modules/feedback/js/feedback-controller.js"></script>
     <script src="/modules/feedback/js/feedback-service.js"></script>
 
+    <script src="/modules/map/js/map-controller.js"></script>
+
     <meta name="fragment" content="!" />
     <base href="/" />
 
@@ -125,6 +127,16 @@
                     <li><a href="/videos">Видео</a></li>
                     <li><a href="/documents">Документы</a></li>
                     <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Инфо <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/map">Карта</a></li>
+                            <li><a href="/phone-book">Телефонный справочник</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/train-schedule">Расписание электричек</a></li>
+                            <li><a href="/bus-schedule">Расписание автобусов</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/feedback">Рассказать</a></li>
                 </ul>
 
