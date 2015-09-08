@@ -58,7 +58,11 @@ angular.module('vygoda-event')
                 $scope.eventDate = new Date(successData.eventDate);
             });
         } else {
-            $scope.event = {author: $localStorage.userData.name, eventDate: new Date().getTime()};
+            $scope.event = {author: $localStorage.userData.name, eventDate: new Date().getTime(),
+            day: $routeParams.day,
+            month: $routeParams.month,
+            year: new Date().getFullYear(),
+            history: $routeParams.day && $routeParams.month};
         }
 
         var onError = function (error) {

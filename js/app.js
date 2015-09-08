@@ -10,6 +10,7 @@ angular.module('vygoda-document', []);
 angular.module('vygoda-video', []);
 angular.module('vygoda-feedback', []);
 angular.module('vygoda-map', []);
+angular.module('vygoda-history', []);
 //angular.module('vygoda-about', []);
 //angular.module('vygoda-contact', []);
 
@@ -22,6 +23,7 @@ angular.module('vygoda-web', [
     'vygoda-video',
     'vygoda-feedback',
     'vygoda-map',
+    'vygoda-history',
 //    'vygoda-about',
 //    'vygoda-contact',
     'config',
@@ -83,6 +85,10 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/event/view/event-edit.html',
                 controller: 'EventEditCtrl'
             }).
+            when('/new/event/history/:month/:day', {
+                templateUrl: 'modules/event/view/event-edit.html',
+                controller: 'EventEditCtrl'
+            }).
 
 
             when('/videos', {
@@ -136,6 +142,18 @@ angular.module('vygoda-web', [
             }).
             when('/bus-schedule', {
                 templateUrl: 'modules/other/view/bus-schedule.html'
+            }).
+            when('/history/month/:month', {
+                templateUrl: 'modules/history/view/history.html',
+                controller: 'HistoryCtrl'
+            }).
+            when('/history', {
+                templateUrl: 'modules/history/view/history.html',
+                controller: 'HistoryCtrl'
+            }).
+            when('/history/event/:eventId', {
+                templateUrl: 'modules/history/view/history-event.html',
+                controller: 'HistoryEventCtrl'
             }).
 
 
@@ -504,3 +522,5 @@ String.prototype.hashCode = function() {
   }
   return hash;
 };
+
+var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];

@@ -1,5 +1,3 @@
-var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-
 var extractYearMonth = function(date) {
     var month = date.getUTCMonth() + 1; //months from 1-12
     var year = date.getUTCFullYear();

@@ -1,0 +1,30 @@
+<div class="text-center">
+
+    <a ng-href="/history/month/{{previousMonth}}" class="pull-left"><span
+            class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a ng-href="/history/month/{{nextMonth}}" class="pull-right"><span
+            class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+
+    <h2>{{month}}</h2>
+
+</div>
+<br/>
+
+<div class="container-fluid">
+    <div class="col-md-2" ng-repeat="day in days">
+        <div ng-class="{true:'panel panel-danger', false:'panel panel-default'}[day.events.length > 0]">
+            <div class="panel-heading text-center">
+                <a ng-if="isAuthenticated" target="_blank" ng-href="/new/event/history/{{currentMonth}}/{{day.day}}"><span class="glyphicon glyphicon-plus" title="Добавить"></span></a>
+                <big><b>{{ day.day }}</b></big></div>
+            <div ng-if="day.events.length > 0" class="panel-body">
+                <div ng-repeat="event in day.events| orderBy:'year'">
+                    <hr ng-if="!$first"/>
+                    <a target="_blank" ng-href="/event/{{(event.prettyTitle) ? event.prettyTitle : event.objectId}}">{{event.year}} - {{event.title}}</a>
+                    <a ng-if="isAuthenticated" target="_blank" ng-href="/edit/event/{{event.objectId}}"><span class="glyphicon glyphicon-pencil" title="Редактировать"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

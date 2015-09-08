@@ -86,6 +86,8 @@
 
     <script src="/modules/map/js/map-controller.js"></script>
 
+    <script src="/modules/history/js/history-controller.js"></script>
+
     <meta name="fragment" content="!" />
     <base href="/" />
 
@@ -126,6 +128,7 @@
                             <li><a href="/bus-schedule">Расписание автобусов</a></li>
                         </ul>
                     </li>
+                    <li><a href="/history/month/{{ date | date:'M' }}">История</a></li>
                     <!--<li><a href="/photo">Фото</a></li>-->
                     <li><a target="_blank" href="https://fotki.yandex.ru/users/is-vygoda/albums/">Фото</a></li> <!--Временное решение-->
                     <li><a href="/videos">Видео</a></li>
@@ -150,7 +153,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
                 <div ng-view></div>
