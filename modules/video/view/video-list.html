@@ -1,7 +1,7 @@
 <h3><a href="/videos">Коллекции видео</a> / {{playlistTitle}}</h3>
 <div class="container-fluid">
 
-      <div class="row" ng-repeat="video in videos.items">
+      <div class="col-md-6 text-center" ng-repeat="video in videos.items">
           <ng-include src="'modules/video/view/video-detail.html'"></ng-include>
       </div>
 

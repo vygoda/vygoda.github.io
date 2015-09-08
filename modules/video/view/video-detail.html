@@ -8,7 +8,7 @@
 
     </div>
     <div class="panel-body" ng-init="fullUrl = getTrusted(video.snippet.resourceId.videoId)">
-        <iframe type="text/html" width='480' height='270' ng-src="{{fullUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>
+        <iframe type="text/html" width='100%' height='270' ng-src="{{fullUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>
 
         <p style="white-space: pre; word-wrap: break-word;">{{ video.snippet.description }}</p>
     </div>
