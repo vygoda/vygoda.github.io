@@ -16,14 +16,26 @@ angular.module('vygoda-history')
     for(var i = 0; i < maxDaysPerMonth[$scope.currentMonth - 1]; i++) {
         days.push({day: i + 1, events: []});
     }
+    var pageSize = 20;
+    var totalCount = 0;
 
-    $scope.events = Event.query({where: "(month=" + $scope.currentMonth + ")AND(history=true)", pageSize: 50, sortBy: "day"},
-    function(successData) {
-        for (var index = 0; index < successData.data.length; ++index) {
-            var item = successData.data[index];
-            days[item.day - 1].events.push(item);
-        }
+    var requestEvents = function(offset) {
+        Event.query({where: "(month=" + $scope.currentMonth + ")AND(history=true)", pageSize: pageSize, sortBy: "day", offset: offset},
+        function(successData) {
+            for (var index = 0; index < successData.data.length; ++index) {
+                var item = successData.data[index];
+                days[item.day - 1].events.push(item);
+            }
 
-        $scope.days = days;
-    });
+            totalCount += successData.data.length;
+
+            if (totalCount < successData.totalObjects) {
+                requestEvents(successData.offset + pageSize);
+            } else {
+                $scope.days = days;
+            }
+        });
+    };
+
+    requestEvents(0);
 });
