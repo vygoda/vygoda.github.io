@@ -15,7 +15,7 @@ angular.module('vygoda-auth')
             config.headers["application-id"] = ENV["application-id"];
             config.headers["secret-key"] = ENV["secret-key"];
 
-            if (config.method !== "GET" && $localStorage["user-token"]) {
+            if ($localStorage["user-token"]) {
                 config.headers["user-token"] = $localStorage["user-token"];
             }
 

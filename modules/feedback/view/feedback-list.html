@@ -1,0 +1,58 @@
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Готово</th>
+        <th>Дата</th>
+        <th>Тема</th>
+        <th>Имя</th>
+    </tr>
+    <tr ng-class="{true:'success', false:''}[feedback.resolved]" ng-repeat="feedback in feedbacks.data">
+        <td><input type="checkbox" ng-model="feedback.resolved" ng-change="change(feedback)"></td>
+        <td>
+            <div>{{feedback.created | date: 'HH:mm:ss'}}</div>
+            <div>{{feedback.created | date: 'dd.MM.yyyy'}}</div>
+        </td>
+        <td>{{feedback.theme}}
+            <button title="Подробности" type="button" class="btn btn-default" ng-click="isExpanded[$index] = !isExpanded[$index]">
+                <span
+                    ng-class="{'glyphicon': true, 'glyphicon-chevron-up': isExpanded[$index], 'glyphicon-chevron-down': !isExpanded[$index]}"></span>
+            </button>
+            <div collapse="!isExpanded[$index]">
+                <dl ng-if="feedback.phone">
+                    <dt>Телефон:</dt>
+                    <dd>{{feedback.phone}}</dd>
+                </dl>
+                <dl ng-if="feedback.email">
+                    <dt>E-Mail:</dt>
+                    <dd><a ng-href="mailto:{{feedback.email}}">{{feedback.email}}</a></dd>
+                </dl>
+                <dl>
+                    <dt>Подробности</dt>
+                    <dd>{{feedback.text}}</dd>
+                </dl>
+            </div></td>
+        <td ng-if="feedback.email"><a ng-href="mailto:{{feedback.email}}">{{feedback.name}}</a></td>
+        <td ng-if="!feedback.email">{{feedback.name}}</td>
+    </tr>
+</table>
+
+
+<div ng-if="totalCount > pageSize" class="text-center">
+    <pagination
+            ng-show="totalCount"
+            total-items="totalCount"
+            ng-model="page"
+            items-per-page="pageSize"
+            max-size="10"
+            class="pagination-sm"
+            boundary-links="true"
+            rotate="false"
+            num-pages="numPages"
+            ng-change="pageChanged(page)"
+
+            next-text="Старее"
+            previous-text="Новее"
+            last-text="Первые"
+            first-text="Последние"
+            >
+    </pagination>
+</div>

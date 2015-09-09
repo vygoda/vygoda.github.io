@@ -16,5 +16,6 @@ angular.module("config", [])
         "facebook-app_id" : "773644762748334",
         "vk-app_id" : "5007540",
         "pageSize" : 5,
+        "feedback-pageSize" : 50,
         "blogger-id" : "3532773844502088245"
     });

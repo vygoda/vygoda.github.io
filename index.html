@@ -82,6 +82,7 @@
     <script src="/modules/video/js/youtube-directive.js"></script>
 
     <script src="/modules/feedback/js/feedback-controller.js"></script>
+    <script src="/modules/feedback/js/feedback-list-controller.js"></script>
     <script src="/modules/feedback/js/feedback-service.js"></script>
 
     <script src="/modules/map/js/map-controller.js"></script>
@@ -135,11 +136,12 @@
                     <!--<li><a href="/documents">Документы</a></li>--> <!--Временное решение-->
                     <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
 
+                    <li><a ng-if="isAuthenticated" href="/feedback-list">Отзывы</a></li>
                     <li><a href="/feedback">Рассказать</a></li>
                 </ul>
 
             <form class="navbar-form navbar-right" ng-controller="AuthCtrl">
-                <span ng-show="isAuthenticated">{{wellcome}}</span>
+                <span ng-show="isAuthenticated" ng-bind="wellcome"></span>
                 <button ng-show="isAuthenticated" type="button" class="btn btn-default" title="Выйти" ng-click="logout()">
                     <span class="glyphicon glyphicon-log-out"></span>
                 </button>

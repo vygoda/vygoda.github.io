@@ -126,6 +126,14 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/feedback/view/feedback.html',
                 controller: 'FeedbackCtrl'
             }).
+            when('/feedback-list', {
+                templateUrl: 'modules/feedback/view/feedback-list.html',
+                controller: 'FeedbackListCtrl'
+            }).
+            when('/feedback-list/:page', {
+                templateUrl: 'modules/feedback/view/feedback-list.html',
+                controller: 'FeedbackListCtrl'
+            }).
             when('/search/:query', {
                 templateUrl: 'modules/event/view/search-result.html',
                 controller: 'SearchCtrl'
