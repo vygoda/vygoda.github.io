@@ -1,8 +1,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="pull-left">
-            <div>{{video.snippet.publishedAt | date: 'HH:mm:ss'}}</div>
-            <div>{{video.snippet.publishedAt | date: 'dd.MM.yyyy'}}</div>
+        <div class="pull-left text-left">
+            <small class="no-margins">{{video.snippet.publishedAt | date: 'dd.MM.yyyy'}}</small>
+            <h6 class="no-margins"><small>{{video.snippet.publishedAt | date: 'HH:mm:ss'}}</small></h6>
+            <h6 class="no-margins"><small>Жители села Выгода</small></h6>
         </div>
         <div class="text-center"><a target="_blank" ng-href="http://www.youtube.com/watch?v={{ video.snippet.resourceId.videoId }}" ><h4>{{video.snippet.title}}</h4></a></div>
 

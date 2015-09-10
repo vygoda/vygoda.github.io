@@ -97,3 +97,8 @@ ul.nav li a, ul.nav li {
   border-color: #e7e7e7;
 }
 
+.no-margins {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+

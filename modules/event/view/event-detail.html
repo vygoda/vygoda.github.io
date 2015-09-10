@@ -1,8 +1,9 @@
 <div class="panel panel-default" ng-show="!event.vkPost" ng-init="id = (event.prettyTitle) ? event.prettyTitle : event.objectId ">
     <div class="panel-heading">
         <div class="pull-left">
-            <div>{{event.eventDate | date: 'HH:mm:ss'}}</div>
-            <div>{{event.eventDate | date: 'dd.MM.yyyy'}}</div>
+            <small class="no-margins">{{event.eventDate | date: 'dd.MM.yyyy'}}</small>
+            <h6 class="no-margins"><small>{{event.eventDate | date: 'HH:mm:ss'}}</small></h6>
+            <h6 class="no-margins"><small>Жители села Выгода</small></h6>
         </div>
 
         <ng-include src="'modules/event/view/event-header-controls.html'"></ng-include>
