@@ -15,7 +15,7 @@ angular.module('vygoda-auth')
             config.headers["application-id"] = ENV["application-id"];
             config.headers["secret-key"] = ENV["secret-key"];
 
-            if ($localStorage["user-token"]) {
+            if (config.method !== "GET" && $localStorage["user-token"]) {
                 config.headers["user-token"] = $localStorage["user-token"];
             }
 
@@ -27,7 +27,8 @@ angular.module('vygoda-auth')
                 return $q.reject(rejection);
             }
 
-            if (rejection.status === 401) {
+            if (rejection.status === 401 || rejection.status === 401) {
+                console.log(rejection);
                 // handle the case where the user is not authenticated
                 delete $localStorage["user-token"];
                 $rootScope.isAuthenticated = false;
