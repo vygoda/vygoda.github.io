@@ -33,3 +33,8 @@
     <h3>Ваша новость успешно отправлена на рассмотрение.<br/>
     Мы свяжемся с Вами в ближайшее время.</h3>
 </div>
+
+<div ng-if="isAuthenticated" ng-controller="FeedbackListCtrl">
+    <h1>Отзывы</h1>
+    <ng-include src="'modules/feedback/view/feedback-list.html'"></ng-include>
+</div>

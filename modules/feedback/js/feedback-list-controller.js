@@ -15,7 +15,7 @@ angular.module('vygoda-feedback')
     };
 
     $scope.pageChanged = function(page) {
-         $location.path('/feedback-list/' + page);
+         $location.path('/feedback/' + page);
     };
 
     $scope.feedbacks = Feedback.query({pageSize: $scope.pageSize, offset: calculateOffset($routeParams.page)},
@@ -24,4 +24,10 @@ angular.module('vygoda-feedback')
             $scope.page = $routeParams.page || 1;
         }
     );
+
+    $scope.remove = function(feedback) {
+        Feedback.delete({feedbackId: feedback.objectId}, function() {
+            $scope.feedbacks.data = $scope.feedbacks.data.filter(function(obj) {return obj.objectId !== feedback.objectId});
+        });
+    };
 });
