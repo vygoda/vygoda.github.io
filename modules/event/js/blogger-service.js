@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vygoda-event')
+angular.module('vygoda-news')
 
 .factory('Blogger',
     function ($resource, $http, ENV) {

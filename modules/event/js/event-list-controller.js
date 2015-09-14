@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vygoda-event')
+angular.module('vygoda-news')
 
 .controller('EventListCtrl',
     function ($scope, $routeParams, Event, $location, $timeout, ENV) {
@@ -98,9 +98,9 @@ angular.module('vygoda-event')
 
              $timeout(function() {
                         if ($scope.isArchive) {
-                            $location.path('/events/' + $scope.year + '/' + $scope.month + '/page/' + $scope.page, false);
+                            $location.path('/news/' + $scope.year + '/' + $scope.month + '/page/' + $scope.page, false);
                         } else {
-                            $location.path('/events/' + $scope.page, false);
+                            $location.path('/news/page/' + $scope.page, false);
                         }
 
                         queryItems();

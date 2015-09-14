@@ -4,7 +4,7 @@
 
 angular.module('vygoda-common', []);
 angular.module('vygoda-auth', []);
-angular.module('vygoda-event', []);
+angular.module('vygoda-news', []);
 angular.module('vygoda-photo', []);
 angular.module('vygoda-document', []);
 angular.module('vygoda-video', []);
@@ -17,7 +17,7 @@ angular.module('vygoda-history', []);
 angular.module('vygoda-web', [
     'vygoda-common',
     'vygoda-auth',
-    'vygoda-event',
+    'vygoda-news',
     'vygoda-photo',
     'vygoda-document',
     'vygoda-video',
@@ -57,35 +57,39 @@ angular.module('vygoda-web', [
         $httpProvider.interceptors.push('authInterceptor');
 
         $routeProvider.
-            when('/events', {
+            when('/', {
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/events/:page', {
+            when('/news', {
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/events/:year/:month', {
+            when('/news/page/:page', {
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/events/:year/:month/page/:page', {
+            when('/news/:year/:month', {
                 templateUrl: 'modules/event/view/event-list.html',
                 controller: 'EventListCtrl'
             }).
-            when('/event/:eventId', {
+            when('/news/:year/:month/page/:page', {
+                templateUrl: 'modules/event/view/event-list.html',
+                controller: 'EventListCtrl'
+            }).
+            when('/news/:eventId', {
                 templateUrl: 'modules/event/view/event-detail.html',
                 controller: 'EventDetailCtrl'
             }).
-            when('/edit/event/:eventId', {
+            when('/edit/news/:eventId', {
                 templateUrl: 'modules/event/view/event-edit.html',
                 controller: 'EventEditCtrl'
             }).
-            when('/new/event', {
+            when('/new/news', {
                 templateUrl: 'modules/event/view/event-edit.html',
                 controller: 'EventEditCtrl'
             }).
-            when('/new/event/history/:month/:day', {
+            when('/new/news/history/:month/:day', {
                 templateUrl: 'modules/event/view/event-edit.html',
                 controller: 'EventEditCtrl'
             }).
@@ -155,11 +159,6 @@ angular.module('vygoda-web', [
                 templateUrl: 'modules/history/view/history.html',
                 controller: 'HistoryCtrl'
             }).
-            when('/history/event/:eventId', {
-                templateUrl: 'modules/history/view/history-event.html',
-                controller: 'HistoryEventCtrl'
-            }).
-
 
 //            when('/about', {
 //                templateUrl: 'modules/about/view/about-list.html',
@@ -209,7 +208,7 @@ angular.module('vygoda-web', [
             }).
             */
             otherwise({
-                redirectTo: '/events'
+                redirectTo: '/'
             });
     })
 

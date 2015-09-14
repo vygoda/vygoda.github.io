@@ -12,7 +12,7 @@
             <tbody>
             <tr ng-repeat="event in events.data">
                 <td>{{event.eventDate | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
-                <td ng-init="id = (event.prettyTitle) ? event.prettyTitle : event.objectId "><a target="_blank" ng-href="/event/{{ id }}">{{ event.title }}</a></td>
+                <td ng-init="id = (event.prettyTitle) ? event.prettyTitle : event.objectId "><a target="_blank" ng-href="/news/{{ id }}">{{ event.title }}</a></td>
             </tr>
             </tbody>
         </table>

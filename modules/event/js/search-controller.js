@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vygoda-event')
+angular.module('vygoda-news')
 
 .controller('SearchFormCtrl',
     function ($scope, $routeParams, $location) {

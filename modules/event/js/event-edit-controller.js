@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vygoda-event')
+angular.module('vygoda-news')
 
 .controller('EventEditCtrl',
     function ($scope, $routeParams, $timeout, $filter, $location, $localStorage, Event, Blogger, Notification) {
@@ -74,7 +74,7 @@ angular.module('vygoda-event')
                 Notification.success({message: 'Сохранено', delay: 2000});
 
                 $timeout(function() {
-                    $location.path('/edit/event/' + data.objectId);
+                    $location.path('/edit/news/' + data.objectId);
                 }, 1000);
             };
 
@@ -90,7 +90,7 @@ angular.module('vygoda-event')
                 Notification.success({message: 'Удалено', delay: 2000});
 
                 $timeout(function() {
-                    $location.path('/events');
+                    $location.path('/');
                 }, 1000);
             };
 

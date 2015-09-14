@@ -115,10 +115,10 @@
     <nav class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">
         <div class="container-fluid">
             <!--<div class="navbar-header">-->
-                <!--<a class="navbar-brand" href="/events">с.Выгода</a>-->
+                <!--<a class="navbar-brand" href="/news">с.Выгода</a>-->
             <!--</div>-->
                 <ul class="nav navbar-nav">
-                    <li><a href="/events">Новости</a></li>
+                    <li><a href="/">Новости</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Инфо <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -134,7 +134,7 @@
                     <li><a target="_blank" href="https://fotki.yandex.ru/users/is-vygoda/albums/">Фото</a></li> <!--Временное решение-->
                     <li><a href="/videos">Видео</a></li>
                     <!--<li><a href="/documents">Документы</a></li>--> <!--Временное решение-->
-                    <li><a ng-href="/events/{{ date | date:'yyyy/M' }}">Архив</a></li>
+                    <li><a ng-href="/news/{{ date | date:'yyyy/M' }}">Архив</a></li>
 
                     <li><a class="diff-menu-item" href="/feedback">Рассказать</a></li>
                 </ul>
