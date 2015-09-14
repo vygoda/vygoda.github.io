@@ -106,10 +106,36 @@
 <body>
 
 <div id="header">
-    <a href="/events">
+    <a href="/">
         <img src="img/vdk1.jpg" class="img-circle"  style="display: inline-block;" />
         <h1 style="display: inline-block; vertical-align: bottom">Жители села Выгода</h1>
     </a>
+
+    <!-- Gismeteo informer START -->
+    <link rel="stylesheet" type="text/css" href="https://www.gismeteo.ru/assets/flat-ui/legacy/css/informer.min.css">
+    <div id="gsInformerID-DRs33M7muuoYoq" class="gsInformer pull-right" style="display: inline-block;width:240px;height:132px">
+        <div class="gsIContent">
+            <div class="gsLinks">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="leftCol">
+                                <a href="https://www.gismeteo.ru" target="_blank">
+                                    <img alt="Gismeteo" title="Gismeteo" src="https://www.gismeteo.ru/assets/flat-ui/img/logo-mini2.png" align="middle" border="0" />
+                                    <span>Gismeteo</span>
+                                </a>
+                            </div>
+                            <div class="rightCol">
+                                <a href="https://www.gismeteo.ru/city/weekly/90283/" target="_blank">Прогноз на 2 недели</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script async src="https://www.gismeteo.ru/api/informer/getinformer/?hash=DRs33M7muuoYoq" type="text/javascript"></script>
+    <!-- Gismeteo informer END -->
 </div>
     <!-- TODO: navbar-fixed-top-->
     <nav class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">
