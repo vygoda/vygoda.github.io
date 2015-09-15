@@ -39,7 +39,9 @@ angular.module('vygoda-web', [
     'uiGmapgoogle-maps',
     'duScroll',
     'ezfb',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'angulartics',
+    'angulartics.google.analytics'
 ])
 
 .controller('NavigationCtrl',
