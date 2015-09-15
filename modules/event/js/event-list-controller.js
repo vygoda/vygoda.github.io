@@ -3,7 +3,7 @@
 angular.module('vygoda-news')
 
 .controller('EventListCtrl',
-    function ($scope, $routeParams, Event, $location, $timeout, ENV) {
+    function ($scope, $routeParams, Event, $location, $timeout, ENV, $analytics) {
         $scope.pageSize = ENV.pageSize;
 
         $scope.year = $routeParams.year;
@@ -91,6 +91,8 @@ angular.module('vygoda-news')
             });
 
             $scope.pinedEvents = Event.query({where: "pined=true"});
+
+            $analytics.eventTrack($scope.isArchive ? 'archive' : "news", {year: $scope.year, month: $scope.month});
         };
 
         $scope.pageChanged = function() {
