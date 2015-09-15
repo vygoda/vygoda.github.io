@@ -1,16 +1,16 @@
-<div class="share-container" ng-init="absUrl = location.protocol() + '://' + location.host() + (!location.port() || location.port() == 80 ? '' : ':' + location.port()) + '/news/' + id">
+<div class="share-container" ng-init="absUrl = location.protocol() + '://' + location.host() + (!location.port() || location.port() == 80 ? '' : ':' + location.port()) + '/news/' + id; description = event.summary.substring(0, 512)">
     <div class="btn-group">
         <button class="btn btn-default btn-sm disabled">Поделиться:</button>
-        <a class="btn btn-default btn-sm" target="_blank" title="On VK.com" ng-href="http://vk.com/share.php?url={{absUrl | escape}}&title={{event.title | escape}}&description={{event.summary | md: event.isHtml | escape}}&image={{event.socialImage}}">
+        <a class="btn btn-default btn-sm" target="_blank" title="On VK.com" ng-href="http://vk.com/share.php?url={{absUrl | escape}}&title={{event.title | escape}}&description={{description | md: event.isHtml | escape}}&image={{event.socialImage}}">
             <i class="fa fa-vk fa-lg vk"></i>
         </a>
-        <a class="btn btn-default btn-sm" target="_blank" title="On Facebook" ng-href="http://www.facebook.com/sharer.php?u={{absUrl | escape}}&t={{event.summary | md: event.isHtml | escape}}">
+        <a class="btn btn-default btn-sm" target="_blank" title="On Facebook" ng-href="http://www.facebook.com/sharer.php?u={{absUrl | escape}}&t={{description | md: event.isHtml | escape}}">
             <i class="fa fa-facebook fa-lg fb"></i>
         </a>
         <a class="btn btn-default btn-sm" target="_blank" title="Like On Facebook" ng-href="http://www.facebook.com/plugins/like.php?href={{absUrl | escape}}">
             <i class="fa fa-thumbs-o-up fa-lg fb"></i>
         </a>
-        <a class="btn btn-default btn-sm" target="_blank" title="On Twitter" ng-href="http://twitter.com/share?url={{absUrl | escape}}&text={{event.summary | md: event.isHtml | escape}}">
+        <a class="btn btn-default btn-sm" target="_blank" title="On Twitter" ng-href="http://twitter.com/share?url={{absUrl | escape}}&text={{description | md: event.isHtml | escape}}">
             <i class="fa fa-twitter fa-lg tw"></i>
         </a>
         <a class="btn btn-default btn-sm google-plus-one" target="_blank" title="+1 On Google" ng-href="https://apis.google.com/_/+1/fastbutton?usegapi=1&size=large&hl=en&url={{absUrl | escape}}">
@@ -23,10 +23,10 @@
         <a class="btn btn-default btn-sm" target="_blank" title="On LinkedIn" ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{absUrl | escape}}">
             <i class="fa fa-linkedin fa-lg linkin"></i>
         </a>
-        <a class="btn btn-default btn-sm" target="_blank" title="Pin It" ng-href="http://www.pinterest.com/pin/create/button/?url={{absUrl | escape}}&media={{event.socialImage}}&description={{event.summary | md: event.isHtml | escape}}&">
+        <a class="btn btn-default btn-sm" target="_blank" title="Pin It" ng-href="http://www.pinterest.com/pin/create/button/?url={{absUrl | escape}}&media={{event.socialImage}}&description={{description | md: event.isHtml | escape}}&">
             <i class="fa fa-pinterest fa-lg pinterest"></i>
         </a>
-        <a class="btn btn-default btn-sm" target="_blank" title="Surf!" ng-href="http://surfingbird.ru/share?url={{absUrl | escape}}&description={{event.summary | md: event.isHtml | escape}}&screenshot={{event.socialImage}}&title={{event.title | escape}}">
+        <a class="btn btn-default btn-sm" target="_blank" title="Surf!" ng-href="http://surfingbird.ru/share?url={{absUrl | escape}}&description={{description | md: event.isHtml | escape}}&screenshot={{event.socialImage}}&title={{event.title | escape}}">
             <i class="fa surfingbird fa-lg"></i>
         </a>
     </div>
