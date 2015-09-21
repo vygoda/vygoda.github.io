@@ -13,7 +13,7 @@
 <br/>
 
 <div class="container-fluid">
-    <div class="col-md-2" ng-repeat="day in days">
+    <div class="col-lg-2" ng-repeat="day in days">
         <div ng-class="{true:'panel panel-danger', false:'panel panel-default'}[day.events.length > 0]">
             <div class="panel-heading text-center">
                 <a ng-if="isAuthenticated" target="_blank" ng-href="/new/news/history/{{currentMonth}}/{{day.day}}"><span class="glyphicon glyphicon-plus" title="Добавить"></span></a>
