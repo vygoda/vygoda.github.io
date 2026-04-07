@@ -5,49 +5,79 @@ const WP_URL = process.env.WP_URL;
 const TOKEN = process.env.VYGODA_SCRAPER_TOKEN;
 
 async function scrapeTrains() {
-    console.log(`🚀 DEBUG Scraper... Target: ${WP_URL}`);
+    console.log(`🚀 Start Heavy Scraper (Autonomous)... Target: ${WP_URL}`);
     const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
     
-    try {
-        console.log(`🔍 Checking poizdato.net...`);
-        await page.goto('https://poizdato.net/rozklad-poizdiv-po-stantsii/vyhoda/', { waitUntil: 'load', timeout: 60000 });
-        await page.waitForTimeout(10000); 
+    // ІМІТУЄМО СУЧАСНИЙ БРАУЗЕР (щоб не блокував Cloudflare)
+    const context = await browser.newContext({
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0',
+        viewport: { width: 1366, height: 768 }
+    });
+    
+    const page = await context.newPage();
+    const stations = [
+        { id: '2208479', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/vyhoda/' },
+        { id: '2208001', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/odesa-holovna/' }
+    ];
 
-        // ВИВОДИМО ТЕ, ЩО БАЧИТЬ GITHUB
-        const pageTitle = await page.title();
-        const pageText = await page.evaluate(() => document.body.innerText.substring(0, 1500));
-        
-        console.log(`--- [PAGE TITLE] ---: ${pageTitle}`);
-        console.log(`--- [PAGE TEXT (FIRST 1500 CHARS)] ---:`);
-        console.log(pageText);
+    let allResults = [];
 
-        const trainsFound = pageText.includes('Вигода') && pageText.includes(':');
-        console.log(`--- Trains data detected in text? : ${trainsFound} ---`);
+    for (const station of stations) {
+        console.log(`🔍 Try scraping: ${station.url}`);
+        try {
+            await page.goto(station.url, { waitUntil: 'load', timeout: 90000 });
+            
+            // ДАЄМО ЧАС СКРИПТАМ (15 СЕКУНД)
+            await page.waitForTimeout(15000); 
 
-        // Спробуємо зібрати хоч щось
-        const results = await page.evaluate(() => {
-            const data = [];
-            const rows = Array.from(document.querySelectorAll('tr, div.row'));
-            rows.forEach(r => {
-                const txt = r.innerText;
-                if (txt.includes(' - ') && /\d{1,2}:\d{2}/.test(txt)) {
-                    data.push({number: 'N/A', route: txt.trim(), arrival: '00:00', departure: '00:00', station_id: '2208479'});
-                }
-            });
-            return data;
-        });
+            const trains = await page.evaluate((sid) => {
+                const data = [];
+                // Шукаємо будь-які елементи, які схожі на розклад
+                const items = document.querySelectorAll('tr, div.station_table_row');
+                items.forEach(el => {
+                    const txt = el.innerText;
+                    // Ми шукаємо час (00:00) та стрілку чи тире (-> або -)
+                    if (txt.includes(':') && txt.length < 200) {
+                        const parts = txt.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+                        if (parts.length >= 3) {
+                            data.push({
+                                number: parts[0],
+                                route: parts[1],
+                                arrival: parts[2],
+                                departure: parts[2],
+                                station_id: sid
+                            });
+                        }
+                    }
+                });
+                return data;
+            }, station.id);
 
-        if (results.length > 0) {
-            console.log(`✅ FOUND ${results.length} RECORDS BY TEXT SCAN!`);
-            const apiEndpoint = `${WP_URL}/vygoda/v1/update-trains`;
-            await axios.post(apiEndpoint, { token: TOKEN, trains: results }, { headers: { 'X-Vygoda-Token': TOKEN } });
+            if (trains.length > 0) {
+                allResults = allResults.concat(trains);
+                console.log(`✅ FOUND ${trains.length} TRAINS!`);
+            }
+        } catch (e) {
+            console.error(`❌ Page error: ${e.message}`);
         }
-
-    } catch (e) {
-        console.error(`❌ Global error: ${e.message}`);
     }
 
     await browser.close();
+
+    if (allResults.length > 0) {
+        console.log(`📤 Push to Staging API: ${WP_URL}`);
+        try {
+            const resp = await axios.post(WP_URL, { token: TOKEN, trains: allResults }, {
+                headers: { 'X-Vygoda-Token': TOKEN, 'Content-Type': 'application/json' },
+                timeout: 30000
+            });
+            console.log('--- ALL GREEN! STAGING UPDATED! ---', resp.data);
+        } catch (e) {
+            console.error('API Error:', e.response ? JSON.stringify(e.response.data) : e.message);
+        }
+    } else {
+        console.error('⚠️ Empty results again. Need to check if Cloudflare blocks GitHub.');
+        process.exit(1);
+    }
 }
 scrapeTrains();
