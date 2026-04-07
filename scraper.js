@@ -5,51 +5,55 @@ const WP_URL = process.env.WP_URL;
 const TOKEN = process.env.VYGODA_SCRAPER_TOKEN;
 
 async function scrapeTrains() {
-    console.log(`🚀 Persistant Scraper (Simple HTML)... Target: ${WP_URL}`);
+    console.log(`🚀 Deep Scraper (POIZDATO.NET)... Target: ${WP_URL}`);
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     
-    // МИ ВИКОРИСТОВУЄМО ROZKLAD-POIZDIV.COM.UA - ВІН НАЙПРОСТІШИЙ
     const stations = [
-        { id: '2208479', name: 'Вигода', url: 'http://rozklad-poizdiv.com.ua/stancyya/vyhoda/' },
-        { id: '2208001', name: 'Одеса', url: 'http://rozklad-poizdiv.com.ua/stancyya/odesa-golovna/' }
+        { id: 'vyhoda', name: 'Вигода', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/vyhoda/' },
+        { id: 'odesa', name: 'Одеса', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/odesa-holovna/' }
     ];
 
     let allResults = [];
 
     for (const station of stations) {
-        console.log(`🔍 Scraping ${station.name}...`);
+        console.log(`🔍 Deep Scanning ${station.name}...`);
         try {
-            await page.goto(station.url, { waitUntil: 'load', timeout: 60000 });
-            await page.waitForTimeout(5000); 
+            await page.goto(station.url, { waitUntil: 'networkidle', timeout: 90000 });
+            await page.waitForTimeout(10000); // 10 секунд на повне завантаження
 
             const trains = await page.evaluate((sid) => {
-                const data = [];
-                // На цьому сайті таблиці мають клас station_table_tab
-                const rows = Array.from(document.querySelectorAll('table tr')).slice(1);
+                const results = [];
+                // ШУКАЄМО ВСІ ЕЛЕМЕНТИ TR, LI або DIV, де є час (00:00)
+                const items = Array.from(document.querySelectorAll('tr, li, div'));
                 
-                rows.forEach(r => {
-                    const cols = r.querySelectorAll('td');
-                    if (cols.length >= 4) {
-                        const number = cols[0].innerText.trim();
-                        const route = cols[1].innerText.trim();
-                        // Якщо це не заголовок і є дані
-                        if (route.length > 5 && (/\d/.test(number) || number.length > 1)) {
-                            data.push({
-                                number: number,
-                                route: route,
-                                arrival: cols[2].innerText.trim() === '-' ? '' : cols[2].innerText.trim(),
-                                departure: cols[3].innerText.trim() === '-' ? '' : cols[3].innerText.trim(),
-                                station_id: sid
+                items.forEach(item => {
+                    const text = item.innerText;
+                    // Патерн часу: 00:00
+                    const timeRegex = /\d{1,2}:\d{2}/g;
+                    const times = text.match(timeRegex);
+                    
+                    // Якщо в елементі є час, номер потяга і він достатньо великий
+                    if (times && times.length >= 1 && text.includes(' - ') && text.length < 300) {
+                        const parts = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+                        if (parts.length >= 3) {
+                            results.push({
+                                number: parts[0] || '---',
+                                route: parts[1] || '---',
+                                arrival: times[0] || '',
+                                departure: times[1] || times[0] || '',
+                                station_id: sid === 'vyhoda' ? '2208479' : '2208001'
                             });
                         }
                     }
                 });
-                return data;
+                return results;
             }, station.id);
 
-            allResults = allResults.concat(trains);
-            console.log(`✅ Success! Found ${trains.length} trains for ${station.name}`);
+            // Очищення від дублікатів (бо ми шукаємо по всіх елементах)
+            const clean = Array.from(new Set(trains.map(a => JSON.stringify(a)))).map(a => JSON.parse(a));
+            allResults = allResults.concat(clean);
+            console.log(`✅ Success! Found ${clean.length} unique records for ${station.name}`);
         } catch (e) {
             console.error(`❌ Error ${station.name}: ${e.message}`);
         }
@@ -65,7 +69,7 @@ async function scrapeTrains() {
                 headers: { 'X-Vygoda-Token': TOKEN, 'Content-Type': 'application/json' },
                 timeout: 30000
             });
-            console.log('--- ALL SYSTEMS GO! --- SUCCESS! ---', resp.data);
+            console.log('🏁 MISSION ACCOMPLISHED! ---', resp.data);
         } catch (e) {
             console.error('API Rejected:', e.response ? JSON.stringify(e.response.data) : e.message);
         }
