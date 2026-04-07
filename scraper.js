@@ -5,76 +5,49 @@ const WP_URL = process.env.WP_URL;
 const TOKEN = process.env.VYGODA_SCRAPER_TOKEN;
 
 async function scrapeTrains() {
-    console.log(`🚀 Deep Scraper (POIZDATO.NET)... Target: ${WP_URL}`);
+    console.log(`🚀 DEBUG Scraper... Target: ${WP_URL}`);
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     
-    const stations = [
-        { id: 'vyhoda', name: 'Вигода', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/vyhoda/' },
-        { id: 'odesa', name: 'Одеса', url: 'https://poizdato.net/rozklad-poizdiv-po-stantsii/odesa-holovna/' }
-    ];
+    try {
+        console.log(`🔍 Checking poizdato.net...`);
+        await page.goto('https://poizdato.net/rozklad-poizdiv-po-stantsii/vyhoda/', { waitUntil: 'load', timeout: 60000 });
+        await page.waitForTimeout(10000); 
 
-    let allResults = [];
+        // ВИВОДИМО ТЕ, ЩО БАЧИТЬ GITHUB
+        const pageTitle = await page.title();
+        const pageText = await page.evaluate(() => document.body.innerText.substring(0, 1500));
+        
+        console.log(`--- [PAGE TITLE] ---: ${pageTitle}`);
+        console.log(`--- [PAGE TEXT (FIRST 1500 CHARS)] ---:`);
+        console.log(pageText);
 
-    for (const station of stations) {
-        console.log(`🔍 Deep Scanning ${station.name}...`);
-        try {
-            await page.goto(station.url, { waitUntil: 'networkidle', timeout: 90000 });
-            await page.waitForTimeout(10000); // 10 секунд на повне завантаження
+        const trainsFound = pageText.includes('Вигода') && pageText.includes(':');
+        console.log(`--- Trains data detected in text? : ${trainsFound} ---`);
 
-            const trains = await page.evaluate((sid) => {
-                const results = [];
-                // ШУКАЄМО ВСІ ЕЛЕМЕНТИ TR, LI або DIV, де є час (00:00)
-                const items = Array.from(document.querySelectorAll('tr, li, div'));
-                
-                items.forEach(item => {
-                    const text = item.innerText;
-                    // Патерн часу: 00:00
-                    const timeRegex = /\d{1,2}:\d{2}/g;
-                    const times = text.match(timeRegex);
-                    
-                    // Якщо в елементі є час, номер потяга і він достатньо великий
-                    if (times && times.length >= 1 && text.includes(' - ') && text.length < 300) {
-                        const parts = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
-                        if (parts.length >= 3) {
-                            results.push({
-                                number: parts[0] || '---',
-                                route: parts[1] || '---',
-                                arrival: times[0] || '',
-                                departure: times[1] || times[0] || '',
-                                station_id: sid === 'vyhoda' ? '2208479' : '2208001'
-                            });
-                        }
-                    }
-                });
-                return results;
-            }, station.id);
+        // Спробуємо зібрати хоч щось
+        const results = await page.evaluate(() => {
+            const data = [];
+            const rows = Array.from(document.querySelectorAll('tr, div.row'));
+            rows.forEach(r => {
+                const txt = r.innerText;
+                if (txt.includes(' - ') && /\d{1,2}:\d{2}/.test(txt)) {
+                    data.push({number: 'N/A', route: txt.trim(), arrival: '00:00', departure: '00:00', station_id: '2208479'});
+                }
+            });
+            return data;
+        });
 
-            // Очищення від дублікатів (бо ми шукаємо по всіх елементах)
-            const clean = Array.from(new Set(trains.map(a => JSON.stringify(a)))).map(a => JSON.parse(a));
-            allResults = allResults.concat(clean);
-            console.log(`✅ Success! Found ${clean.length} unique records for ${station.name}`);
-        } catch (e) {
-            console.error(`❌ Error ${station.name}: ${e.message}`);
+        if (results.length > 0) {
+            console.log(`✅ FOUND ${results.length} RECORDS BY TEXT SCAN!`);
+            const apiEndpoint = `${WP_URL}/vygoda/v1/update-trains`;
+            await axios.post(apiEndpoint, { token: TOKEN, trains: results }, { headers: { 'X-Vygoda-Token': TOKEN } });
         }
+
+    } catch (e) {
+        console.error(`❌ Global error: ${e.message}`);
     }
 
     await browser.close();
-
-    if (allResults.length > 0) {
-        const apiEndpoint = `${WP_URL}/vygoda/v1/update-trains`;
-        console.log(`📤 Sending ${allResults.length} records to API...`);
-        try {
-            const resp = await axios.post(apiEndpoint, { token: TOKEN, trains: allResults }, {
-                headers: { 'X-Vygoda-Token': TOKEN, 'Content-Type': 'application/json' },
-                timeout: 30000
-            });
-            console.log('🏁 MISSION ACCOMPLISHED! ---', resp.data);
-        } catch (e) {
-            console.error('API Rejected:', e.response ? JSON.stringify(e.response.data) : e.message);
-        }
-    } else {
-        process.exit(1);
-    }
 }
 scrapeTrains();
