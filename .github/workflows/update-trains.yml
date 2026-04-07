@@ -1,18 +1,32 @@
 name: Update Vygoda Trains
+
 on:
   schedule:
-    - cron: '15 22 * * *'
-  workflow_dispatch:
+    - cron: '0 */6 * * *' # Запуск кожні 6 годин
+  workflow_dispatch:      # Дозволяє запускати вручну (кнопкою)
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - run: npm install playwright axios
-      - run: npx playwright install chromium
-      - env:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install playwright axios
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Run scraper
+        # ОСЬ ЦЕЙ БЛОК МИ ДОДАЛИ ТА ВИПРАВИЛИ:
+        env:
           WP_URL: ${{ secrets.WP_URL }}
-          WP_TOKEN: ${{ secrets.VYGODA_SCRAPER_TOKEN }}
+          VYGODA_SCRAPER_TOKEN: ${{ secrets.VYGODA_SCRAPER_TOKEN }}
         run: node scraper.js
